@@ -16,29 +16,50 @@ class AddSpoolVC: UIViewController {
     @IBOutlet weak var diameterSegmentedControl: UISegmentedControl!
     @IBOutlet weak var purchaseLinkTextBox: UITextField!
     @IBOutlet weak var remarksTextBox: UITextField!
+    @IBOutlet weak var spoolImage: UIImageView!
+    
+    var imagePicker: UIImagePickerController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        initializeImagePicker()
         getData()
 //        clearCoreData()
     }
     
-
+    @IBAction func uploadPicture(_ sender: Any) {
+        
+        
+        present(imagePicker, animated: true, completion: nil)
+        
+        
+    }
+    
+    func saveImage(data: Data) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let imageInstance = Spool(context: context)
+        imageInstance.image = data
+        do {
+            try context.save()
+            print("Image is saved")
+        } catch {
+            print(error.localizedDescription)
+          }
+    }
+    
     @IBAction func storeSpoolData(_ sender: Any) {
-        
-        
+        // check that inputs are valid
         if checkInputs() {
+            // add spool to core data
             addToCoreData()
             getData()
-            
-        
         } else {
             print("Bad input data")
         }
-        
-        
     }
     
     func checkInputs() -> Bool {
@@ -61,10 +82,11 @@ class AddSpoolVC: UIViewController {
         let context = appDelegate.persistentContainer.viewContext
         
         let toAddQuantity = Int(quantityTextBox.text!) ?? 0
+        
+        // create new spool/s
         for _ in 1...toAddQuantity {
             let spool = NSEntityDescription.insertNewObject(
                 forEntityName: "Spool", into:context)
-            
 
             spool.setValue(materialTextBox.text, forKey: "material")
             spool.setValue(colorTextBox.text, forKey: "color")
@@ -82,6 +104,9 @@ class AddSpoolVC: UIViewController {
             }
             
             // TODO: image
+            if let imageData = spoolImage.image?.pngData() {
+                saveImage(data: imageData)
+            }
             
             // Commit the changes
             do {
@@ -140,7 +165,7 @@ class AddSpoolVC: UIViewController {
                 
                 for result:AnyObject in fetchedResults {
                     context.delete(result as! NSManagedObject)
-                    print("\(result.value(forKey:"uid")!) has been deleted")
+//                    print("\(result.value(forKey:"uid")!) has been deleted")
                 }
             }
             try context.save()
@@ -157,3 +182,37 @@ class AddSpoolVC: UIViewController {
     
 
 }
+
+extension AddSpoolVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    // dismiss imagePicker when cancel is pressed
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        // get the image from photolibrary
+        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
+            return
+        }
+        
+        // set the spool image to the new image
+        spoolImage.image = image
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func initializeImagePicker() {
+        // initialize imagePicker
+        imagePicker = UIImagePickerController()
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
+    }
+    
+    // This closes the keyboard when touch is detected outside of the keyboard
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        super.touchesBegan(touches, with: event)
+    }
+}
+    

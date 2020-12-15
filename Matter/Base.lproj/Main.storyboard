@@ -83,6 +83,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="410-Zd-VFg">
                                 <rect key="frame" x="156" y="638" width="102" height="30"/>
                                 <state key="normal" title="Upload Picture"/>
+                                <connections>
+                                    <action selector="uploadPicture:" destination="2TH-vI-A0g" eventType="touchUpInside" id="IEY-mY-8dE"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XNC-di-Ihu">
                                 <rect key="frame" x="182.5" y="722" width="49" height="30"/>
@@ -135,16 +138,22 @@
                                     <segment title="2.85"/>
                                 </segments>
                             </segmentedControl>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z4i-hG-14u">
+                                <rect key="frame" x="99" y="489" width="240" height="128"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pge-ek-1T5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Z4i-hG-14u" firstAttribute="centerX" secondItem="6BH-0C-orR" secondAttribute="centerX" id="0Un-aM-40q"/>
                             <constraint firstItem="hVR-Nv-Jhk" firstAttribute="top" secondItem="pge-ek-1T5" secondAttribute="top" constant="50" id="0i4-OZ-WcE"/>
                             <constraint firstItem="nSD-1T-Nse" firstAttribute="leading" secondItem="pge-ek-1T5" secondAttribute="leading" constant="60" id="3ot-lq-cdu"/>
                             <constraint firstItem="Arh-eT-3KZ" firstAttribute="top" secondItem="YQ0-JA-snw" secondAttribute="bottom" constant="30" id="CaA-2b-DS4"/>
+                            <constraint firstItem="410-Zd-VFg" firstAttribute="top" secondItem="Z4i-hG-14u" secondAttribute="bottom" constant="21" id="Ebo-rd-Dnv"/>
                             <constraint firstItem="XNC-di-Ihu" firstAttribute="centerX" secondItem="6BH-0C-orR" secondAttribute="centerX" id="EyI-Cx-9dQ"/>
                             <constraint firstItem="dLa-Jx-h2f" firstAttribute="leading" secondItem="pge-ek-1T5" secondAttribute="leading" constant="60" id="Hdw-4z-Zt6"/>
                             <constraint firstItem="hVR-Nv-Jhk" firstAttribute="leading" secondItem="pge-ek-1T5" secondAttribute="leading" constant="60" id="K1n-Ez-dge"/>
+                            <constraint firstItem="Z4i-hG-14u" firstAttribute="top" secondItem="Klo-iU-4ad" secondAttribute="bottom" constant="24" id="NH7-Ap-UPs"/>
                             <constraint firstItem="XNC-di-Ihu" firstAttribute="top" secondItem="410-Zd-VFg" secondAttribute="bottom" constant="54" id="NHe-Sn-f3F"/>
                             <constraint firstItem="YQ0-JA-snw" firstAttribute="top" secondItem="hVR-Nv-Jhk" secondAttribute="bottom" constant="30" id="QZd-rg-6Nx"/>
                             <constraint firstItem="OEi-Vn-2oL" firstAttribute="leading" secondItem="pge-ek-1T5" secondAttribute="leading" constant="60" id="cR6-M6-pt4"/>
@@ -167,6 +176,7 @@
                         <outlet property="purchaseLinkTextBox" destination="sBM-71-d7r" id="4uU-Uo-tFQ"/>
                         <outlet property="quantityTextBox" destination="q3t-QJ-FMD" id="FUW-XF-l5X"/>
                         <outlet property="remarksTextBox" destination="EZA-aK-3GK" id="xXZ-58-CxE"/>
+                        <outlet property="spoolImage" destination="Z4i-hG-14u" id="MYJ-7r-f1n"/>
                         <outlet property="weightTextBox" destination="z4K-8c-BhI" id="hdS-s9-Ulr"/>
                     </connections>
                 </viewController>
