@@ -18,6 +18,7 @@
 		7C8474A7258914040031BFC9 /* MatterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8474A6258914040031BFC9 /* MatterUITests.swift */; };
 		7C8474C0258917C50031BFC9 /* ObjectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8474BF258917C50031BFC9 /* ObjectVC.swift */; };
 		7C8474C5258919B70031BFC9 /* PrintingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8474C4258919B70031BFC9 /* PrintingVC.swift */; };
+		7C8474CB2589268B0031BFC9 /* AddSpoolVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8474CA2589268B0031BFC9 /* AddSpoolVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		7C8474A8258914040031BFC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C8474BF258917C50031BFC9 /* ObjectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectVC.swift; sourceTree = "<group>"; };
 		7C8474C4258919B70031BFC9 /* PrintingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintingVC.swift; sourceTree = "<group>"; };
+		7C8474CA2589268B0031BFC9 /* AddSpoolVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpoolVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 				7C847485258914030031BFC9 /* SpoolVC.swift */,
 				7C8474BF258917C50031BFC9 /* ObjectVC.swift */,
 				7C8474C4258919B70031BFC9 /* PrintingVC.swift */,
+				7C8474CA2589268B0031BFC9 /* AddSpoolVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				7C847486258914030031BFC9 /* SpoolVC.swift in Sources */,
 				7C847482258914020031BFC9 /* AppDelegate.swift in Sources */,
 				7C847484258914020031BFC9 /* SceneDelegate.swift in Sources */,
+				7C8474CB2589268B0031BFC9 /* AddSpoolVC.swift in Sources */,
 				7C8474C0258917C50031BFC9 /* ObjectVC.swift in Sources */,
 				7C8474C5258919B70031BFC9 /* PrintingVC.swift in Sources */,
 			);

@@ -33,7 +33,7 @@
         <!--Add Spool-->
         <scene sceneID="pqD-c9-EQK">
             <objects>
-                <viewController id="2TH-vI-A0g" sceneMemberID="viewController">
+                <viewController id="2TH-vI-A0g" customClass="AddSpoolVC" customModule="Matter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6BH-0C-orR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -87,6 +87,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XNC-di-Ihu">
                                 <rect key="frame" x="182.5" y="722" width="49" height="30"/>
                                 <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="storeSpoolData:" destination="2TH-vI-A0g" eventType="touchUpInside" id="HPv-fb-J5D"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xjO-ib-Sxx" userLabel="Material Text Field">
                                 <rect key="frame" x="192" y="182" width="100" height="34"/>
@@ -102,12 +105,6 @@
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z4K-8c-BhI" userLabel="Weight Text Field">
                                 <rect key="frame" x="192" y="284" width="97" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qSB-Wg-h7N" userLabel="Diameter Text Field">
-                                <rect key="frame" x="192" y="335" width="97" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -130,6 +127,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sNt-qJ-Ifo">
+                                <rect key="frame" x="177" y="337" width="131" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="1.75"/>
+                                    <segment title="2.85"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pge-ek-1T5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -155,6 +160,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add Spool" id="FMY-Mf-Tqm"/>
+                    <connections>
+                        <outlet property="colorTextBox" destination="VPL-oB-goY" id="h4Z-GD-eLS"/>
+                        <outlet property="diameterSegmentedControl" destination="sNt-qJ-Ifo" id="PsY-gB-ihj"/>
+                        <outlet property="materialTextBox" destination="xjO-ib-Sxx" id="DQc-mz-x3P"/>
+                        <outlet property="purchaseLinkTextBox" destination="sBM-71-d7r" id="4uU-Uo-tFQ"/>
+                        <outlet property="quantityTextBox" destination="q3t-QJ-FMD" id="FUW-XF-l5X"/>
+                        <outlet property="remarksTextBox" destination="EZA-aK-3GK" id="xXZ-58-CxE"/>
+                        <outlet property="weightTextBox" destination="z4K-8c-BhI" id="hdS-s9-Ulr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qUg-ph-9qZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
