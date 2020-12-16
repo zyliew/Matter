@@ -19,6 +19,7 @@
 		7C8474C5258919B70031BFC9 /* PrintingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8474C4258919B70031BFC9 /* PrintingVC.swift */; };
 		7C8474CB2589268B0031BFC9 /* AddSpoolVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8474CA2589268B0031BFC9 /* AddSpoolVC.swift */; };
 		7CAA9769258A91F300F92A04 /* SpoolVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAA9768258A91F300F92A04 /* SpoolVC.swift */; };
+		7CAA976E258A944300F92A04 /* SpoolDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAA976D258A944300F92A04 /* SpoolDisplay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		7C8474C4258919B70031BFC9 /* PrintingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintingVC.swift; sourceTree = "<group>"; };
 		7C8474CA2589268B0031BFC9 /* AddSpoolVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpoolVC.swift; sourceTree = "<group>"; };
 		7CAA9768258A91F300F92A04 /* SpoolVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoolVC.swift; sourceTree = "<group>"; };
+		7CAA976D258A944300F92A04 /* SpoolDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoolDisplay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				7C84748F258914030031BFC9 /* LaunchScreen.storyboard */,
 				7C847492258914030031BFC9 /* Info.plist */,
 				7C84748A258914030031BFC9 /* Matter.xcdatamodeld */,
+				7CAA976D258A944300F92A04 /* SpoolDisplay.swift */,
 			);
 			path = Matter;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CAA976E258A944300F92A04 /* SpoolDisplay.swift in Sources */,
 				7C84748C258914030031BFC9 /* Matter.xcdatamodeld in Sources */,
 				7CAA9769258A91F300F92A04 /* SpoolVC.swift in Sources */,
 				7C847482258914020031BFC9 /* AppDelegate.swift in Sources */,

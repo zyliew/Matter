@@ -15,10 +15,6 @@ struct Sanity {
     var color:String
 }
 
-let spoolArray = [
-    Sanity(material: "PLA", diameter: 2.85, count: 1, color: "Blue"),
-    Sanity(material: "ABS", diameter: 1.75, count: 3, color: "Black")
-]
 
 class SpoolTableViewCell: UITableViewCell {
     @IBOutlet weak var spoolImage: UIImageView!
@@ -29,17 +25,116 @@ class SpoolTableViewCell: UITableViewCell {
     
 }
 
-class SpoolVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SpoolVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    
+    var spoolArray:[SpoolDisplay] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
+//        clearCoreData()
+        getCoreData()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        getCoreData()
+        DispatchQueue.main.async { self.tableView.reloadData() }
+    }
+
+}
+
+extension SpoolVC {
+    func getCoreData() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Spool")
+        
+        var fetchedResults: [NSManagedObject]? = nil
+        
+        do {
+            try fetchedResults = context.fetch(request) as? [NSManagedObject]
+        } catch {
+            // if an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        for spool in fetchedResults! {
+            checkAndAdd(compare: spool)
+        }
+    }
+    
+    func clearCoreData() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Spool")
+        
+        var fetchedResults: [NSManagedObject]
+        
+        do {
+            try fetchedResults = context.fetch(request) as! [NSManagedObject]
+            
+            if fetchedResults.count > 0 {
+                
+                for result:AnyObject in fetchedResults {
+                    context.delete(result as! NSManagedObject)
+//                    print("\(result.value(forKey:"uid")!) has been deleted")
+                }
+            }
+            try context.save()
+            
+        } catch {
+            // if an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        print("core data cleared")
+    }
+    
+    // checks if spool is already in the spoolArray, add or increment count accordingly
+    func checkAndAdd(compare: NSManagedObject) {
+        let otherColor = compare.value(forKey: "color") as! String
+        let otherDiameter = compare.value(forKey: "diameter") as! Double
+        let otherMaterial = compare.value(forKey: "material") as! String
+        
+        for spool in spoolArray {
+            let color = spool.color
+            let diameter = spool.diameter
+            let material = spool.material
+            
+            
+            
+            if color == otherColor && diameter == otherDiameter && material == otherMaterial {
+                // already in spoolArray, increment count
+                print("already in spoolArray")
+                spool.count += 1
+            }
+        }
+        
+        // new material, add to spoolArray
+        if let otherImage = compare.value(forKey: "image") {
+            print("add to spoolArray")
+            spoolArray.append(SpoolDisplay(color: otherColor, material: otherMaterial, diameter: otherDiameter, count: 1, image: UIImage(data: otherImage as! Data)!))
+        } else {
+            // TODO
+            // don't have an image, use a placeholder
+            print("hit else")
+        }
+    }
+}
+
+
+
+extension SpoolVC: UITableViewDelegate, UITableViewDataSource {
     // set up how many rows are in the tableview
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return spoolArray.count
@@ -64,8 +159,4 @@ class SpoolVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
 }
-
-
-
