@@ -25,11 +25,14 @@ class SpoolTableViewCell: UITableViewCell {
     
 }
 
+var spoolArray:[SpoolDisplay] = []
+var uids:[String] = []
+
 class SpoolVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var spoolArray:[SpoolDisplay] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +41,7 @@ class SpoolVC: UIViewController {
         tableView.dataSource = self
 //        clearCoreData()
         getCoreData()
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -102,28 +106,36 @@ extension SpoolVC {
     
     // checks if spool is already in the spoolArray, add or increment count accordingly
     func checkAndAdd(compare: NSManagedObject) {
+//        print("check and add")
         let otherColor = compare.value(forKey: "color") as! String
         let otherDiameter = compare.value(forKey: "diameter") as! Double
         let otherMaterial = compare.value(forKey: "material") as! String
+        let uid = compare.value(forKey: "uid") as! String
+//        print("otherColor: \(otherColor), otherDiameter: \(otherDiameter), otherMaterial: \(otherMaterial)")
         
         for spool in spoolArray {
             let color = spool.color
             let diameter = spool.diameter
             let material = spool.material
-            
-            
+//            print("color: \(color), diameter: \(diameter), material: \(material), uid: \(uid)")
+//            print("uids \(uids)")
             
             if color == otherColor && diameter == otherDiameter && material == otherMaterial {
+                if uids.contains(uid) { return }
                 // already in spoolArray, increment count
-                print("already in spoolArray")
+//                print("material already in spoolArray")
                 spool.count += 1
+                uids.append(uid)
+                return
             }
         }
         
         // new material, add to spoolArray
         if let otherImage = compare.value(forKey: "image") {
-            print("add to spoolArray")
+//            print("add to spoolArray")
             spoolArray.append(SpoolDisplay(color: otherColor, material: otherMaterial, diameter: otherDiameter, count: 1, image: UIImage(data: otherImage as! Data)!))
+//            print("uid is \(uid)")
+            uids.append(uid)
         } else {
             // TODO
             // don't have an image, use a placeholder
