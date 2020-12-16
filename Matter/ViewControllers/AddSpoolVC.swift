@@ -25,7 +25,7 @@ class AddSpoolVC: UIViewController {
 
         // Do any additional setup after loading the view.
         initializeImagePicker()
-        getData()
+//        getData()
 //        clearCoreData()
     }
     
@@ -105,7 +105,8 @@ class AddSpoolVC: UIViewController {
             
             // TODO: image
             if let imageData = spoolImage.image?.pngData() {
-                saveImage(data: imageData)
+//                saveImage(data: imageData)
+                spool.setValue(imageData, forKey: "image")
             }
             
             // Commit the changes
@@ -146,8 +147,18 @@ class AddSpoolVC: UIViewController {
                let uid = spool.value(forKey: "uid"),
                let weight = spool.value(forKey: "weight") {
                 print("Color: \(color), Diameter: \(diameter), Link: \(link), Material: \(material), Remarks: \(remarks), UID: \(uid), Weight: \(weight)")
+                
             }
+            
+        
+            if let image = spool.value(forKey: "image") {
+                spoolImage.image = UIImage(data: image as! Data)
+            }
+//            print(image)
+//            spoolImage.image = UIImage(data: image as! Data)
         }
+        
+
     }
     
     func clearCoreData() {
@@ -177,7 +188,7 @@ class AddSpoolVC: UIViewController {
             abort()
         }
         
-        
+        print("core data cleared")
     }
     
 
