@@ -12,21 +12,21 @@ import UIKit
 class IndividualSpool {
     var material = String()
     var diameter:Double = 0
-    var count:Int = 0
     var color = String()
     var image:UIImage?
     var brand = String()
     var uid = String()
     var weight:Double = 0
+    var link = String()
     
-    init(material: String, diameter: Double, count: Int, color: String, image: UIImage, brand: String, uid: String, weight: Double) {
+    init(material: String, diameter: Double, color: String, image: UIImage, brand: String, uid: String, weight: Double, link: String) {
         self.material = material
         self.diameter = diameter
-        self.count = count
         self.color = color
         self.image = image
         self.brand = brand
         self.uid = uid
         self.weight = weight
+        self.link = link
     }
 }

@@ -57,9 +57,11 @@ class SpoolVC: UIViewController {
             let row = tableView.indexPathForSelectedRow?.row {
             let spools = spoolArray[row]
             nextVC.uids = spools.uids
+            nextVC.brand = spools.brand
             nextVC.material = spools.material
             nextVC.color = spools.color
             nextVC.diameter = spools.diameter
+            nextVC.image = spools.image
         }
     }
     
