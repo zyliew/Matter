@@ -260,15 +260,18 @@ extension SpoolVC: UITableViewDelegate, UITableViewDataSource {
                 spoolArray.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             } else {
-                print("count more than 1. Can't delete")
+                // confirm that the user wants to delete multiple spools
                 let alert = UIAlertController(title: "Are you sure?", message: "\(spool.count) spools will be deleted", preferredStyle: .alert)
-
-                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {action in
+                
+                // Delete
+                alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: {action in
                     self.deleteMultipleData(uids: spool.uids)
                     spoolArray.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .fade)
                 }))
-                alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+                
+                // Cancel
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
                 self.present(alert, animated: true)
             }
