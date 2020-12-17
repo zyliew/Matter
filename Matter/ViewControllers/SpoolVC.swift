@@ -55,8 +55,11 @@ class SpoolVC: UIViewController {
         if segue.identifier == "individualSpoolsSegue",
             let nextVC = segue.destination as? IndividualSpoolsVC,
             let row = tableView.indexPathForSelectedRow?.row {
-                let spools = spoolArray[row]
-                // TODO
+            let spools = spoolArray[row]
+            nextVC.uids = spools.uids
+            nextVC.material = spools.material
+            nextVC.color = spools.color
+            nextVC.diameter = spools.diameter
         }
     }
     
@@ -64,12 +67,11 @@ class SpoolVC: UIViewController {
 
 // Core Data methods
 extension SpoolVC {
+    // Retrieve all spools from Core Data
     func getCoreData() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
-        
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Spool")
-        
         var fetchedResults: [NSManagedObject]? = nil
         
         do {
@@ -81,17 +83,17 @@ extension SpoolVC {
             abort()
         }
         
+        // Filter and add the spools into spoolArray
         for spool in fetchedResults! {
             checkAndAdd(compare: spool)
         }
     }
     
+    // purges Core Data
     func clearCoreData() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
-        
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Spool")
-        
         var fetchedResults: [NSManagedObject]
         
         do {
@@ -116,19 +118,18 @@ extension SpoolVC {
         print("core data cleared")
     }
     
+    // delete a single spool with the given uid
     func deleteSingleData(uid: String) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
-        
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Spool")
-        
         var fetchedResults: [NSManagedObject]
         
         do {
             try fetchedResults = context.fetch(request) as! [NSManagedObject]
             
             if fetchedResults.count > 0 {
-                
+                // find spools with the matching uid and delete it
                 for result:AnyObject in fetchedResults {
                     let currentUID = result.value(forKey: "uid") as! String
                     if uid == currentUID {
@@ -150,19 +151,18 @@ extension SpoolVC {
         print("deleted single data")
     }
     
+    // delete the list of spools with the given uids
     func deleteMultipleData(uids: [String]) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
-        
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Spool")
-        
         var fetchedResults: [NSManagedObject]
         
         do {
             try fetchedResults = context.fetch(request) as! [NSManagedObject]
             
             if fetchedResults.count > 0 {
-                
+                // find spools with matching uid and delete it
                 for result:AnyObject in fetchedResults {
                     let currentUID = result.value(forKey: "uid") as! String
                     if uids.contains(currentUID) {
@@ -201,10 +201,13 @@ extension SpoolVC {
 //            print("color: \(color), diameter: \(diameter), material: \(material), uid: \(uid)")
 //            print("uids \(uids)")
             
+            // Existing material
             if color == otherColor && diameter == otherDiameter && material == otherMaterial && brand == otherBrand {
+                // check if spool is already in spoolArray
                 if uids.contains(uid) { return }
                 // already in spoolArray, increment count
 //                print("material already in spoolArray")
+                
                 spool.count += 1
                 spool.addUid(uid: uid)
                 uids.append(uid)
@@ -212,9 +215,10 @@ extension SpoolVC {
             }
         }
         
-        // new material, add to spoolArray
+        // New material, add to spoolArray
         print("spoolArray empty, add to spoolArray")
         if let otherImage = compare.value(forKey: "image") {
+            // create with the uploaded image
             print("add with image")
             let newSpool = SpoolDisplay(color: otherColor, material: otherMaterial, diameter: otherDiameter, count: 1, image: UIImage(data: otherImage as! Data)!, brand: otherBrand)
             spoolArray.append(newSpool)
@@ -222,7 +226,6 @@ extension SpoolVC {
             newSpool.addUid(uid: uid)
             uids.append(uid)
         } else {
-            // TODO
             // don't have an image, use a placeholder
             print("add without image")
             let image = #imageLiteral(resourceName: "noun_3d printer filament_2602507")
@@ -295,9 +298,4 @@ extension SpoolVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-}
-
-// helpers for tableview methods
-extension SpoolVC {
-    
 }

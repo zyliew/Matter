@@ -18,10 +18,10 @@ class IndividualSpoolsVC: UIViewController {
     @IBOutlet weak var diameterLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    var spoolList: [String] = []
+    var uids: [String] = []
     var material = String()
     var color = String()
-    var diameter = Int()
+    var diameter = Double()
     var link = String()
     
     override func viewDidLoad() {
