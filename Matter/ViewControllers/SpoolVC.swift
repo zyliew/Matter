@@ -140,6 +140,8 @@ extension SpoolVC {
             // TODO
             // don't have an image, use a placeholder
             print("hit else")
+            let image = #imageLiteral(resourceName: "noun_3d printer filament_2602507")
+            spoolArray.append(SpoolDisplay(color: otherColor, material: otherMaterial, diameter: otherDiameter, count: 1, image: image))
         }
     }
 }
@@ -162,6 +164,7 @@ extension SpoolVC: UITableViewDelegate, UITableViewDataSource {
         cell.materialLabel.text = material.material
         cell.diameterLabel.text = String(material.diameter)
         cell.countLabel.text = String(material.count)
+        cell.spoolImage.image = material.image!
         
         return cell
     }
