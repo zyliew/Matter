@@ -15,6 +15,7 @@ class SpoolDisplay {
     var count:Int = 0
     var color:String = ""
     var image:UIImage?
+    var uids:[String] = []
     
     init(color:String, material: String, diameter: Double, count: Int, image: UIImage) {
         self.material = material
@@ -22,5 +23,9 @@ class SpoolDisplay {
         self.count = count
         self.color = color
         self.image = image
+    }
+    
+    func addUid(uid: String) {
+        uids.append(uid)
     }
 }

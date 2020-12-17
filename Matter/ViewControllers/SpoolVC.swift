@@ -37,6 +37,7 @@ class SpoolVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        // setup tableview
         tableView.delegate = self
         tableView.dataSource = self
 //        clearCoreData()
@@ -51,6 +52,7 @@ class SpoolVC: UIViewController {
 
 }
 
+// Core Data methods
 extension SpoolVC {
     func getCoreData() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -104,9 +106,43 @@ extension SpoolVC {
         print("core data cleared")
     }
     
+    func deleteSingleData(uid: String) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Spool")
+        
+        var fetchedResults: [NSManagedObject]
+        
+        do {
+            try fetchedResults = context.fetch(request) as! [NSManagedObject]
+            
+            if fetchedResults.count > 0 {
+                
+                for result:AnyObject in fetchedResults {
+                    let currentUID = result.value(forKey: "uid") as! String
+                    if uid == currentUID {
+                        context.delete(result as! NSManagedObject)
+                        print("Spool with UID: \(uid) deleted from Core Data")
+                        break
+                    }
+                }
+            }
+            try context.save()
+            
+        } catch {
+            // if an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        print("deleted single data")
+    }
+    
     // checks if spool is already in the spoolArray, add or increment count accordingly
     func checkAndAdd(compare: NSManagedObject) {
-//        print("check and add")
+        print("check and add")
         let otherColor = compare.value(forKey: "color") as! String
         let otherDiameter = compare.value(forKey: "diameter") as! Double
         let otherMaterial = compare.value(forKey: "material") as! String
@@ -125,29 +161,36 @@ extension SpoolVC {
                 // already in spoolArray, increment count
 //                print("material already in spoolArray")
                 spool.count += 1
+                spool.addUid(uid: uid)
                 uids.append(uid)
                 return
             }
         }
         
         // new material, add to spoolArray
+        print("spoolArray empty, add to spoolArray")
         if let otherImage = compare.value(forKey: "image") {
-//            print("add to spoolArray")
-            spoolArray.append(SpoolDisplay(color: otherColor, material: otherMaterial, diameter: otherDiameter, count: 1, image: UIImage(data: otherImage as! Data)!))
+            print("add with image")
+            let newSpool = SpoolDisplay(color: otherColor, material: otherMaterial, diameter: otherDiameter, count: 1, image: UIImage(data: otherImage as! Data)!)
+            spoolArray.append(newSpool)
 //            print("uid is \(uid)")
+            newSpool.addUid(uid: uid)
             uids.append(uid)
         } else {
             // TODO
             // don't have an image, use a placeholder
-            print("hit else")
+            print("add without image")
             let image = #imageLiteral(resourceName: "noun_3d printer filament_2602507")
-            spoolArray.append(SpoolDisplay(color: otherColor, material: otherMaterial, diameter: otherDiameter, count: 1, image: image))
+            let newSpool = SpoolDisplay(color: otherColor, material: otherMaterial, diameter: otherDiameter, count: 1, image: image)
+            spoolArray.append(newSpool)
+            newSpool.addUid(uid: uid)
+            uids.append(uid)
         }
     }
 }
 
 
-
+// tableview methods
 extension SpoolVC: UITableViewDelegate, UITableViewDataSource {
     // set up how many rows are in the tableview
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -169,9 +212,36 @@ extension SpoolVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    // swipe to delete, only delete if count is 1, otherwise popup alert
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // check that only 1 spool is present
+            let spool = spoolArray[indexPath.row]
+            print("Delete spool")
+            print(spool.material)
+            print(spool.uids)
+            if spool.count == 1 {
+                // delete from Core Data
+                deleteSingleData(uid: spool.uids.first!)
+                // delete from spoolArray, tableView
+                spoolArray.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            } else {
+                print("count more than 1. Can't delete")
+            }
+            
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+        }
+    }
+    
     // deselects the row so it's not highlighted after click
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.deselectRow(at: indexPath, animated: true)
     }
+}
+
+// helpers for tableview methods
+extension SpoolVC {
+    
 }
