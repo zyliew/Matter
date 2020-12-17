@@ -197,10 +197,11 @@ extension SpoolVC {
             let color = spool.color
             let diameter = spool.diameter
             let material = spool.material
+            let brand = spool.brand
 //            print("color: \(color), diameter: \(diameter), material: \(material), uid: \(uid)")
 //            print("uids \(uids)")
             
-            if color == otherColor && diameter == otherDiameter && material == otherMaterial {
+            if color == otherColor && diameter == otherDiameter && material == otherMaterial && brand == otherBrand {
                 if uids.contains(uid) { return }
                 // already in spoolArray, increment count
 //                print("material already in spoolArray")

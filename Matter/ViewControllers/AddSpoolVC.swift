@@ -74,11 +74,15 @@ class AddSpoolVC: UIViewController {
     }
     
     func addToCoreData() {
+        print("add to core data")
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
-        let brand = brandTextBox.text ?? "Generic"
+        var brand = brandTextBox.text ?? ""
         let link = purchaseLinkTextBox.text ?? ""
+        if brand == "" {
+            brand = "Generic"
+        }
         
         let toAddQuantity = Int(quantityTextBox.text!) ?? 0
         
@@ -93,6 +97,7 @@ class AddSpoolVC: UIViewController {
             spool.setValue(UUID().uuidString, forKey: "uid")
             spool.setValue(link, forKey: "link")
             spool.setValue(brand, forKey: "brand")
+//            print("brand is \(brand)")
             switch diameterSegmentedControl.selectedSegmentIndex {
             case 0:
                 spool.setValue(1.75, forKey: "diameter")
