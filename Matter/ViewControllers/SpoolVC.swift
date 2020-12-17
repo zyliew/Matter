@@ -22,6 +22,7 @@ class SpoolTableViewCell: UITableViewCell {
     @IBOutlet weak var diameterLabel: UILabel!
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var colorLabel: UILabel!
+    @IBOutlet weak var brandLabel: UILabel!
     
 }
 
@@ -49,7 +50,16 @@ class SpoolVC: UIViewController {
         getCoreData()
         DispatchQueue.main.async { self.tableView.reloadData() }
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "individualSpoolsSegue",
+            let nextVC = segue.destination as? IndividualSpoolsVC,
+            let row = tableView.indexPathForSelectedRow?.row {
+                let spools = spoolArray[row]
+                // TODO
+        }
+    }
+    
 }
 
 // Core Data methods
@@ -179,6 +189,7 @@ extension SpoolVC {
         let otherColor = compare.value(forKey: "color") as! String
         let otherDiameter = compare.value(forKey: "diameter") as! Double
         let otherMaterial = compare.value(forKey: "material") as! String
+        let otherBrand = compare.value(forKey: "brand") as! String
         let uid = compare.value(forKey: "uid") as! String
 //        print("otherColor: \(otherColor), otherDiameter: \(otherDiameter), otherMaterial: \(otherMaterial)")
         
@@ -204,7 +215,7 @@ extension SpoolVC {
         print("spoolArray empty, add to spoolArray")
         if let otherImage = compare.value(forKey: "image") {
             print("add with image")
-            let newSpool = SpoolDisplay(color: otherColor, material: otherMaterial, diameter: otherDiameter, count: 1, image: UIImage(data: otherImage as! Data)!)
+            let newSpool = SpoolDisplay(color: otherColor, material: otherMaterial, diameter: otherDiameter, count: 1, image: UIImage(data: otherImage as! Data)!, brand: otherBrand)
             spoolArray.append(newSpool)
 //            print("uid is \(uid)")
             newSpool.addUid(uid: uid)
@@ -214,7 +225,7 @@ extension SpoolVC {
             // don't have an image, use a placeholder
             print("add without image")
             let image = #imageLiteral(resourceName: "noun_3d printer filament_2602507")
-            let newSpool = SpoolDisplay(color: otherColor, material: otherMaterial, diameter: otherDiameter, count: 1, image: image)
+            let newSpool = SpoolDisplay(color: otherColor, material: otherMaterial, diameter: otherDiameter, count: 1, image: image, brand: otherBrand)
             spoolArray.append(newSpool)
             newSpool.addUid(uid: uid)
             uids.append(uid)
@@ -241,6 +252,7 @@ extension SpoolVC: UITableViewDelegate, UITableViewDataSource {
         cell.diameterLabel.text = String(material.diameter)
         cell.countLabel.text = String(material.count)
         cell.spoolImage.image = material.image!
+        cell.brandLabel.text = material.brand
         
         return cell
     }
@@ -275,9 +287,6 @@ extension SpoolVC: UITableViewDelegate, UITableViewDataSource {
 
                 self.present(alert, animated: true)
             }
-            
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }
     }
     

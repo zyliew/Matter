@@ -15,7 +15,7 @@ class AddSpoolVC: UIViewController {
     @IBOutlet weak var weightTextBox: UITextField!
     @IBOutlet weak var diameterSegmentedControl: UISegmentedControl!
     @IBOutlet weak var purchaseLinkTextBox: UITextField!
-    @IBOutlet weak var remarksTextBox: UITextField!
+    @IBOutlet weak var brandTextBox: UITextField!
     @IBOutlet weak var spoolImage: UIImageView!
     
     var imagePicker: UIImagePickerController!
@@ -30,11 +30,7 @@ class AddSpoolVC: UIViewController {
     }
     
     @IBAction func uploadPicture(_ sender: Any) {
-        
-        
         present(imagePicker, animated: true, completion: nil)
-        
-        
     }
     
     func saveImage(data: Data) {
@@ -81,6 +77,9 @@ class AddSpoolVC: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
+        let brand = brandTextBox.text ?? "Generic"
+        let link = purchaseLinkTextBox.text ?? ""
+        
         let toAddQuantity = Int(quantityTextBox.text!) ?? 0
         
         // create new spool/s
@@ -92,8 +91,8 @@ class AddSpoolVC: UIViewController {
             spool.setValue(colorTextBox.text, forKey: "color")
             spool.setValue(Int(weightTextBox.text!), forKey: "weight")
             spool.setValue(UUID().uuidString, forKey: "uid")
-            spool.setValue(purchaseLinkTextBox.text, forKey: "link")
-            spool.setValue(remarksTextBox.text, forKey: "remarks")
+            spool.setValue(link, forKey: "link")
+            spool.setValue(brand, forKey: "brand")
             switch diameterSegmentedControl.selectedSegmentIndex {
             case 0:
                 spool.setValue(1.75, forKey: "diameter")
@@ -143,10 +142,10 @@ class AddSpoolVC: UIViewController {
                let diameter = spool.value(forKey: "diameter"),
                let link = spool.value(forKey: "link"),
                let material = spool.value(forKey: "material"),
-               let remarks = spool.value(forKey: "remarks"),
+               let brand = spool.value(forKey: "brand"),
                let uid = spool.value(forKey: "uid"),
                let weight = spool.value(forKey: "weight") {
-                print("Color: \(color), Diameter: \(diameter), Link: \(link), Material: \(material), Remarks: \(remarks), UID: \(uid), Weight: \(weight)")
+                print("Color: \(color), Diameter: \(diameter), Link: \(link), Material: \(material), Brand: \(brand), UID: \(uid), Weight: \(weight)")
                 
             }
             
