@@ -2,7 +2,7 @@
 //  ObjectVC.swift
 //  Matter
 //
-//  Created by Ziyi Liew on 16/12/20.
+//  Created by Ziyi Liew on 19/12/20.
 //
 
 import UIKit
@@ -21,18 +21,17 @@ class ObjectTableViewCell: UITableViewCell {
     var name:String?
     var weight:Double?
     
-//    @IBAction func printObject(_ sender: Any) {
-//        delegate?.printObject(name: name!, weight: weight!)
-//    }
+    @IBAction func printObject(_ sender: Any) {
+        delegate?.printObject(name: name!, weight: weight!)
+    }
 }
 
 class ObjectVC: UIViewController {
-    
     @IBOutlet weak var tableView: UITableView!
     var objectArray:[ObjectDisplay] = []
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
@@ -41,7 +40,7 @@ class ObjectVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         getCoreData()
-//        DispatchQueue.main.async { self.tableView.reloadData() }
+        DispatchQueue.main.async { self.tableView.reloadData() }
     }
 }
 
@@ -60,6 +59,7 @@ extension ObjectVC: UITableViewDelegate, UITableViewDataSource {
         cell.objectImage.image = item.image!
         cell.nameLabel.text = item.name
         cell.weightLabel.text = String(item.weight)
+        cell.objectImage.image = #imageLiteral(resourceName: "noun_3d printer filament_2602507")
         cell.name = item.name
         cell.weight = item.weight
         
