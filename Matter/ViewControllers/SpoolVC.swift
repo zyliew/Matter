@@ -26,14 +26,13 @@ class SpoolTableViewCell: UITableViewCell {
     
 }
 
-var spoolArray:[SpoolDisplay] = []
-var uids:[String] = []
+
 
 class SpoolVC: UIViewController {
-
     @IBOutlet weak var tableView: UITableView!
     
-    
+    var spoolArray:[SpoolDisplay] = []
+    var uids:[String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +40,7 @@ class SpoolVC: UIViewController {
         // setup tableview
         tableView.delegate = self
         tableView.dataSource = self
+        self.navigationItem.title = "My Spools"
 //        clearCoreData()
         getCoreData()
         
@@ -284,7 +284,7 @@ extension SpoolVC: UITableViewDelegate, UITableViewDataSource {
                 // Delete
                 alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: {action in
                     self.deleteMultipleData(uids: spool.uids)
-                    spoolArray.remove(at: indexPath.row)
+                    self.spoolArray.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .fade)
                 }))
                 

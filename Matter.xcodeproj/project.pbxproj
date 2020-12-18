@@ -22,6 +22,7 @@
 		7CAA976E258A944300F92A04 /* SpoolDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAA976D258A944300F92A04 /* SpoolDisplay.swift */; };
 		7CD723B1258BBA1300F43475 /* IndividualSpool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD723B0258BBA1300F43475 /* IndividualSpool.swift */; };
 		7CE822B4258B81C300D0AC32 /* IndividualSpoolsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE822B3258B81C300D0AC32 /* IndividualSpoolsVC.swift */; };
+		7CF7E75B258D28B1005EFE98 /* ObjectDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF7E75A258D28B1005EFE98 /* ObjectDisplay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		7CAA976D258A944300F92A04 /* SpoolDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoolDisplay.swift; sourceTree = "<group>"; };
 		7CD723B0258BBA1300F43475 /* IndividualSpool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualSpool.swift; sourceTree = "<group>"; };
 		7CE822B3258B81C300D0AC32 /* IndividualSpoolsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualSpoolsVC.swift; sourceTree = "<group>"; };
+		7CF7E75A258D28B1005EFE98 /* ObjectDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDisplay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				7C847481258914020031BFC9 /* AppDelegate.swift */,
+				7CF7E759258D2892005EFE98 /* Entities */,
 				7C8474B7258914AD0031BFC9 /* ViewControllers */,
 				7C847483258914020031BFC9 /* SceneDelegate.swift */,
 				7C847487258914030031BFC9 /* Main.storyboard */,
@@ -121,8 +124,6 @@
 				7C84748F258914030031BFC9 /* LaunchScreen.storyboard */,
 				7C847492258914030031BFC9 /* Info.plist */,
 				7C84748A258914030031BFC9 /* Matter.xcdatamodeld */,
-				7CAA976D258A944300F92A04 /* SpoolDisplay.swift */,
-				7CD723B0258BBA1300F43475 /* IndividualSpool.swift */,
 			);
 			path = Matter;
 			sourceTree = "<group>";
@@ -155,6 +156,16 @@
 				7C8474CA2589268B0031BFC9 /* AddSpoolVC.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7CF7E759258D2892005EFE98 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				7CAA976D258A944300F92A04 /* SpoolDisplay.swift */,
+				7CD723B0258BBA1300F43475 /* IndividualSpool.swift */,
+				7CF7E75A258D28B1005EFE98 /* ObjectDisplay.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CE822B4258B81C300D0AC32 /* IndividualSpoolsVC.swift in Sources */,
+				7CF7E75B258D28B1005EFE98 /* ObjectDisplay.swift in Sources */,
 				7CAA976E258A944300F92A04 /* SpoolDisplay.swift in Sources */,
 				7C84748C258914030031BFC9 /* Matter.xcdatamodeld in Sources */,
 				7CAA9769258A91F300F92A04 /* SpoolVC.swift in Sources */,
