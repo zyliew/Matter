@@ -21,14 +21,14 @@ class ObjectTableViewCell: UITableViewCell {
     var name:String?
     var weight:Double?
     
-    @IBAction func printObject(_ sender: Any) {
-        delegate?.printObject(name: name!, weight: weight!)
-    }
+//    @IBAction func printObject(_ sender: Any) {
+//        delegate?.printObject(name: name!, weight: weight!)
+//    }
 }
 
 class ObjectVC: UIViewController {
-    @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var tableView: UITableView!
     var objectArray:[ObjectDisplay] = []
 
     override func viewDidLoad() {
@@ -41,7 +41,7 @@ class ObjectVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         getCoreData()
-        DispatchQueue.main.async { self.tableView.reloadData() }
+//        DispatchQueue.main.async { self.tableView.reloadData() }
     }
 }
 

@@ -8,14 +8,6 @@
 import UIKit
 import CoreData
 
-struct Sanity {
-    var material:String
-    var diameter:Double
-    var count:Int
-    var color:String
-}
-
-
 class SpoolTableViewCell: UITableViewCell {
     @IBOutlet weak var spoolImage: UIImageView!
     @IBOutlet weak var materialLabel: UILabel!
@@ -25,8 +17,6 @@ class SpoolTableViewCell: UITableViewCell {
     @IBOutlet weak var brandLabel: UILabel!
     
 }
-
-
 
 class SpoolVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
