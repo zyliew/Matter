@@ -112,7 +112,7 @@ class AddSpoolVC: UIViewController {
 //                saveImage(data: imageData)
                 spool.setValue(imageData, forKey: "image")
             } else {
-                let image = #imageLiteral(resourceName: "noun_3d printer filament_2602507").pngData()
+                let image = #imageLiteral(resourceName: "filament_spool").pngData()
                 spool.setValue(image, forKey: "image")
             }
             
