@@ -61,7 +61,11 @@ extension ObjectVC: passObjects {
 }
 
 // tableview methods
-extension ObjectVC: UITableViewDelegate, UITableViewDataSource {
+extension ObjectVC: UITableViewDelegate, UITableViewDataSource, ObjectTableViewCellDelegate {
+    func printObject(name: String, weight: Double) {
+        print("printing \(name) with weight \(weight)")
+    }
+    
     // set up how many rows are in the tableview
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return objectArray.count
@@ -78,6 +82,7 @@ extension ObjectVC: UITableViewDelegate, UITableViewDataSource {
         cell.objectImage.image = item.image
         cell.name = item.name
         cell.weight = item.weight
+        cell.delegate = self
         
         return cell
     }
