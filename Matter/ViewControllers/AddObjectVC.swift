@@ -8,6 +8,8 @@
 import UIKit
 import CoreData
 
+// pass object array between AddObjectVC and ObjectVC
+// (multiple items)
 protocol passObjects {
     func updateArray(object: [ObjectDisplay])
 }

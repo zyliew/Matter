@@ -8,7 +8,9 @@
 import UIKit
 import CoreData
 
-// pass objectArray between ObjectVC and AddObjectVC
+
+
+// Enable print button on tableview cells
 protocol ObjectTableViewCellDelegate {
     func printObject(name: String, weight: Double)
 }
@@ -22,6 +24,7 @@ class ObjectTableViewCell: UITableViewCell {
     @IBOutlet weak var weightLabel: UILabel!
     var name:String?
     var weight:Double?
+    
     
     @IBAction func printObject(_ sender: Any) {
         delegate?.printObject(name: name!, weight: weight!)
@@ -48,6 +51,7 @@ class ObjectVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addModelSegue",
            let nextVC = segue.destination as? AddObjectVC {
+            print("going to addModelSegue")
             nextVC.delegate = self
             nextVC.objects = objectArray
         }
@@ -64,15 +68,22 @@ extension ObjectVC: passObjects {
 extension ObjectVC: UITableViewDelegate, UITableViewDataSource, ObjectTableViewCellDelegate {
     func printObject(name: String, weight: Double) {
         print("printing \(name) with weight \(weight)")
-        goSpoolVC()
+//        goSpoolVC()
     }
     
-    // Go to home screen after successful login
+    // Go to SpoolVC
     func goSpoolVC(){
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "SpoolsNavController")
-        nextViewController.modalPresentationStyle = .fullScreen
-        self.present(nextViewController, animated:true, completion:nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "SpoolsNavController")
+        nextVC.modalPresentationStyle = .fullScreen
+        
+        let VC = SpoolVC()
+        VC.showCancel = false
+        print("set showCancel to \(VC.showCancel)")
+//        VC?.showCancel = false
+        print("in goSpoolVC")
+        
+        self.present(nextVC, animated:true, completion:nil)
     }
     
     // set up how many rows are in the tableview

@@ -425,7 +425,8 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Print"/>
                                                     <connections>
-                                                        <action selector="printObject:" destination="8pg-nK-Yw2" eventType="touchUpInside" id="6Cf-AX-rrB"/>
+                                                        <action selector="printObject:" destination="8pg-nK-Yw2" eventType="touchUpInside" id="bSq-RW-Ef8"/>
+                                                        <segue destination="o6b-5M-mCV" kind="show" identifier="printSegue" id="VoH-ez-P70"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -572,6 +573,7 @@
                 <navigationController storyboardIdentifier="SpoolsNavController" automaticallyAdjustsScrollViewInsets="NO" id="o6b-5M-mCV" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Spools" id="f9b-1a-ign"/>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="7r4-8L-VJM"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="kVz-dQ-PuP">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -605,6 +607,9 @@
             <point key="canvasLocation" x="598.55072463768124" y="212.94642857142856"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="VoH-ez-P70"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">

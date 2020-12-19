@@ -8,6 +8,11 @@
 import UIKit
 import CoreData
 
+//// Pass single item between ObjectVC and SpoolVC
+//protocol passSingleObject {
+//    func passSingleObject(object: ObjectDisplay)
+//}
+
 class SpoolTableViewCell: UITableViewCell {
     @IBOutlet weak var spoolImage: UIImageView!
     @IBOutlet weak var materialLabel: UILabel!
@@ -22,8 +27,14 @@ class SpoolVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var cancelButton: UIButton!
     
+    var showCancel = true
+    
+//    var delegate:passSingleObject?
     var spoolArray:[SpoolDisplay] = []
     var uids:[String] = []
+    
+    var itemName = String()
+    var itemWeight = Double()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +42,8 @@ class SpoolVC: UIViewController {
         // setup tableview
         tableView.delegate = self
         tableView.dataSource = self
+        
+        cancelButton.isHidden = true
         self.navigationItem.title = "My Spools"
 //        clearCoreData()
         getCoreData()
@@ -38,6 +51,9 @@ class SpoolVC: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+//        print("showCancel is \(showCancel)")
+//        print("in SpoolVC. itemName is \(itemName) itemWeight is \(itemWeight)")
+
         getCoreData()
         DispatchQueue.main.async { self.tableView.reloadData() }
     }
@@ -61,6 +77,13 @@ class SpoolVC: UIViewController {
     }
     
 }
+
+//extension SpoolVC: ObjectTableViewCellDelegate {
+//    func printObject(name: String, weight: Double) {
+//        itemName = name
+//        itemWeight = weight
+//            }
+//}
 
 // Core Data methods
 extension SpoolVC {
