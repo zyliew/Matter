@@ -20,6 +20,7 @@ class SpoolTableViewCell: UITableViewCell {
 
 class SpoolVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var cancelButton: UIButton!
     
     var spoolArray:[SpoolDisplay] = []
     var uids:[String] = []
@@ -39,6 +40,10 @@ class SpoolVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         getCoreData()
         DispatchQueue.main.async { self.tableView.reloadData() }
+    }
+    
+    @IBAction func cancelPrint(_ sender: Any) {
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

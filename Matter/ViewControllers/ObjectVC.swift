@@ -64,6 +64,15 @@ extension ObjectVC: passObjects {
 extension ObjectVC: UITableViewDelegate, UITableViewDataSource, ObjectTableViewCellDelegate {
     func printObject(name: String, weight: Double) {
         print("printing \(name) with weight \(weight)")
+        goSpoolVC()
+    }
+    
+    // Go to home screen after successful login
+    func goSpoolVC(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "SpoolsNavController")
+        nextViewController.modalPresentationStyle = .fullScreen
+        self.present(nextViewController, animated:true, completion:nil)
     }
     
     // set up how many rows are in the tableview

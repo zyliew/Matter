@@ -11,7 +11,7 @@
         <!--SpoolVC-->
         <scene sceneID="6u1-Kn-f14">
             <objects>
-                <viewController id="JvP-5K-sbI" customClass="SpoolVC" customModule="Matter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SpoolVC" id="JvP-5K-sbI" customClass="SpoolVC" customModule="Matter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aG0-V1-Wgu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -91,6 +91,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="1fX-cy-T60">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="Jkn-mg-ogK">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Ov8-Ay-s9B">
+                                <rect key="frame" x="20" y="7" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" systemColor="systemRedColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelPrint:" destination="JvP-5K-sbI" eventType="touchUpInside" id="shM-3v-7ta"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="038-eW-sOv">
                             <connections>
                                 <segue destination="2TH-vI-A0g" kind="show" id="SW0-wc-6KV"/>
@@ -98,6 +110,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cancelButton" destination="Ov8-Ay-s9B" id="7mM-Zx-khs"/>
                         <outlet property="tableView" destination="hbO-ZD-tm0" id="QPu-Rl-DqT"/>
                     </connections>
                 </viewController>
@@ -537,7 +550,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="4ly-4q-AAf">
             <objects>
-                <tabBarController id="CBh-jL-gPZ" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="HomeTabBarController" id="CBh-jL-gPZ" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kiH-g5-opP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -556,7 +569,7 @@
         <!--Spools-->
         <scene sceneID="s8F-ez-53S">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="o6b-5M-mCV" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SpoolsNavController" automaticallyAdjustsScrollViewInsets="NO" id="o6b-5M-mCV" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Spools" id="f9b-1a-ign"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="kVz-dQ-PuP">
@@ -575,7 +588,7 @@
         <!--Objects-->
         <scene sceneID="jiv-Ey-z7g">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uRG-cU-wzB" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ObjectsNavController" automaticallyAdjustsScrollViewInsets="NO" id="uRG-cU-wzB" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Objects" id="6LF-3F-Diu"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xpP-HD-lr5">
@@ -596,6 +609,9 @@
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
