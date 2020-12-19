@@ -428,7 +428,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="fAt-n5-fHN">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="KuX-Z8-aN3">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Iqg-ED-QMp" userLabel="Add">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Iqg-ED-QMp" userLabel="Add">
                                 <rect key="frame" x="374" y="11" width="20" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="plus" catalog="system"/>
