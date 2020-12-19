@@ -95,7 +95,6 @@ extension SpoolVC {
                 
                 for result:AnyObject in fetchedResults {
                     context.delete(result as! NSManagedObject)
-//                    print("\(result.value(forKey:"uid")!) has been deleted")
                 }
             }
             try context.save()
@@ -177,7 +176,7 @@ extension SpoolVC {
     
     // checks if spool is already in the spoolArray, add or increment count accordingly
     func checkAndAdd(compare: NSManagedObject) {
-        print("check and add")
+//        print("check and add")
         let otherColor = compare.value(forKey: "color") as! String
         let otherDiameter = compare.value(forKey: "diameter") as! Double
         let otherMaterial = compare.value(forKey: "material") as! String

@@ -33,19 +33,19 @@ class AddSpoolVC: UIViewController {
         present(imagePicker, animated: true, completion: nil)
     }
     
-    func saveImage(data: Data) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        
-        let imageInstance = Spool(context: context)
-        imageInstance.image = data
-        do {
-            try context.save()
-            print("Image is saved")
-        } catch {
-            print(error.localizedDescription)
-          }
-    }
+//    func saveImage(data: Data) {
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        let context = appDelegate.persistentContainer.viewContext
+//
+//        let imageInstance = Spool(context: context)
+//        imageInstance.image = data
+//        do {
+//            try context.save()
+//            print("Image is saved")
+//        } catch {
+//            print(error.localizedDescription)
+//          }
+//    }
     
     @IBAction func storeSpoolData(_ sender: Any) {
         // check that inputs are valid

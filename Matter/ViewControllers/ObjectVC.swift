@@ -8,10 +8,12 @@
 import UIKit
 import CoreData
 
+// pass objectArray between ObjectVC and AddObjectVC
 protocol ObjectTableViewCellDelegate {
     func printObject(name: String, weight: Double)
 }
 
+// Custom TableView cell
 class ObjectTableViewCell: UITableViewCell {
     var delegate: ObjectTableViewCellDelegate?
     
@@ -35,12 +37,26 @@ class ObjectVC: UIViewController {
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
+//        clearCoreData()
         getCoreData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getCoreData()
         DispatchQueue.main.async { self.tableView.reloadData() }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addModelSegue",
+           let nextVC = segue.destination as? AddObjectVC {
+            nextVC.delegate = self
+            nextVC.objects = objectArray
+        }
+    }
+}
+
+extension ObjectVC: passObjects {
+    func updateArray(object: [ObjectDisplay]) {
+        objectArray = object
     }
 }
 
@@ -59,7 +75,7 @@ extension ObjectVC: UITableViewDelegate, UITableViewDataSource {
         cell.objectImage.image = item.image!
         cell.nameLabel.text = item.name
         cell.weightLabel.text = String(item.weight)
-        cell.objectImage.image = #imageLiteral(resourceName: "noun_3d printer filament_2602507")
+        cell.objectImage.image = item.image
         cell.name = item.name
         cell.weight = item.weight
         
@@ -102,7 +118,7 @@ extension ObjectVC {
     func getCoreData() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Object")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Item")
         var fetchedResults: [NSManagedObject]? = nil
         
         do {
@@ -124,10 +140,38 @@ extension ObjectVC {
         }
     }
     
+    // purges Core Data
+    func clearCoreData() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Item")
+        var fetchedResults: [NSManagedObject]
+        
+        do {
+            try fetchedResults = context.fetch(request) as! [NSManagedObject]
+            
+            if fetchedResults.count > 0 {
+                
+                for result:AnyObject in fetchedResults {
+                    context.delete(result as! NSManagedObject)
+                }
+            }
+            try context.save()
+            
+        } catch {
+            // if an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        print("core data cleared")
+    }
+    
     func deleteSingleObject(name: String) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Object")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Item")
         var fetchedResults: [NSManagedObject]
         
         do {

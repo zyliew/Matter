@@ -429,11 +429,11 @@
                     <navigationItem key="navigationItem" id="fAt-n5-fHN">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="KuX-Z8-aN3">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Iqg-ED-QMp" userLabel="Add">
-                                <rect key="frame" x="374" y="11" width="20" height="22"/>
+                                <rect key="frame" x="372.5" y="11" width="21.5" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="plus" catalog="system"/>
                                 <connections>
-                                    <segue destination="En8-Nk-w23" kind="show" id="mav-2q-vDr"/>
+                                    <segue destination="En8-Nk-w23" kind="show" identifier="addModelSegue" id="mav-2q-vDr"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -469,14 +469,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rur-0Z-a0w">
-                                <rect key="frame" x="157" y="376" width="102" height="30"/>
+                                <rect key="frame" x="156" y="641" width="102" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Upload Picture"/>
+                                <connections>
+                                    <action selector="uploadImage:" destination="En8-Nk-w23" eventType="touchUpInside" id="s7J-eh-11N"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghc-HL-aCP">
-                                <rect key="frame" x="183" y="450" width="49" height="30"/>
+                                <rect key="frame" x="182" y="715" width="49" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="submit:" destination="En8-Nk-w23" eventType="touchUpInside" id="93F-Ia-f2S"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fav-8S-dhv" userLabel="Name Text Field">
                                 <rect key="frame" x="183" y="158" width="193" height="34"/>
@@ -490,11 +496,20 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5XR-YU-AKY">
+                                <rect key="frame" x="87" y="344" width="240" height="180"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Wjo-WT-Pu5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add Model" id="0E5-Rn-CLh"/>
+                    <connections>
+                        <outlet property="nameTextField" destination="fav-8S-dhv" id="HQz-zf-Hg0"/>
+                        <outlet property="objectImage" destination="5XR-YU-AKY" id="GwB-52-ngS"/>
+                        <outlet property="weightTextField" destination="FJJ-4s-p6Q" id="0jC-jx-Cwx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zno-al-f9w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
