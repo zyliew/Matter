@@ -28,6 +28,7 @@ class ObjectTableViewCell: UITableViewCell {
     
     @IBAction func printObject(_ sender: Any) {
         delegate?.printObject(name: name!, weight: weight!)
+        
     }
 }
 
@@ -54,6 +55,11 @@ class ObjectVC: UIViewController {
             print("going to addModelSegue")
             nextVC.delegate = self
             nextVC.objects = objectArray
+        } else if segue.identifier == "printSegue" {
+            print("going to printSegue")
+            let nextVC = segue.destination as? SpoolVC
+            nextVC!.showCancel = false
+            nextVC?.hidesBottomBarWhenPushed = true
         }
     }
 }

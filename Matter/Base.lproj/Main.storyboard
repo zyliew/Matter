@@ -426,7 +426,7 @@
                                                     <state key="normal" title="Print"/>
                                                     <connections>
                                                         <action selector="printObject:" destination="8pg-nK-Yw2" eventType="touchUpInside" id="bSq-RW-Ef8"/>
-                                                        <segue destination="o6b-5M-mCV" kind="show" identifier="printSegue" id="VoH-ez-P70"/>
+                                                        <segue destination="JvP-5K-sbI" kind="show" identifier="printSegue" id="VB6-Xn-HyQ"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -608,7 +608,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VoH-ez-P70"/>
+        <segue reference="9Db-9p-KlA"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="plus" catalog="system" width="128" height="113"/>

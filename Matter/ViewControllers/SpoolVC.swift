@@ -51,7 +51,8 @@ class SpoolVC: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-//        print("showCancel is \(showCancel)")
+        print("viewWillAppear. showCancel is \(showCancel)")
+        cancelButton.isHidden = showCancel
 //        print("in SpoolVC. itemName is \(itemName) itemWeight is \(itemWeight)")
 
         getCoreData()
