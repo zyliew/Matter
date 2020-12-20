@@ -25,22 +25,35 @@ class ObjectTableViewCell: UITableViewCell {
     var name:String?
     var weight:Double?
     
-    
     @IBAction func printObject(_ sender: Any) {
         delegate?.printObject(name: name!, weight: weight!)
         
     }
 }
 
+//struct PrintItem {
+//    var name:String
+//    var weight:Double
+//}
+
 class ObjectVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var objectArray:[ObjectDisplay] = []
+//    var itemArray:[PrintItem] = []
+    
+    // variables to pass to SpoolVC
+//    var printItemName:String?
+//    var printItemWeight:Double?
+//    var currentRow:Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
+        
+        self.navigationItem.title = "My Items"
 //        clearCoreData()
         getCoreData()
     }
@@ -56,10 +69,16 @@ class ObjectVC: UIViewController {
             nextVC.delegate = self
             nextVC.objects = objectArray
         } else if segue.identifier == "printSegue" {
-            print("going to printSegue")
+            print("printSegue")
+//            print("printItemName is \(printItemName)")
+//            print("printItemWeight is \(printItemWeight)")
+            
             let nextVC = segue.destination as? SpoolVC
-            nextVC!.showCancel = false
+            nextVC?.showCancel = false
+//            nextVC?.printItemName = printItemName
+//            nextVC?.printItemWeight = printItemWeight
             nextVC?.hidesBottomBarWhenPushed = true
+            
         }
     }
 }
@@ -74,7 +93,8 @@ extension ObjectVC: passObjects {
 extension ObjectVC: UITableViewDelegate, UITableViewDataSource, ObjectTableViewCellDelegate {
     func printObject(name: String, weight: Double) {
         print("printing \(name) with weight \(weight)")
-//        goSpoolVC()
+//        printItemName = name
+//        printItemWeight = weight
     }
     
     // Go to SpoolVC
@@ -168,6 +188,7 @@ extension ObjectVC {
             let image = object.value(forKey: "image") as! Data
             
             objectArray.append(ObjectDisplay(name: name, weight: weight, image: UIImage(data: image)!))
+//            itemArray.append(PrintItem(name: name, weight: weight))
         }
     }
     

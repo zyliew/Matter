@@ -27,7 +27,11 @@ class SpoolVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var cancelButton: UIButton!
     
+    // variables for passing print item to IndividualSpoolsVC
+    // set from ObjectVC
     var showCancel = true
+//    var printItemName:String?
+//    var printItemWeight:Double?
     
 //    var delegate:passSingleObject?
     var spoolArray:[SpoolDisplay] = []
@@ -53,6 +57,7 @@ class SpoolVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear. showCancel is \(showCancel)")
         cancelButton.isHidden = showCancel
+//        print("itemName is \(printItemName) itemWeight is \(printItemWeight)")
 //        print("in SpoolVC. itemName is \(itemName) itemWeight is \(itemWeight)")
 
         getCoreData()
@@ -60,7 +65,8 @@ class SpoolVC: UIViewController {
     }
     
     @IBAction func cancelPrint(_ sender: Any) {
-        self.navigationController?.dismiss(animated: true, completion: nil)
+//        self.navigationController?.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
