@@ -83,6 +83,8 @@ class SpoolVC: UIViewController {
             nextVC.color = spools.color
             nextVC.diameter = spools.diameter
             nextVC.image = spools.image
+            
+            nextVC.toPrint = toPrint
         }
     }
     

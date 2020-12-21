@@ -23,6 +23,8 @@ class IndividualSpoolsVC: UIViewController {
     var uids:[String] = []
     var spools:[IndividualSpool] = []
     
+    var toPrint:PrintItem?
+    
     var brand = String()
     var material = String()
     var color = String()
@@ -38,6 +40,12 @@ class IndividualSpoolsVC: UIViewController {
         tableView.dataSource = self
         populateCommonData()
         getCoreData()
+        
+        print("IndividualSpoolsVC viewDidLoad")
+        if (toPrint != nil) {
+            print("toPrint name is \(toPrint?.name)")
+            print("toPrint weight is \(toPrint?.weight)")
+        }
     }
     
     // Pops up alert and presents the link to reorder
@@ -68,24 +76,34 @@ extension IndividualSpoolsVC: UITableViewDelegate, UITableViewDataSource {
     // swipe to delete, only delete if count is 1, otherwise popup alert
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // check that only 1 spool is present
-//            let spool = spoolArray[indexPath.row]
-//            print("Delete spool")
-//            print(spool.material)
-//            print(spool.uids)
-//
-//            // delete from Core Data
-//            deleteSingleData(uid: spool.uids.first!)
-//            // delete from spoolArray, tableView
-//            spoolArray.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
+            let spool = spools[indexPath.row]
+            deleteSingleSpool(uid: spool.uid)
+            spools.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            // TODO: fix the row index, update it after deletion
         }
     }
     
     // deselects the row so it's not highlighted after click
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if toPrint != nil {
+            let alert = UIAlertController(title: "Print", message: "Use this spool?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style:.default, handler: nil))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style:.cancel, handler: nil))
+            self.present(alert, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Print", message: "Please select an item from the Items page", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style:.cancel, handler: nil))
+            self.present(alert, animated: true)
+        }
+        
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+  
 }
 
 
@@ -145,5 +163,37 @@ extension IndividualSpoolsVC {
         }
         
         print("end of getCoreData, spools has \(spools.count) spools")
+    }
+    
+    func deleteSingleSpool(uid: String) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Spool")
+        var fetchedResults: [NSManagedObject]
+        
+        do {
+            try fetchedResults = context.fetch(request) as! [NSManagedObject]
+            
+            if fetchedResults.count > 0 {
+                // find spools with the matching uid and delete it
+                for result:AnyObject in fetchedResults {
+                    let currentUID = result.value(forKey: "uid") as! String
+                    if uid == currentUID {
+                        context.delete(result as! NSManagedObject)
+                        print("Spool with UID: \(uid) deleted from Core Data")
+                        break
+                    }
+                }
+            }
+            try context.save()
+            
+        } catch {
+            // if an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        print("deleted single spool data")
     }
 }
