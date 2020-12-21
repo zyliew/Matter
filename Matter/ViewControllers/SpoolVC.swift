@@ -37,8 +37,7 @@ class SpoolVC: UIViewController {
     var spoolArray:[SpoolDisplay] = []
     var uids:[String] = []
     
-    var itemName = String()
-    var itemWeight = Double()
+    var toPrint:PrintItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,10 +54,13 @@ class SpoolVC: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        print("viewWillAppear. showCancel is \(showCancel)")
+        print("viewWillAppear")
+        if (toPrint != nil) {
+            print("toPrint name is \(toPrint?.name)")
+            print("toPrint weight is \(toPrint?.weight)")
+        }
+        
         cancelButton.isHidden = showCancel
-//        print("itemName is \(printItemName) itemWeight is \(printItemWeight)")
-//        print("in SpoolVC. itemName is \(itemName) itemWeight is \(itemWeight)")
 
         getCoreData()
         DispatchQueue.main.async { self.tableView.reloadData() }
@@ -66,6 +68,7 @@ class SpoolVC: UIViewController {
     
     @IBAction func cancelPrint(_ sender: Any) {
 //        self.navigationController?.dismiss(animated: true, completion: nil)
+        toPrint = nil
         self.navigationController?.popViewController(animated: true)
     }
     

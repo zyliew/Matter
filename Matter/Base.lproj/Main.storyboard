@@ -420,21 +420,13 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7EG-by-7fr">
-                                                    <rect key="frame" x="320" y="36" width="32" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Print"/>
-                                                    <connections>
-                                                        <action selector="printObject:" destination="8pg-nK-Yw2" eventType="touchUpInside" id="bSq-RW-Ef8"/>
-                                                        <segue destination="JvP-5K-sbI" kind="show" identifier="printSegue" id="VB6-Xn-HyQ"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="nameLabel" destination="4pb-FT-tIP" id="Mz3-fT-V5a"/>
                                             <outlet property="objectImage" destination="ocP-zS-tDI" id="mHz-g6-70v"/>
                                             <outlet property="weightLabel" destination="Lha-2c-UiK" id="Hpx-Ya-aC9"/>
+                                            <segue destination="JvP-5K-sbI" kind="show" identifier="printSegue" id="95x-pE-vW1"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -608,7 +600,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VB6-Xn-HyQ"/>
+        <segue reference="95x-pE-vW1"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="plus" catalog="system" width="128" height="113"/>

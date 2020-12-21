@@ -8,43 +8,27 @@
 import UIKit
 import CoreData
 
-
-
-// Enable print button on tableview cells
-protocol ObjectTableViewCellDelegate {
-    func printObject(name: String, weight: Double)
+// Struct to pass print info to SpoolVC
+struct PrintItem {
+    var name:String
+    var weight:Double
 }
 
 // Custom TableView cell
 class ObjectTableViewCell: UITableViewCell {
-    var delegate: ObjectTableViewCellDelegate?
-    
     @IBOutlet weak var objectImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
-    var name:String?
-    var weight:Double?
-    
-    @IBAction func printObject(_ sender: Any) {
-        delegate?.printObject(name: name!, weight: weight!)
-        
-    }
 }
-
-//struct PrintItem {
-//    var name:String
-//    var weight:Double
-//}
-
+    
 class ObjectVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var objectArray:[ObjectDisplay] = []
-//    var itemArray:[PrintItem] = []
+    var itemArray:[PrintItem] = []
+    var row = Int()
     
     // variables to pass to SpoolVC
-//    var printItemName:String?
-//    var printItemWeight:Double?
-//    var currentRow:Int?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,13 +54,11 @@ class ObjectVC: UIViewController {
             nextVC.objects = objectArray
         } else if segue.identifier == "printSegue" {
             print("printSegue")
-//            print("printItemName is \(printItemName)")
-//            print("printItemWeight is \(printItemWeight)")
             
             let nextVC = segue.destination as? SpoolVC
+            let item = itemArray[row]
+            nextVC?.toPrint = item
             nextVC?.showCancel = false
-//            nextVC?.printItemName = printItemName
-//            nextVC?.printItemWeight = printItemWeight
             nextVC?.hidesBottomBarWhenPushed = true
             
         }
@@ -90,28 +72,7 @@ extension ObjectVC: passObjects {
 }
 
 // tableview methods
-extension ObjectVC: UITableViewDelegate, UITableViewDataSource, ObjectTableViewCellDelegate {
-    func printObject(name: String, weight: Double) {
-        print("printing \(name) with weight \(weight)")
-//        printItemName = name
-//        printItemWeight = weight
-    }
-    
-    // Go to SpoolVC
-    func goSpoolVC(){
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "SpoolsNavController")
-        nextVC.modalPresentationStyle = .fullScreen
-        
-        let VC = SpoolVC()
-        VC.showCancel = false
-        print("set showCancel to \(VC.showCancel)")
-//        VC?.showCancel = false
-        print("in goSpoolVC")
-        
-        self.present(nextVC, animated:true, completion:nil)
-    }
-    
+extension ObjectVC: UITableViewDelegate, UITableViewDataSource {
     // set up how many rows are in the tableview
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return objectArray.count
@@ -126,9 +87,6 @@ extension ObjectVC: UITableViewDelegate, UITableViewDataSource, ObjectTableViewC
         cell.nameLabel.text = item.name
         cell.weightLabel.text = String(item.weight)
         cell.objectImage.image = item.image
-        cell.name = item.name
-        cell.weight = item.weight
-        cell.delegate = self
         
         return cell
     }
@@ -163,6 +121,11 @@ extension ObjectVC: UITableViewDelegate, UITableViewDataSource, ObjectTableViewC
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        row = indexPath.row
+        return indexPath
+    }
 }
 
 extension ObjectVC {
@@ -188,7 +151,7 @@ extension ObjectVC {
             let image = object.value(forKey: "image") as! Data
             
             objectArray.append(ObjectDisplay(name: name, weight: weight, image: UIImage(data: image)!))
-//            itemArray.append(PrintItem(name: name, weight: weight))
+            itemArray.append(PrintItem(name: name, weight: weight))
         }
     }
     
