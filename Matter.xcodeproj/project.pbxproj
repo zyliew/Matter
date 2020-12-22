@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		7C53580525927683002ED4C2 /* PrinterDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C53580425927683002ED4C2 /* PrinterDisplay.swift */; };
 		7C53580A25927693002ED4C2 /* PrintingDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C53580925927693002ED4C2 /* PrintingDisplay.swift */; };
+		7C53580F2592785C002ED4C2 /* PrintersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C53580E2592785C002ED4C2 /* PrintersVC.swift */; };
+		7C53581425927B41002ED4C2 /* PrintJobsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C53581325927B41002ED4C2 /* PrintJobsVC.swift */; };
+		7C53581925927B77002ED4C2 /* AddPrinterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C53581825927B77002ED4C2 /* AddPrinterVC.swift */; };
 		7C847482258914020031BFC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C847481258914020031BFC9 /* AppDelegate.swift */; };
 		7C847484258914020031BFC9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C847483258914020031BFC9 /* SceneDelegate.swift */; };
 		7C847489258914030031BFC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C847487258914030031BFC9 /* Main.storyboard */; };
@@ -48,6 +51,9 @@
 /* Begin PBXFileReference section */
 		7C53580425927683002ED4C2 /* PrinterDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrinterDisplay.swift; sourceTree = "<group>"; };
 		7C53580925927693002ED4C2 /* PrintingDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintingDisplay.swift; sourceTree = "<group>"; };
+		7C53580E2592785C002ED4C2 /* PrintersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintersVC.swift; sourceTree = "<group>"; };
+		7C53581325927B41002ED4C2 /* PrintJobsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintJobsVC.swift; sourceTree = "<group>"; };
+		7C53581825927B77002ED4C2 /* AddPrinterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPrinterVC.swift; sourceTree = "<group>"; };
 		7C84747E258914020031BFC9 /* Matter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Matter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C847481258914020031BFC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C847483258914020031BFC9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +167,9 @@
 				7C8474C4258919B70031BFC9 /* PrintingVC.swift */,
 				7CB29A71258D31DF00B224E7 /* ObjectVC.swift */,
 				7CA70340258DED3000A3434D /* AddObjectVC.swift */,
+				7C53580E2592785C002ED4C2 /* PrintersVC.swift */,
+				7C53581325927B41002ED4C2 /* PrintJobsVC.swift */,
+				7C53581825927B77002ED4C2 /* AddPrinterVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -307,11 +316,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C53581425927B41002ED4C2 /* PrintJobsVC.swift in Sources */,
 				7CE822B4258B81C300D0AC32 /* IndividualSpoolsVC.swift in Sources */,
 				7C53580525927683002ED4C2 /* PrinterDisplay.swift in Sources */,
 				7CF7E75B258D28B1005EFE98 /* ObjectDisplay.swift in Sources */,
 				7CAA976E258A944300F92A04 /* SpoolDisplay.swift in Sources */,
 				7C84748C258914030031BFC9 /* Matter.xcdatamodeld in Sources */,
+				7C53581925927B77002ED4C2 /* AddPrinterVC.swift in Sources */,
 				7CB29A72258D31DF00B224E7 /* ObjectVC.swift in Sources */,
 				7CA70341258DED3000A3434D /* AddObjectVC.swift in Sources */,
 				7CAA9769258A91F300F92A04 /* SpoolVC.swift in Sources */,
@@ -321,6 +332,7 @@
 				7C8474CB2589268B0031BFC9 /* AddSpoolVC.swift in Sources */,
 				7C8474C5258919B70031BFC9 /* PrintingVC.swift in Sources */,
 				7C53580A25927693002ED4C2 /* PrintingDisplay.swift in Sources */,
+				7C53580F2592785C002ED4C2 /* PrintersVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
