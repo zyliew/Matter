@@ -38,6 +38,7 @@ class AddPrinterVC: UIViewController {
         // check that inputs are valid
         if validInputs() {
             // add spool to core data
+            print("adding printer to core data")
             addToCoreData()
         }
     }
@@ -49,14 +50,15 @@ class AddPrinterVC: UIViewController {
             let alert = UIAlertController(title: "Invalid Input", message: "Name and Diameter have to be filled in", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             
+            self.present(alert, animated: true)
             return false
         }
         
         // check if inputs are the appropriate type
-        let numberCharacters = NSCharacterSet.decimalDigits.inverted
-        if diameterTextBox.text!.rangeOfCharacter(from: numberCharacters) != nil {
+        if !diameterTextBox.text!.isDouble {
             let alert = UIAlertController(title: "Invalid Input", message: "Diameter has to be a number", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
             
             return false
         }
@@ -138,4 +140,10 @@ extension AddPrinterVC: UIImagePickerControllerDelegate, UINavigationControllerD
         imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self
     }
+}
+
+extension String {
+    var isInteger: Bool { return Int(self) != nil }
+    var isFloat: Bool { return Float(self) != nil }
+    var isDouble: Bool { return Double(self) != nil }
 }

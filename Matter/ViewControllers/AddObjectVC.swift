@@ -119,18 +119,18 @@ extension AddObjectVC {
             let alert = UIAlertController(title: "Invalid Input", message: "Name and Weight have to be filled in", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            
+            self.present(alert, animated: true)
             return false
         }
         
         // check that weight is a double
         let numberCharacters = NSCharacterSet.decimalDigits.inverted
-        if weightTextField.text!.rangeOfCharacter(from: numberCharacters) != nil {
+        if !weightTextField.text!.isDouble {
             // throw alert
             let alert = UIAlertController(title: "Invalid Input", message: "Weight has to be a number", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            
+            self.present(alert, animated: true)
             return false
         }
         return true
