@@ -87,13 +87,27 @@ extension IndividualSpoolsVC: UITableViewDelegate, UITableViewDataSource {
     
     // deselects the row so it's not highlighted after click
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // check that there is an item to be printed
         if toPrint != nil {
-            let alert = UIAlertController(title: "Print", message: "Use this spool?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Yes", style:.default, handler: nil))
-            
-            alert.addAction(UIAlertAction(title: "Cancel", style:.cancel, handler: nil))
-            self.present(alert, animated: true)
+            let spool = spools[indexPath.row]
+            // check that spool has enough filament left
+            let newWeight = spool.weight - toPrint!.weight
+            if newWeight < 0 {
+                // not enough filament
+                let alert = UIAlertController(title: "Warning", message: "Not enough filament to print \(toPrint!.name)", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style:.cancel, handler: nil))
+                self.present(alert, animated: true)
+            } else {
+                // enough filament, ask to confirm
+                let alert = UIAlertController(title: "Print with this Spool?", message: "\(newWeight)g of filament will be left after printing \(toPrint!.name)", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Yes", style:.default, handler: {action in self.printItem()}))
+                
+                alert.addAction(UIAlertAction(title: "Cancel", style:.cancel, handler: nil))
+                self.present(alert, animated: true)
+            }
         } else {
+            // No item was selected
             let alert = UIAlertController(title: "Print", message: "Please select an item from the Items page", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style:.cancel, handler: nil))
             self.present(alert, animated: true)
@@ -103,6 +117,34 @@ extension IndividualSpoolsVC: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    func printItem() {
+        // update spool weight in array and core data
+        
+        // add toPrint item to printingVC
+        
+        
+        // Show Printing VC
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "HomeTabBarController")
+        // nextVC doesn't have tabBarController. Fix this
+        nextViewController.tabBarController?.selectedIndex = 2
+        
+        if nextViewController.tabBarController == nil {
+            print("there's no tabBarController")
+        } else {
+            print("there is a tabBarController")
+        }
+
+        nextViewController.modalPresentationStyle = .fullScreen
+        
+        self.present(nextViewController, animated:true, completion:nil)
+        
+        
+        // pop 2 controllers back to ObjectsVC
+//        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+//            self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+        
+    }
   
 }
 
