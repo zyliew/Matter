@@ -101,7 +101,7 @@ extension IndividualSpoolsVC: UITableViewDelegate, UITableViewDataSource {
             } else {
                 // enough filament, ask to confirm
                 let alert = UIAlertController(title: "Print with this Spool?", message: "\(newWeight)g of filament will be left after printing \(toPrint!.name)", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Yes", style:.default, handler: {action in self.printItem()}))
+                alert.addAction(UIAlertAction(title: "Yes", style:.default, handler: {action in self.printItem(uid: spool.uid)}))
                 
                 alert.addAction(UIAlertAction(title: "Cancel", style:.cancel, handler: nil))
                 self.present(alert, animated: true)
@@ -117,8 +117,9 @@ extension IndividualSpoolsVC: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func printItem() {
+    func printItem(uid: String) {
         // update spool weight in array and core data
+        updateSingleSpoolWeight(uid: uid)
         
         // add toPrint item to printingVC
         
@@ -237,5 +238,42 @@ extension IndividualSpoolsVC {
         }
         
         print("deleted single spool data")
+    }
+    
+    func updateSingleSpoolWeight(uid: String) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Spool")
+        var fetchedResults: [NSManagedObject]? = nil
+        
+        do {
+            try fetchedResults = context.fetch(request) as? [NSManagedObject]
+        } catch {
+            // if an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        for spool in fetchedResults! {
+            let currentUid = spool.value(forKey: "uid") as? String
+            if currentUid == uid {
+                print("modifying spool in updateSingleSpoolWeight")
+                let currentWeight = (spool.value(forKey: "weight") as? Double)!
+                let updatedWeight = currentWeight - toPrint!.weight
+                spool.setValue(updatedWeight, forKey: "weight")
+                break
+            }
+        }
+        
+        do {
+            try context.save()
+            print("modified core data")
+        } catch {
+            // if an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
     }
 }

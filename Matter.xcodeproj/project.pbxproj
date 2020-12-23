@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C1F17D8259390E40086BBF2 /* CustomString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F17D7259390E40086BBF2 /* CustomString.swift */; };
 		7C53580525927683002ED4C2 /* PrinterDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C53580425927683002ED4C2 /* PrinterDisplay.swift */; };
 		7C53580A25927693002ED4C2 /* PrintingDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C53580925927693002ED4C2 /* PrintingDisplay.swift */; };
 		7C53580F2592785C002ED4C2 /* PrintersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C53580E2592785C002ED4C2 /* PrintersVC.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7C1F17D7259390E40086BBF2 /* CustomString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomString.swift; sourceTree = "<group>"; };
 		7C53580425927683002ED4C2 /* PrinterDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrinterDisplay.swift; sourceTree = "<group>"; };
 		7C53580925927693002ED4C2 /* PrintingDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintingDisplay.swift; sourceTree = "<group>"; };
 		7C53580E2592785C002ED4C2 /* PrintersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintersVC.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				7C84748F258914030031BFC9 /* LaunchScreen.storyboard */,
 				7C847492258914030031BFC9 /* Info.plist */,
 				7C84748A258914030031BFC9 /* Matter.xcdatamodeld */,
+				7C1F17D7259390E40086BBF2 /* CustomString.swift */,
 			);
 			path = Matter;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C53581425927B41002ED4C2 /* PrintJobsVC.swift in Sources */,
+				7C1F17D8259390E40086BBF2 /* CustomString.swift in Sources */,
 				7CE822B4258B81C300D0AC32 /* IndividualSpoolsVC.swift in Sources */,
 				7C53580525927683002ED4C2 /* PrinterDisplay.swift in Sources */,
 				7CF7E75B258D28B1005EFE98 /* ObjectDisplay.swift in Sources */,
