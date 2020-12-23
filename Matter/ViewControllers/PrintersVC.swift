@@ -116,6 +116,13 @@ extension PrintersVC: UITableViewDelegate, UITableViewDataSource {
     
     // deselects the row so it's not highlighted after click
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         // check that there is an item to be printed
         if toPrint != nil {
             let printer = printers[indexPath.row]
@@ -124,11 +131,11 @@ extension PrintersVC: UITableViewDelegate, UITableViewDataSource {
             alert.addAction(UIAlertAction(title: "Yes", style:.default, handler: {action in self.printItem(uid: self.spoolUID!)}))
             
             alert.addAction(UIAlertAction(title: "Cancel", style:.cancel, handler: nil))
-            self.present(alert, animated: true)
-            }
+            self.present(alert, animated: false)
+        }
         
+        return indexPath
         
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
