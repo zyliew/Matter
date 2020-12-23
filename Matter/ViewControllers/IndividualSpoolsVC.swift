@@ -122,12 +122,6 @@ extension IndividualSpoolsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func printItem(uid: String) {
-        // update spool weight in array and core data
-        // TODO: move this to PrintersVC
-        updateSingleSpoolWeight(uid: uid)
-        
-        // pass toPrint to PrintersVC to select a printer
-        
         // go to PrintersVC
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "PrintersNavController") as? UINavigationController

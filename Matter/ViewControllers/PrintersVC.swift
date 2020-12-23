@@ -116,11 +116,35 @@ extension PrintersVC: UITableViewDelegate, UITableViewDataSource {
     
     // deselects the row so it's not highlighted after click
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // check that there is an item to be printed
+        if toPrint != nil {
+            let printer = printers[indexPath.row]
+            
+            let alert = UIAlertController(title: "Confirm Print", message: "\(toPrint!.name) will be printed using \(printer.name)", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style:.default, handler: {action in self.printItem(uid: self.spoolUID!)}))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style:.cancel, handler: nil))
+            self.present(alert, animated: true)
+            }
+        
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
 extension PrintersVC {
+    func printItem(uid: String) {
+        // update spool weight in core data
+        updateSingleSpoolWeight(uid: uid)
+        
+        // create and add new printing object to core data
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "HomeTabBarController")
+        nextViewController.modalPresentationStyle = .fullScreen
+        self.present(nextViewController, animated:true, completion:nil)
+    }
+    
     func getCoreData() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
@@ -204,5 +228,42 @@ extension PrintersVC {
         }
         
         print("deleted single object")
+    }
+    
+    func updateSingleSpoolWeight(uid: String) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Spool")
+        var fetchedResults: [NSManagedObject]? = nil
+        
+        do {
+            try fetchedResults = context.fetch(request) as? [NSManagedObject]
+        } catch {
+            // if an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        for spool in fetchedResults! {
+            let currentUid = spool.value(forKey: "uid") as? String
+            if currentUid == uid {
+                print("modifying spool in updateSingleSpoolWeight")
+                let currentWeight = (spool.value(forKey: "weight") as? Double)!
+                let updatedWeight = currentWeight - toPrint!.weight
+                spool.setValue(updatedWeight, forKey: "weight")
+                break
+            }
+        }
+        
+        do {
+            try context.save()
+            print("modified core data")
+        } catch {
+            // if an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
     }
 }
