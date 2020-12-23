@@ -16,8 +16,12 @@ class PrinterTableViewCell: UITableViewCell {
 
 class PrintersVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var cancelButton: UIButton!
     
     var printers:[PrinterDisplay] = []
+    var toPrint:PrintItem?
+    var spoolUID:String?
+    var showCancel = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,13 +30,27 @@ class PrintersVC: UIViewController {
         tableView.dataSource = self
         
         self.navigationItem.title = "Printers"
+        cancelButton.isHidden = true
         
         getCoreData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear: showCancel is \(showCancel)")
+        cancelButton.isHidden = showCancel
+        if toPrint != nil {
+            print("toPrint is \(toPrint?.name), with weight \(toPrint?.weight)")
+        }
         DispatchQueue.main.async { self.tableView.reloadData() }
     }
+    
+    @IBAction func dismissVC(_ sender: Any) {
+        print("clicked cancel")
+        // TODO: restore the subtracted weight of the selected spool. Might be better to do the core data modification after selecting the printer
+        toPrint = nil
+        self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addPrinterSegue",

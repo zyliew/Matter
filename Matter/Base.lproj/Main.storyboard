@@ -563,7 +563,7 @@
         <!--PrintersVC-->
         <scene sceneID="LyK-yg-Iet">
             <objects>
-                <viewController id="Rsq-mo-9Wj" customClass="PrintersVC" customModule="Matter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PrintersVC" id="Rsq-mo-9Wj" customClass="PrintersVC" customModule="Matter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="juk-FN-SDi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -619,6 +619,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="c7G-iK-9Cj">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="KIJ-Yu-eci">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="byV-di-Bwd">
+                                <rect key="frame" x="20" y="7" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" systemColor="systemRedColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissVC:" destination="Rsq-mo-9Wj" eventType="touchUpInside" id="pu0-e0-snS"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="xrn-T6-sVR">
                             <connections>
                                 <segue destination="L0R-93-ZKu" kind="show" identifier="addPrinterSegue" id="OMj-5r-ilY"/>
@@ -626,6 +638,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cancelButton" destination="byV-di-Bwd" id="NP0-SE-cSl"/>
                         <outlet property="tableView" destination="y7F-On-y9U" id="W2L-cp-VfM"/>
                     </connections>
                 </viewController>
@@ -760,7 +773,7 @@
         <!--Printers-->
         <scene sceneID="Hfa-u0-Sb5">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gbt-rn-4xC" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="PrintersNavController" automaticallyAdjustsScrollViewInsets="NO" id="gbt-rn-4xC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Printers" id="VjE-oV-Abq" userLabel="Printers"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jcs-0n-5uX">

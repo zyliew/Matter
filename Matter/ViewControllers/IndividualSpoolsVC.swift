@@ -48,6 +48,10 @@ class IndividualSpoolsVC: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        DispatchQueue.main.async { self.tableView.reloadData() }
+    }
+    
     // Pops up alert and presents the link to reorder
     @IBAction func Reorder(_ sender: Any) {
     }
@@ -119,26 +123,20 @@ extension IndividualSpoolsVC: UITableViewDelegate, UITableViewDataSource {
     
     func printItem(uid: String) {
         // update spool weight in array and core data
+        // TODO: move this to PrintersVC
         updateSingleSpoolWeight(uid: uid)
         
-        // add toPrint item to printingVC
+        // pass toPrint to PrintersVC to select a printer
         
-        
-        // Show Printing VC
+        // go to PrintersVC
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "HomeTabBarController")
-        // nextVC doesn't have tabBarController. Fix this
-        nextViewController.tabBarController?.selectedIndex = 2
-        
-        if nextViewController.tabBarController == nil {
-            print("there's no tabBarController")
-        } else {
-            print("there is a tabBarController")
-        }
-
-        nextViewController.modalPresentationStyle = .fullScreen
-        
-        self.present(nextViewController, animated:true, completion:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "PrintersNavController") as? UINavigationController
+        let editVC = nextViewController?.viewControllers.first as? PrintersVC
+        editVC?.toPrint = toPrint
+        editVC?.spoolUID = uid
+        editVC?.showCancel = false
+        nextViewController!.modalPresentationStyle = .fullScreen
+        self.present(nextViewController!, animated:true, completion:nil)
         
         
         // pop 2 controllers back to ObjectsVC

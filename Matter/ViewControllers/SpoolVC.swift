@@ -46,8 +46,8 @@ class SpoolVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        cancelButton.isHidden = true
         self.navigationItem.title = "My Spools"
+        cancelButton.isHidden = true
 //        clearCoreData()
         getCoreData()
         
@@ -56,8 +56,7 @@ class SpoolVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear")
         if (toPrint != nil) {
-            print("toPrint name is \(toPrint?.name)")
-            print("toPrint weight is \(toPrint?.weight)")
+            self.navigationItem.title = "Select Spool"
         }
         
         cancelButton.isHidden = showCancel
