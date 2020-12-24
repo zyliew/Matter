@@ -9,10 +9,10 @@ import UIKit
 import CoreData
 
 // Struct to pass print info to SpoolVC
-struct PrintItem {
-    var name:String
-    var weight:Double
-}
+//struct PrintItem {
+//    var name:String
+//    var weight:Double
+//}
 
 // Custom TableView cell
 class ObjectTableViewCell: UITableViewCell {
@@ -24,7 +24,7 @@ class ObjectTableViewCell: UITableViewCell {
 class ObjectVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var objectArray:[ObjectDisplay] = []
-    var itemArray:[PrintItem] = []
+//    var itemArray:[PrintItem] = []
     var row = Int()
     
     // variables to pass to SpoolVC
@@ -56,7 +56,7 @@ class ObjectVC: UIViewController {
             print("printSegue")
             
             let nextVC = segue.destination as? SpoolVC
-            let item = itemArray[row]
+            let item = objectArray[row]
             nextVC?.toPrint = item
             nextVC?.showCancel = false
             nextVC?.hidesBottomBarWhenPushed = true
@@ -151,7 +151,7 @@ extension ObjectVC {
             let image = object.value(forKey: "image") as! Data
             
             objectArray.append(ObjectDisplay(name: name, weight: weight, image: UIImage(data: image)!))
-            itemArray.append(PrintItem(name: name, weight: weight))
+//            itemArray.append(PrintItem(name: name, weight: weight))
         }
     }
     

@@ -23,7 +23,7 @@ class IndividualSpoolsVC: UIViewController {
     var uids:[String] = []
     var spools:[IndividualSpool] = []
     
-    var toPrint:PrintItem?
+    var toPrint:ObjectDisplay?
     
     var brand = String()
     var material = String()
@@ -105,7 +105,7 @@ extension IndividualSpoolsVC: UITableViewDelegate, UITableViewDataSource {
             } else {
                 // enough filament, ask to confirm
                 let alert = UIAlertController(title: "Print with this Spool?", message: "\(newWeight)g of filament will be left after printing \(toPrint!.name)", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Yes", style:.default, handler: {action in self.printItem(uid: spool.uid)}))
+                alert.addAction(UIAlertAction(title: "Yes", style:.default, handler: {action in self.printItem(spool: spool)}))
                 
                 alert.addAction(UIAlertAction(title: "Cancel", style:.cancel, handler: nil))
                 self.present(alert, animated: true)
@@ -121,13 +121,13 @@ extension IndividualSpoolsVC: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func printItem(uid: String) {
+    func printItem(spool: IndividualSpool) {
         // go to PrintersVC
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "PrintersNavController") as? UINavigationController
         let editVC = nextViewController?.viewControllers.first as? PrintersVC
-        editVC?.toPrint = toPrint
-        editVC?.spoolUID = uid
+        editVC?.toPrintItem = toPrint
+        editVC?.toPrintSpool = spool
         editVC?.showCancel = false
         nextViewController!.modalPresentationStyle = .fullScreen
         self.present(nextViewController!, animated:true, completion:nil)

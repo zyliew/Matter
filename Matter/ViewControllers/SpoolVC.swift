@@ -37,7 +37,7 @@ class SpoolVC: UIViewController {
     var spoolArray:[SpoolDisplay] = []
     var uids:[String] = []
     
-    var toPrint:PrintItem?
+    var toPrint:ObjectDisplay?
     
     override func viewDidLoad() {
         super.viewDidLoad()

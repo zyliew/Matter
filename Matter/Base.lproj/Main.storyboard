@@ -524,21 +524,87 @@
             </objects>
             <point key="canvasLocation" x="1478.2608695652175" y="731.91964285714278"/>
         </scene>
-        <!--Printing-->
+        <!--PrintingVC-->
         <scene sceneID="JPg-1w-3cg">
             <objects>
-                <viewController id="ewZ-Wx-ggu" sceneMemberID="viewController">
+                <viewController id="ewZ-Wx-ggu" customClass="PrintingVC" customModule="Matter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="98W-xR-MBU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="koC-Zg-6M2">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PrintingCell" id="Rdn-0f-ch6" customClass="PrintingTableViewCell" customModule="Matter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rdn-0f-ch6" id="AXh-8l-kDg">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tX7-JI-Jry">
+                                                    <rect key="frame" x="20" y="9" width="80" height="80"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Item" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GQE-84-RuV">
+                                                    <rect key="frame" x="138" y="11" width="34" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Weight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nb7-Hb-oGZ">
+                                                    <rect key="frame" x="128" y="56" width="54" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1.75" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1H-tK-fh5">
+                                                    <rect key="frame" x="286" y="11" width="31" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Printer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DeJ-Gv-o2r">
+                                                    <rect key="frame" x="286" y="56" width="51" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="diameterLabel" destination="R1H-tK-fh5" id="nHZ-zR-Byi"/>
+                                            <outlet property="itemImage" destination="tX7-JI-Jry" id="yV7-g5-ttS"/>
+                                            <outlet property="itemLabel" destination="GQE-84-RuV" id="m0J-bu-wRZ"/>
+                                            <outlet property="printerLabel" destination="DeJ-Gv-o2r" id="Uj6-hl-ZvI"/>
+                                            <outlet property="weightLabel" destination="Nb7-Hb-oGZ" id="pHa-Ew-u60"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="cZv-5T-7df"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="koC-Zg-6M2" firstAttribute="leading" secondItem="cZv-5T-7df" secondAttribute="leading" id="FTP-EU-wBx"/>
+                            <constraint firstItem="koC-Zg-6M2" firstAttribute="top" secondItem="cZv-5T-7df" secondAttribute="top" id="LVe-sL-7ke"/>
+                            <constraint firstItem="cZv-5T-7df" firstAttribute="bottom" secondItem="koC-Zg-6M2" secondAttribute="bottom" id="gwZ-VP-JQi"/>
+                            <constraint firstItem="koC-Zg-6M2" firstAttribute="trailing" secondItem="cZv-5T-7df" secondAttribute="trailing" id="oye-g6-PkP"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Printing" id="Dec-sK-H4M"/>
+                    <navigationItem key="navigationItem" id="EfN-8J-UH0"/>
+                    <connections>
+                        <outlet property="tableView" destination="koC-Zg-6M2" id="FVd-Jh-yir"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dYY-bB-wX9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2352.1739130434785" y="193.52678571428569"/>
+            <point key="canvasLocation" x="3262.3188405797105" y="193.52678571428569"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="4ly-4q-AAf">
@@ -552,7 +618,7 @@
                     <connections>
                         <segue destination="o6b-5M-mCV" kind="relationship" relationship="viewControllers" id="kJV-L8-aZa"/>
                         <segue destination="uRG-cU-wzB" kind="relationship" relationship="viewControllers" id="u0g-bh-AEZ"/>
-                        <segue destination="ewZ-Wx-ggu" kind="relationship" relationship="viewControllers" id="faV-UN-YX3"/>
+                        <segue destination="Gud-iN-gVB" kind="relationship" relationship="viewControllers" id="faV-UN-YX3"/>
                         <segue destination="gbt-rn-4xC" kind="relationship" relationship="viewControllers" id="1hO-oO-I0M"/>
                     </connections>
                 </tabBarController>
@@ -729,7 +795,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QZj-13-jpH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3438" y="-421"/>
+            <point key="canvasLocation" x="4347.826086956522" y="-421.20535714285711"/>
         </scene>
         <!--Spools-->
         <scene sceneID="s8F-ez-53S">
@@ -788,6 +854,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7eS-iw-AFG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1553.6231884057972" y="-686.38392857142856"/>
+        </scene>
+        <!--Printing-->
+        <scene sceneID="v21-er-J8C">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gud-iN-gVB" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Printing" id="Dec-sK-H4M"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wiW-8L-Rbr">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ewZ-Wx-ggu" kind="relationship" relationship="rootViewController" id="AJI-wj-Ek6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yfR-ZG-5Bf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2352.1739130434785" y="193.52678571428569"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
