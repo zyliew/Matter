@@ -788,8 +788,41 @@
                     <view key="view" contentMode="scaleToFill" id="eVS-dU-Tqw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jbP-Ia-y86">
+                                <rect key="frame" x="120.5" y="108" width="173" height="32"/>
+                                <segments>
+                                    <segment title="Printing"/>
+                                    <segment title="Completed"/>
+                                </segments>
+                            </segmentedControl>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4E7-jC-9Tb" userLabel="Printing Container View">
+                                <rect key="frame" x="0.0" y="159" width="414" height="654"/>
+                                <connections>
+                                    <segue destination="7lf-WH-mJk" kind="embed" identifier="toIndividualPrintingSegue" id="mIe-QX-s3u"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RPl-9v-jGe" userLabel="Completed Container View">
+                                <rect key="frame" x="0.0" y="159" width="414" height="654"/>
+                                <connections>
+                                    <segue destination="R33-yT-r3X" kind="embed" identifier="toIndividualCompletedSegue" id="CL1-3m-WqI"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Jia-gu-be3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Jia-gu-be3" firstAttribute="bottom" secondItem="4E7-jC-9Tb" secondAttribute="bottom" id="C1e-rF-SU9"/>
+                            <constraint firstItem="4E7-jC-9Tb" firstAttribute="top" secondItem="jbP-Ia-y86" secondAttribute="bottom" constant="20" id="FKC-7W-f1M"/>
+                            <constraint firstItem="RPl-9v-jGe" firstAttribute="leading" secondItem="Jia-gu-be3" secondAttribute="leading" id="Gb8-WM-gYn"/>
+                            <constraint firstItem="Jia-gu-be3" firstAttribute="trailing" secondItem="RPl-9v-jGe" secondAttribute="trailing" id="K33-oq-JTl"/>
+                            <constraint firstItem="jbP-Ia-y86" firstAttribute="centerX" secondItem="eVS-dU-Tqw" secondAttribute="centerX" id="Tgb-3I-U4c"/>
+                            <constraint firstItem="RPl-9v-jGe" firstAttribute="top" secondItem="jbP-Ia-y86" secondAttribute="bottom" constant="20" id="clr-ne-aiE"/>
+                            <constraint firstItem="4E7-jC-9Tb" firstAttribute="leading" secondItem="Jia-gu-be3" secondAttribute="leading" id="m7W-tm-D6c"/>
+                            <constraint firstItem="Jia-gu-be3" firstAttribute="trailing" secondItem="4E7-jC-9Tb" secondAttribute="trailing" id="sIm-8H-3gs"/>
+                            <constraint firstItem="jbP-Ia-y86" firstAttribute="top" secondItem="Jia-gu-be3" secondAttribute="top" constant="20" id="wqW-sJ-eJn"/>
+                            <constraint firstItem="Jia-gu-be3" firstAttribute="bottom" secondItem="RPl-9v-jGe" secondAttribute="bottom" id="yBi-oR-oWp"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="1eI-qd-WaY"/>
                 </viewController>
@@ -873,6 +906,58 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yfR-ZG-5Bf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2352.1739130434785" y="193.52678571428569"/>
+        </scene>
+        <!--Individual PrintingVC-->
+        <scene sceneID="Dhh-qQ-QEO">
+            <objects>
+                <viewController id="7lf-WH-mJk" customClass="IndividualPrintingVC" customModule="Matter" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="auo-pb-FRy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="654"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SPT-kj-itP">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="654"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="SPT-kj-itP" secondAttribute="trailing" id="8Qp-q9-vfk"/>
+                            <constraint firstItem="SPT-kj-itP" firstAttribute="top" secondItem="auo-pb-FRy" secondAttribute="top" id="PQw-KI-IUD"/>
+                            <constraint firstAttribute="bottom" secondItem="SPT-kj-itP" secondAttribute="bottom" id="cEc-al-a8U"/>
+                            <constraint firstItem="SPT-kj-itP" firstAttribute="leading" secondItem="auo-pb-FRy" secondAttribute="leading" id="vvm-e4-AQz"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ntA-Hb-4Zi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5191" y="-737"/>
+        </scene>
+        <!--Individual CompletedVC-->
+        <scene sceneID="s9D-Hp-Stw">
+            <objects>
+                <viewController id="R33-yT-r3X" customClass="IndividualCompletedVC" customModule="Matter" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yW4-Up-tDq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="654"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CtQ-OF-cZt">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="654"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="CtQ-OF-cZt" firstAttribute="top" secondItem="yW4-Up-tDq" secondAttribute="top" id="5BS-cq-Hwv"/>
+                            <constraint firstAttribute="trailing" secondItem="CtQ-OF-cZt" secondAttribute="trailing" id="FrM-bU-c7t"/>
+                            <constraint firstAttribute="bottom" secondItem="CtQ-OF-cZt" secondAttribute="bottom" id="NKm-Oy-6Cd"/>
+                            <constraint firstItem="CtQ-OF-cZt" firstAttribute="leading" secondItem="yW4-Up-tDq" secondAttribute="leading" id="y3d-Xb-c6p"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vD8-uM-pJB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5226" y="-190"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

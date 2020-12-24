@@ -170,6 +170,7 @@ extension PrintersVC {
         let printerName = printer.name
         let diameter = printer.diameter
         let weight = toPrintItem!.weight
+        let completed = false
         
         let object = NSEntityDescription.insertNewObject(forEntityName: "Printing", into: context)
         
@@ -178,6 +179,7 @@ extension PrintersVC {
         object.setValue(printerName, forKey: "printer")
         object.setValue(diameter, forKey: "diameter")
         object.setValue(weight, forKey: "weight")
+        object.setValue(completed, forKey: "completed")
         
         // Commit the changes
         do {

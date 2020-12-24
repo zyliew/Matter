@@ -28,6 +28,7 @@ class PrintingVC: UIViewController {
         tableView.dataSource = self
         
         self.navigationItem.title = "Printing"
+//        clearCoreData()
         getCoreData()
     }
 
@@ -116,8 +117,9 @@ extension PrintingVC {
             let printer = object.value(forKey: "printer") as! String
             let diameter = object.value(forKey: "diameter") as! Double
             let weight = object.value(forKey: "weight") as! Double
+            let completed = object.value(forKey: "completed") as! Bool
             
-            printingArray.append(PrintingDisplay(image: UIImage(data: image)!, item: item, printer: printer, diameter: diameter, weight: weight))
+            printingArray.append(PrintingDisplay(image: UIImage(data: image)!, item: item, printer: printer, diameter: diameter, weight: weight, completed: completed))
         }
     }
     

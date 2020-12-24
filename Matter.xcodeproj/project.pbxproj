@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7C1F17D8259390E40086BBF2 /* CustomString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F17D7259390E40086BBF2 /* CustomString.swift */; };
+		7C4F7B8C259519FB00A424FB /* IndividualPrintingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4F7B8B259519FB00A424FB /* IndividualPrintingVC.swift */; };
+		7C4F7B9125951A1700A424FB /* IndividualCompletedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4F7B9025951A1700A424FB /* IndividualCompletedVC.swift */; };
 		7C53580525927683002ED4C2 /* PrinterDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C53580425927683002ED4C2 /* PrinterDisplay.swift */; };
 		7C53580A25927693002ED4C2 /* PrintingDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C53580925927693002ED4C2 /* PrintingDisplay.swift */; };
 		7C53580F2592785C002ED4C2 /* PrintersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C53580E2592785C002ED4C2 /* PrintersVC.swift */; };
@@ -51,6 +53,8 @@
 
 /* Begin PBXFileReference section */
 		7C1F17D7259390E40086BBF2 /* CustomString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomString.swift; sourceTree = "<group>"; };
+		7C4F7B8B259519FB00A424FB /* IndividualPrintingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualPrintingVC.swift; sourceTree = "<group>"; };
+		7C4F7B9025951A1700A424FB /* IndividualCompletedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualCompletedVC.swift; sourceTree = "<group>"; };
 		7C53580425927683002ED4C2 /* PrinterDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrinterDisplay.swift; sourceTree = "<group>"; };
 		7C53580925927693002ED4C2 /* PrintingDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintingDisplay.swift; sourceTree = "<group>"; };
 		7C53580E2592785C002ED4C2 /* PrintersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintersVC.swift; sourceTree = "<group>"; };
@@ -173,6 +177,8 @@
 				7C53580E2592785C002ED4C2 /* PrintersVC.swift */,
 				7C53581325927B41002ED4C2 /* PrintJobsVC.swift */,
 				7C53581825927B77002ED4C2 /* AddPrinterVC.swift */,
+				7C4F7B8B259519FB00A424FB /* IndividualPrintingVC.swift */,
+				7C4F7B9025951A1700A424FB /* IndividualCompletedVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -328,6 +334,7 @@
 				7C84748C258914030031BFC9 /* Matter.xcdatamodeld in Sources */,
 				7C53581925927B77002ED4C2 /* AddPrinterVC.swift in Sources */,
 				7CB29A72258D31DF00B224E7 /* ObjectVC.swift in Sources */,
+				7C4F7B9125951A1700A424FB /* IndividualCompletedVC.swift in Sources */,
 				7CA70341258DED3000A3434D /* AddObjectVC.swift in Sources */,
 				7CAA9769258A91F300F92A04 /* SpoolVC.swift in Sources */,
 				7C847482258914020031BFC9 /* AppDelegate.swift in Sources */,
@@ -336,6 +343,7 @@
 				7C8474CB2589268B0031BFC9 /* AddSpoolVC.swift in Sources */,
 				7C8474C5258919B70031BFC9 /* PrintingVC.swift in Sources */,
 				7C53580A25927693002ED4C2 /* PrintingDisplay.swift in Sources */,
+				7C4F7B8C259519FB00A424FB /* IndividualPrintingVC.swift in Sources */,
 				7C53580F2592785C002ED4C2 /* PrintersVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
