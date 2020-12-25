@@ -118,8 +118,12 @@ extension PrintingVC {
             let diameter = object.value(forKey: "diameter") as! Double
             let weight = object.value(forKey: "weight") as! Double
             let completed = object.value(forKey: "completed") as! Bool
+            let createdDateString = object.value(forKey: "createdDate") as! String
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MM-dd-yyy HH:mm"
+            let createdDate = formatter.date(from: createdDateString)
             
-            printingArray.append(PrintingDisplay(image: UIImage(data: image)!, item: item, printer: printer, diameter: diameter, weight: weight, completed: completed))
+            printingArray.append(PrintingDisplay(image: UIImage(data: image)!, item: item, printer: printer, diameter: diameter, weight: weight, completed: completed, createdDate: createdDate!))
         }
     }
     
