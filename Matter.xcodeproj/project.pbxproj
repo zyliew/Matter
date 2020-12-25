@@ -168,15 +168,15 @@
 		7C8474B7258914AD0031BFC9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7CAA9768258A91F300F92A04 /* SpoolVC.swift */,
-				7C8474CA2589268B0031BFC9 /* AddSpoolVC.swift */,
-				7CE822B3258B81C300D0AC32 /* IndividualSpoolsVC.swift */,
-				7C8474C4258919B70031BFC9 /* PrintingVC.swift */,
-				7CB29A71258D31DF00B224E7 /* ObjectVC.swift */,
 				7CA70340258DED3000A3434D /* AddObjectVC.swift */,
-				7C53580E2592785C002ED4C2 /* PrintersVC.swift */,
-				7C53581325927B41002ED4C2 /* PrintJobsVC.swift */,
+				7CB29A71258D31DF00B224E7 /* ObjectVC.swift */,
+				7C8474CA2589268B0031BFC9 /* AddSpoolVC.swift */,
+				7CAA9768258A91F300F92A04 /* SpoolVC.swift */,
+				7CE822B3258B81C300D0AC32 /* IndividualSpoolsVC.swift */,
 				7C53581825927B77002ED4C2 /* AddPrinterVC.swift */,
+				7C53580E2592785C002ED4C2 /* PrintersVC.swift */,
+				7C8474C4258919B70031BFC9 /* PrintingVC.swift */,
+				7C53581325927B41002ED4C2 /* PrintJobsVC.swift */,
 				7C4F7B8B259519FB00A424FB /* IndividualPrintingVC.swift */,
 				7C4F7B9025951A1700A424FB /* IndividualCompletedVC.swift */,
 			);

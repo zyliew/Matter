@@ -15,13 +15,20 @@ class PrintingDisplay {
     var diameter:Double = 0
     var weight:Double = 0
     var completed = Bool()
+    var createdDate = Date()
+    var finishedDate:Date?
     
-    init (image: UIImage, item: String, printer: String, diameter: Double, weight: Double, completed: Bool) {
+    init (image: UIImage, item: String, printer: String, diameter: Double, weight: Double, completed: Bool, createdDate: Date) {
         self.image = image
         self.item = item
         self.printer = printer
         self.diameter = diameter
         self.weight = weight
         self.completed = completed
+        self.createdDate = createdDate
+    }
+    
+    func addFinishedDate(finishedDate: Date) {
+        self.finishedDate = finishedDate
     }
 }

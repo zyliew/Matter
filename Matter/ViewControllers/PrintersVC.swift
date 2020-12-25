@@ -172,6 +172,12 @@ extension PrintersVC {
         let weight = toPrintItem!.weight
         let completed = false
         
+        let currentDateTime = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyy HH:mm"
+        let createdDate = dateFormatter.string(from: currentDateTime)
+        let finishedDate = "none"
+        
         let object = NSEntityDescription.insertNewObject(forEntityName: "Printing", into: context)
         
         object.setValue(image, forKey: "image")
@@ -180,6 +186,8 @@ extension PrintersVC {
         object.setValue(diameter, forKey: "diameter")
         object.setValue(weight, forKey: "weight")
         object.setValue(completed, forKey: "completed")
+        object.setValue(createdDate, forKey: "createdDate")
+        object.setValue(finishedDate, forKey: "finishedDate")
         
         // Commit the changes
         do {
