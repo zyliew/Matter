@@ -123,7 +123,10 @@ extension PrintingVC {
             formatter.dateFormat = "MM-dd-yyy HH:mm"
             let createdDate = formatter.date(from: createdDateString)
             
-            printingArray.append(PrintingDisplay(image: UIImage(data: image)!, item: item, printer: printer, diameter: diameter, weight: weight, completed: completed, createdDate: createdDate!))
+            let toAdd = PrintingDisplay(image: UIImage(data: image)!, item: item, printer: printer, diameter: diameter, weight: weight, completed: completed)
+            toAdd.createdDate = createdDate!
+            
+            printingArray.append(toAdd)
         }
     }
     
