@@ -101,6 +101,13 @@ extension IndividualCompletedVC: PrintingTableViewCellDelegate {
             self.markCompletedCoreData(name: item.item)
             self.printingArray.remove(at: row)
             self.tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            let currentDateTime = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM-dd-yyy HH:mm"
+            let finishedDate = dateFormatter.string(from: currentDateTime)
+            item.finishedDate = currentDateTime
+            self.updateFinishedDate(uid: item.item, date: finishedDate)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true)
@@ -132,14 +139,17 @@ extension IndividualCompletedVC {
             let weight = object.value(forKey: "weight") as! Double
             let completed = object.value(forKey: "completed") as! Bool
             let createdDateString = object.value(forKey: "createdDate") as! String
+            let finishedDateString = object.value(forKey: "finishedDate") as! String
             let formatter = DateFormatter()
             formatter.dateFormat = "MM-dd-yyy HH:mm"
             let createdDate = formatter.date(from: createdDateString)
+            let finishedDate = formatter.date(from: finishedDateString)
             
             // check that object is not completed yet
             if completed {
                 let toAdd = PrintingDisplay(image: UIImage(data: image)!, item: item, printer: printer, diameter: diameter, weight: weight, completed: completed)
                 toAdd.createdDate = createdDate!
+                toAdd.finishedDate = finishedDate
                 
                 printingArray.append(toAdd)
             }
@@ -209,6 +219,40 @@ extension IndividualCompletedVC {
         }
         
         print("core data cleared")
+    }
+    
+    func updateFinishedDate(uid: String, date: String) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Printing")
+        var fetchedResults: [NSManagedObject]? = nil
+        
+        do {
+            try fetchedResults = context.fetch(request) as? [NSManagedObject]
+        } catch {
+            // if an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        for print in fetchedResults! {
+            let currentPrint = print.value(forKey: "item") as? String
+            if currentPrint == uid {
+                print.setValue(date, forKey: "finishedDate")
+                break
+            }
+        }
+        
+        do {
+            try context.save()
+            print("modified core data, updated finishedDate")
+        } catch {
+            // if an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
     }
     
     func deleteSingleObject(name: String) {

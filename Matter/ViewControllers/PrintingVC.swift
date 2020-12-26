@@ -122,6 +122,13 @@ extension PrintingVC: PrintingTableViewCellDelegate {
             self.markCompletedCoreData(name: item.item)
             self.printingArray.remove(at: row)
             self.tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            let currentDateTime = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM-dd-yyy HH:mm"
+            let finishedDate = dateFormatter.string(from: currentDateTime)
+            item.finishedDate = currentDateTime
+            self.updateFinishedDate(uid: item.item, date: finishedDate)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true)
@@ -231,6 +238,40 @@ extension PrintingVC {
         }
         
         print("core data cleared")
+    }
+    
+    func updateFinishedDate(uid: String, date: String) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Printing")
+        var fetchedResults: [NSManagedObject]? = nil
+        
+        do {
+            try fetchedResults = context.fetch(request) as? [NSManagedObject]
+        } catch {
+            // if an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        for print in fetchedResults! {
+            let currentPrint = print.value(forKey: "item") as? String
+            if currentPrint == uid {
+                print.setValue(date, forKey: "finishedDate")
+                break
+            }
+        }
+        
+        do {
+            try context.save()
+            print("modified core data, updated finishedDate")
+        } catch {
+            // if an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
     }
     
     func deleteSingleObject(name: String) {
