@@ -8,13 +8,18 @@
 import UIKit
 
 class IndividualCompletedVC: UIViewController {
-
+    var printer:PrinterDisplay?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        print("IndividualCompletedVC, printer is \(printer!.name)")
+    }
 
     /*
     // MARK: - Navigation

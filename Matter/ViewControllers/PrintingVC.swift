@@ -20,6 +20,7 @@ class PrintingTableViewCell:UITableViewCell {
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var diameterLabel: UILabel!
     @IBOutlet weak var printerLabel: UILabel!
+    @IBOutlet weak var completeButton: UIButton!
     var cellRow:Int?
     var cellIndexPath:IndexPath?
     

@@ -59,6 +59,8 @@ class PrintersVC: UIViewController {
             print("going to AddPrinterVC")
             nextVC.delegate = self
             nextVC.printers = printers
+        } else if segue.identifier == "printJobsSegue", let nextVC = segue.destination as? PrintJobsVC, let indexPath = tableView.indexPathForSelectedRow {
+            nextVC.printer = printers[indexPath.row]
         }
     }
 }

@@ -8,22 +8,54 @@
 import UIKit
 
 class PrintJobsVC: UIViewController {
-
+    @IBOutlet weak var printingView: UIView!
+    @IBOutlet weak var completedView: UIView!
+    
+    var printer:PrinterDisplay?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        setView(view: printingView, hidden: false)
+        setView(view: completedView, hidden: true)
+        
+        print("printer is \(printer!.name)")
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func toggleSegmentedController(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            // PrintingView
+            setView(view: printingView, hidden: false)
+            setView(view: completedView, hidden: true)
+        case 1:
+            // CompletedView
+            setView(view: printingView, hidden: true)
+            setView(view: completedView, hidden: false)
+        default:
+            // Shouldn't hit here
+            print("hit default case of toggleSegmentedController")
+            setView(view: printingView, hidden: false)
+            setView(view: completedView, hidden: true)
+        }
     }
-    */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toIndividualPrintingSegue", let nextVC = segue.destination as? IndividualPrintingVC {
+            nextVC.printer = printer
+        } else if segue.identifier == "toIndividualCompletedSegue", let nextVC = segue.destination as? IndividualCompletedVC {
+            nextVC.printer = printer
+        }
 
+    }
+}
+
+extension PrintJobsVC {
+    // animation helper function to hide/show views
+    func setView(view: UIView, hidden: Bool) {
+        UIView.transition(with: view, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            view.isHidden = hidden
+        })
+    }
 }
