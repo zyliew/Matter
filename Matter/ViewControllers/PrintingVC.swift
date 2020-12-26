@@ -42,10 +42,11 @@ class PrintingVC: UIViewController {
         
         self.navigationItem.title = "Printing"
 //        clearCoreData()
-        getCoreData()
+//        getCoreData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        getCoreData()
         DispatchQueue.main.async { self.tableView.reloadData() }
     }
 }
@@ -129,6 +130,7 @@ extension PrintingVC: PrintingTableViewCellDelegate {
 
 extension PrintingVC {
     func getCoreData() {
+        printingArray.removeAll()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Printing")

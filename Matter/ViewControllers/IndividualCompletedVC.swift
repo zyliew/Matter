@@ -19,11 +19,11 @@ class IndividualCompletedVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        
+        getCoreData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getCoreData()
+//        getCoreData()
         DispatchQueue.main.async { self.tableView.reloadData() }
     }
     
