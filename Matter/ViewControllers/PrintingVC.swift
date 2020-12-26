@@ -117,52 +117,13 @@ extension PrintingVC: PrintingTableViewCellDelegate {
         let item = printingArray[row]
         // confirm that the user wants to complete print
         let alert = UIAlertController(title: "Are you sure?", message: "\(item.item) will be marked as completed. It can be found in the printer's individual page", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: {action in
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {action in
             self.markCompletedCoreData(name: item.item)
             self.printingArray.remove(at: row)
             self.tableView.deleteRows(at: [indexPath], with: .fade)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true)
-        // set PrintingDisplay item as complete, amend core data
-        
-        // remove row from tableview
-    }
-    
-    func markCompletedCoreData(name: String) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Printing")
-        var fetchedResults: [NSManagedObject]? = nil
-        
-        
-        do {
-            try fetchedResults = context.fetch(request) as? [NSManagedObject]
-        } catch {
-            // if an error occurs
-            let nserror = error as NSError
-            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-            abort()
-        }
-        
-        for print in fetchedResults! {
-            let currentPrint = print.value(forKey: "item") as? String
-            if currentPrint == name {
-                let completed = !((print.value(forKey: "completed") as? Bool)!)
-                print.setValue(completed, forKey: "completed")
-                break
-            }
-        }
-        
-        do {
-            try context.save()
-            print("modified core data")
-        } catch {
-            // if an error occurs
-            let nserror = error as NSError
-            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-            abort()
-        }
     }
 }
 
@@ -202,6 +163,43 @@ extension PrintingVC {
                 
                 printingArray.append(toAdd)
             }
+        }
+    }
+    
+    // flip bool value of completed for the given PrintingDisplay object
+    func markCompletedCoreData(name: String) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Printing")
+        var fetchedResults: [NSManagedObject]? = nil
+        
+        
+        do {
+            try fetchedResults = context.fetch(request) as? [NSManagedObject]
+        } catch {
+            // if an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        for print in fetchedResults! {
+            let currentPrint = print.value(forKey: "item") as? String
+            if currentPrint == name {
+                let completed = !((print.value(forKey: "completed") as? Bool)!)
+                print.setValue(completed, forKey: "completed")
+                break
+            }
+        }
+        
+        do {
+            try context.save()
+            print("modified core data")
+        } catch {
+            // if an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
         }
     }
     

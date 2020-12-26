@@ -1004,6 +1004,9 @@
                             <constraint firstItem="SPT-kj-itP" firstAttribute="leading" secondItem="auo-pb-FRy" secondAttribute="leading" id="vvm-e4-AQz"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="SPT-kj-itP" id="L1g-9X-azd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ntA-Hb-4Zi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1054,9 +1057,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H7L-sc-HLo">
-                                                    <rect key="frame" x="331" y="34" width="67" height="30"/>
+                                                    <rect key="frame" x="338" y="34" width="54" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Complete"/>
+                                                    <state key="normal" title="Unmark"/>
                                                     <connections>
                                                         <action selector="tapOnComplete:" destination="SGL-dh-O1a" eventType="touchUpInside" id="ehP-Dq-8VS"/>
                                                     </connections>
@@ -1090,6 +1093,9 @@
                             <constraint firstItem="CtQ-OF-cZt" firstAttribute="leading" secondItem="yW4-Up-tDq" secondAttribute="leading" id="y3d-Xb-c6p"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="CtQ-OF-cZt" id="8D7-tK-KYF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vD8-uM-pJB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
