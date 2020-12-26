@@ -7,6 +7,9 @@
 
 import UIKit
 
+// TODO: retrieve both completed and not completed printing items in this VC, pass to child VCs
+// set up delegate to retrive the information back from childVCs if arrays are updated
+
 class PrintJobsVC: UIViewController {
     @IBOutlet weak var printingView: UIView!
     @IBOutlet weak var completedView: UIView!
@@ -29,10 +32,12 @@ class PrintJobsVC: UIViewController {
             // PrintingView
             setView(view: printingView, hidden: false)
             setView(view: completedView, hidden: true)
+//            performSegue(withIdentifier: "toIndividualPrintingSegue", sender: nil)
         case 1:
             // CompletedView
             setView(view: printingView, hidden: true)
             setView(view: completedView, hidden: false)
+//            performSegue(withIdentifier: "toIndividualCompletedSegue", sender: nil)
         default:
             // Shouldn't hit here
             print("hit default case of toggleSegmentedController")
@@ -43,8 +48,10 @@ class PrintJobsVC: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toIndividualPrintingSegue", let nextVC = segue.destination as? IndividualPrintingVC {
+            print("individualPrinting segue")
             nextVC.printer = printer
         } else if segue.identifier == "toIndividualCompletedSegue", let nextVC = segue.destination as? IndividualCompletedVC {
+            print("completedSegue")
             nextVC.printer = printer
         }
 
