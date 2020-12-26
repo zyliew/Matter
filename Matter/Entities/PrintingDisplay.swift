@@ -26,8 +26,4 @@ class PrintingDisplay {
         self.weight = weight
         self.completed = completed
     }
-    
-    func addFinishedDate(finishedDate: Date) {
-        self.finishedDate = finishedDate
-    }
 }

@@ -8,12 +8,23 @@
 import UIKit
 import CoreData
 
+protocol PrintingTableViewCellDelegate {
+    func markCompleted(row: Int)
+}
+
 class PrintingTableViewCell:UITableViewCell {
+    var delegate:PrintingTableViewCellDelegate?
+    
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var itemLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var diameterLabel: UILabel!
     @IBOutlet weak var printerLabel: UILabel!
+    var cellRow:Int?
+    
+    @IBAction func tapOnComplete(_ sender: Any) {
+        delegate?.markCompleted(row: cellRow!)
+    }
     
 }
 
@@ -54,6 +65,8 @@ extension PrintingVC: UITableViewDelegate, UITableViewDataSource {
         cell.printerLabel.text = item.printer
         cell.diameterLabel.text = String(item.diameter)
         cell.weightLabel.text = String(item.weight)
+        cell.cellRow = indexPath.row
+        cell.delegate = self
         
         return cell
     }
@@ -94,6 +107,12 @@ extension PrintingVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+extension PrintingVC: PrintingTableViewCellDelegate {
+    func markCompleted(row: Int) {
+        print("row \(row) completed button pressed")
+    }
+}
+
 extension PrintingVC {
     func getCoreData() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -110,7 +129,7 @@ extension PrintingVC {
             abort()
         }
         
-        // add all objects into objectArray
+        // add not yet completed prints into printingArray
         for object in fetchedResults! {
             let image = object.value(forKey: "image") as! Data
             let item = object.value(forKey: "item") as! String
@@ -123,10 +142,13 @@ extension PrintingVC {
             formatter.dateFormat = "MM-dd-yyy HH:mm"
             let createdDate = formatter.date(from: createdDateString)
             
-            let toAdd = PrintingDisplay(image: UIImage(data: image)!, item: item, printer: printer, diameter: diameter, weight: weight, completed: completed)
-            toAdd.createdDate = createdDate!
-            
-            printingArray.append(toAdd)
+            // check that object is not completed yet
+            if !completed {
+                let toAdd = PrintingDisplay(image: UIImage(data: image)!, item: item, printer: printer, diameter: diameter, weight: weight, completed: completed)
+                toAdd.createdDate = createdDate!
+                
+                printingArray.append(toAdd)
+            }
         }
     }
     
