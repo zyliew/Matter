@@ -61,12 +61,22 @@ class AddSpoolVC: UIViewController {
     func checkInputs() -> Bool {
         // check for empty inputs
         if quantityTextBox.text!.isEmpty || materialTextBox.text!.isEmpty || colorTextBox.text!.isEmpty || weightTextBox.text!.isEmpty {
+            // alert
+            let alert = UIAlertController(title: "Invalid Input", message: "Quantity, Material, Color and Weight have to be filled in", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
             return false
         }
         
         // check if inputs are the appropriate type
         let numberCharacters = NSCharacterSet.decimalDigits.inverted
-        if quantityTextBox.text!.rangeOfCharacter(from: numberCharacters) != nil || weightTextBox.text!.rangeOfCharacter(from: numberCharacters) != nil {
+        if quantityTextBox.text!.rangeOfCharacter(from: numberCharacters) != nil || !weightTextBox.text!.isDouble {
+            // alert
+            let alert = UIAlertController(title: "Invalid Input", message: "Quantity and Weight has to be a number", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
             return false
         }
         

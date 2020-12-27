@@ -134,7 +134,7 @@ extension IndividualCompletedVC {
         for object in fetchedResults! {
             let image = object.value(forKey: "image") as! Data
             let item = object.value(forKey: "item") as! String
-            let printer = object.value(forKey: "printer") as! String
+            let printerCurrent = object.value(forKey: "printer") as! String
             let diameter = object.value(forKey: "diameter") as! Double
             let weight = object.value(forKey: "weight") as! Double
             let completed = object.value(forKey: "completed") as! Bool
@@ -146,8 +146,8 @@ extension IndividualCompletedVC {
             let finishedDate = formatter.date(from: finishedDateString)
             
             // check that object is not completed yet
-            if completed {
-                let toAdd = PrintingDisplay(image: UIImage(data: image)!, item: item, printer: printer, diameter: diameter, weight: weight, completed: completed)
+            if completed && printerCurrent == printer!.name {
+                let toAdd = PrintingDisplay(image: UIImage(data: image)!, item: item, printer: printerCurrent, diameter: diameter, weight: weight, completed: completed)
                 toAdd.createdDate = createdDate!
                 toAdd.finishedDate = finishedDate
                 
