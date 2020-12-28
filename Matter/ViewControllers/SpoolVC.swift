@@ -324,6 +324,13 @@ extension SpoolVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    // Rearrange the items in tableview
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let temp = spoolArray[sourceIndexPath.item]
+        spoolArray.remove(at: sourceIndexPath.item)
+        spoolArray.insert(temp, at: destinationIndexPath.item)
+    }
+    
     // deselects the row so it's not highlighted after click
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

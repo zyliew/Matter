@@ -13,12 +13,22 @@ import CoreData
 //    var name:String
 //    var weight:Double
 //}
+protocol ObjectTableViewCellDelegate {
+    func tappedEdit(name: String, weight: Double, row: Int)
+}
 
 // Custom TableView cell
 class ObjectTableViewCell: UITableViewCell {
+    var delegate:ObjectTableViewCellDelegate?
     @IBOutlet weak var objectImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
+    var objectRow:Int?
+    
+    @IBAction func editPressed(_ sender: Any) {
+        delegate?.tappedEdit(name: nameLabel.text!, weight: Double(weightLabel.text!)!, row: objectRow!)
+    }
+    
 }
     
 class ObjectVC: UIViewController {
@@ -95,6 +105,8 @@ extension ObjectVC: UITableViewDelegate, UITableViewDataSource {
         cell.nameLabel.text = item.name
         cell.weightLabel.text = String(item.weight)
         cell.objectImage.image = item.image
+        cell.delegate = self
+        cell.objectRow = indexPath.row
         
         return cell
     }
@@ -125,6 +137,7 @@ extension ObjectVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    // Rearrange the items in tableview
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let temp = objectArray[sourceIndexPath.item]
         objectArray.remove(at: sourceIndexPath.item)
@@ -137,11 +150,39 @@ extension ObjectVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if self.tableView.isEditing {
-            print("tableview is in editing mode")
-        }
         row = indexPath.row
         return indexPath
+    }
+}
+
+extension ObjectVC: ObjectTableViewCellDelegate {
+    func tappedEdit(name: String, weight: Double, row: Int) {
+        print("implement alert")
+        print("name is \(name), weight is \(weight)")
+        var editName:UITextField?
+        var editWeight:UITextField?
+
+        let alert = UIAlertController(
+            title: "Edit", message: nil,
+                preferredStyle: .alert)
+        alert.addTextField(configurationHandler: {(nameTextField) in
+            editName = nameTextField
+            editName?.text = name
+        })
+        alert.addTextField(configurationHandler: {(weightTextField) in
+            editWeight = weightTextField
+            editWeight?.keyboardType = .decimalPad
+            editWeight?.text = String(weight)
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:nil))
+        alert.addAction(UIAlertAction(title: "Update", style: .default, handler:nil))
+
+        self.present(alert, animated: true)
+    }
+    
+    // updates this object's name and weight in objectArray and core data
+    func updateInfo(name: String, weight: Double) {
+        
     }
 }
 
