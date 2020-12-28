@@ -441,6 +441,17 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="fAt-n5-fHN">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="OOG-E4-UzF">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="sxG-TG-4uf">
+                                <rect key="frame" x="20" y="5.5" width="92" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="editPressed:" destination="vzd-15-lc0" eventType="touchUpInside" id="ZKc-tP-fAO"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="KuX-Z8-aN3">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Iqg-ED-QMp" userLabel="Add">
                                 <rect key="frame" x="372.5" y="11" width="21.5" height="22"/>
@@ -453,6 +464,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="sxG-TG-4uf" id="6Vk-fY-FdF"/>
                         <outlet property="tableView" destination="uOQ-R6-PdI" id="Rkh-wP-E83"/>
                     </connections>
                 </viewController>

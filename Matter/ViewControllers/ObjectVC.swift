@@ -22,6 +22,7 @@ class ObjectTableViewCell: UITableViewCell {
 }
     
 class ObjectVC: UIViewController {
+    @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     var objectArray:[ObjectDisplay] = []
 //    var itemArray:[PrintItem] = []
@@ -44,6 +45,13 @@ class ObjectVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         DispatchQueue.main.async { self.tableView.reloadData() }
+    }
+    
+    // change edit text when pressed, set tableview editing priviledges
+    @IBAction func editPressed(_ sender: Any) {
+        self.tableView.isEditing = !self.tableView.isEditing
+        let text = (self.tableView.isEditing) ? "Done" : "Edit"
+        editButton.setTitle(text, for: .normal)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -117,12 +125,21 @@ extension ObjectVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let temp = objectArray[sourceIndexPath.item]
+        objectArray.remove(at: sourceIndexPath.item)
+        objectArray.insert(temp, at: destinationIndexPath.item)
+    }
+    
     // deselects the row so it's not highlighted after click
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if self.tableView.isEditing {
+            print("tableview is in editing mode")
+        }
         row = indexPath.row
         return indexPath
     }
