@@ -190,6 +190,7 @@ extension PrintersVC {
         object.setValue(completed, forKey: "completed")
         object.setValue(createdDate, forKey: "createdDate")
         object.setValue(finishedDate, forKey: "finishedDate")
+        object.setValue(UUID().uuidString, forKey: "uid")
         
         // Commit the changes
         do {

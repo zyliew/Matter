@@ -98,7 +98,7 @@ extension IndividualPrintingVC: PrintingTableViewCellDelegate {
         // confirm that the user wants to complete print
         let alert = UIAlertController(title: "Are you sure?", message: "\(item.item) will be marked as completed. It can be found in the printer's individual page", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {action in
-            self.markCompletedCoreData(name: item.item)
+            self.markCompletedCoreData(uid: item.uid)
             self.printingArray.remove(at: row)
             self.tableView.deleteRows(at: [indexPath], with: .fade)
             
@@ -138,6 +138,7 @@ extension IndividualPrintingVC {
             let diameter = object.value(forKey: "diameter") as! Double
             let weight = object.value(forKey: "weight") as! Double
             let completed = object.value(forKey: "completed") as! Bool
+            let uid = object.value(forKey: "uid") as! String
             let createdDateString = object.value(forKey: "createdDate") as! String
             let formatter = DateFormatter()
             formatter.dateFormat = "MM-dd-yyy HH:mm"
@@ -145,7 +146,7 @@ extension IndividualPrintingVC {
             
             // check that object is not completed yet
             if !completed  && printerCurrent == printer!.name {
-                let toAdd = PrintingDisplay(image: UIImage(data: image)!, item: item, printer: printerCurrent, diameter: diameter, weight: weight, completed: completed)
+                let toAdd = PrintingDisplay(image: UIImage(data: image)!, item: item, printer: printerCurrent, diameter: diameter, weight: weight, completed: completed, uid: uid)
                 toAdd.createdDate = createdDate!
                 
                 printingArray.append(toAdd)
@@ -154,7 +155,7 @@ extension IndividualPrintingVC {
     }
     
     // flip bool value of completed for the given PrintingDisplay object
-    func markCompletedCoreData(name: String) {
+    func markCompletedCoreData(uid: String) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Printing")
@@ -171,8 +172,8 @@ extension IndividualPrintingVC {
         }
         
         for print in fetchedResults! {
-            let currentPrint = print.value(forKey: "item") as? String
-            if currentPrint == name {
+            let currentPrint = print.value(forKey: "uid") as? String
+            if currentPrint == uid {
                 let completed = !((print.value(forKey: "completed") as? Bool)!)
                 print.setValue(completed, forKey: "completed")
                 break
