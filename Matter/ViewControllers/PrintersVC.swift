@@ -32,7 +32,7 @@ class PrintersVC: UIViewController {
         
         self.navigationItem.title = "Printers"
         cancelButton.isHidden = true
-        
+//        clearCoreData()
         getCoreData()
     }
     
@@ -91,21 +91,21 @@ extension PrintersVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    // swipe to delete, only delete if count is 1, otherwise popup alert
+    // swipe to delete printer
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // check that only 1 spool is present
             let printer = printers[indexPath.row]
-            let name = printer.name
+            let uid = printer.uid
             print("Delete object")
-            print(name)
+            print(uid)
             
             // confirm that the user wants to delete multiple spools
-            let alert = UIAlertController(title: "Are you sure?", message: "\(name) will be deleted", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Are you sure?", message: "\(printer.name) will be deleted", preferredStyle: .alert)
             
             // Delete
             alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: {action in
-                self.deleteSingleObject(name: name)
+                self.deleteSinglePrinter(uid: uid)
                 self.printers.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }))
@@ -172,6 +172,7 @@ extension PrintersVC {
         let printerName = printer.name
         let diameter = printer.diameter
         let weight = toPrintItem!.weight
+        let material = toPrintSpool!.material
         let completed = false
         
         let currentDateTime = Date()
@@ -187,6 +188,7 @@ extension PrintersVC {
         object.setValue(printerName, forKey: "printer")
         object.setValue(diameter, forKey: "diameter")
         object.setValue(weight, forKey: "weight")
+        object.setValue(material, forKey: "material")
         object.setValue(completed, forKey: "completed")
         object.setValue(createdDate, forKey: "createdDate")
         object.setValue(finishedDate, forKey: "finishedDate")
@@ -224,8 +226,9 @@ extension PrintersVC {
             let name = object.value(forKey: "name") as! String
             let diameter = object.value(forKey: "diameter") as! Double
             let image = object.value(forKey: "image") as! Data
+            let uid = object.value(forKey: "uid") as! String
             
-            printers.append(PrinterDisplay(image: UIImage(data: image)!, name: name, diameter: diameter))
+            printers.append(PrinterDisplay(image: UIImage(data: image)!, name: name, diameter: diameter, uid: uid))
         }
     }
     
@@ -257,7 +260,7 @@ extension PrintersVC {
         print("core data cleared")
     }
     
-    func deleteSingleObject(name: String) {
+    func deleteSinglePrinter(uid: String) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Printer")
@@ -269,10 +272,10 @@ extension PrintersVC {
             if fetchedResults.count > 0 {
                 // find spools with the matching uid and delete it
                 for result:AnyObject in fetchedResults {
-                    let currentName = result.value(forKey: "name") as! String
-                    if name == currentName {
+                    let currentuid = result.value(forKey: "uid") as! String
+                    if uid == currentuid {
                         context.delete(result as! NSManagedObject)
-                        print("Object with name: \(name) deleted from Core Data")
+                        print("Printer with uid: \(uid) deleted from Core Data")
                         break
                     }
                 }
@@ -286,7 +289,7 @@ extension PrintersVC {
             abort()
         }
         
-        print("deleted single object")
+        print("deleted single printer")
     }
     
     func updateSingleSpoolWeight(uid: String) {

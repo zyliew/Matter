@@ -12,10 +12,12 @@ class PrinterDisplay {
     var image:UIImage?
     var name = String()
     var diameter:Double = 0
+    var uid = String()
     
-    init (image: UIImage, name: String, diameter: Double) {
+    init (image: UIImage, name: String, diameter: Double, uid: String) {
         self.image = image
         self.name = name
         self.diameter = diameter
+        self.uid = uid
     }
 }

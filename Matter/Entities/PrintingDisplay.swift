@@ -14,12 +14,13 @@ class PrintingDisplay {
     var printer = String()
     var diameter:Double = 0
     var weight:Double = 0
+    var material = String()
     var completed = Bool()
     var createdDate = Date()
     var finishedDate:Date?
     var uid = String()
     
-    init (image: UIImage, item: String, printer: String, diameter: Double, weight: Double, completed: Bool, uid: String) {
+    init (image: UIImage, item: String, printer: String, diameter: Double, weight: Double, completed: Bool, uid: String, material: String) {
         self.image = image
         self.item = item
         self.printer = printer
@@ -27,5 +28,6 @@ class PrintingDisplay {
         self.weight = weight
         self.completed = completed
         self.uid = uid
+        self.material = material
     }
 }

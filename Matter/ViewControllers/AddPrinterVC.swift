@@ -83,21 +83,23 @@ extension AddPrinterVC {
         
         let name = nameTextBox.text
         let diameter = Double(diameterTextBox.text!)
+        let uid = UUID().uuidString
         
         let printer = NSEntityDescription.insertNewObject(forEntityName: "Printer", into: context)
         
         printer.setValue(name, forKey: "name")
         printer.setValue(diameter, forKey: "diameter")
+        printer.setValue(uid, forKey: "uid")
         
         // handle images
         if let imageData = printerImage.image?.pngData() {
             printer.setValue(imageData, forKey: "image")
-            printers?.append(PrinterDisplay(image: printerImage.image!, name: name!, diameter: diameter!))
+            printers?.append(PrinterDisplay(image: printerImage.image!, name: name!, diameter: diameter!, uid: uid))
         } else {
             let image = #imageLiteral(resourceName: "nozzle_extruding").pngData()
             printerImage.image = #imageLiteral(resourceName: "3d_printer")
             printer.setValue(image, forKey: "image")
-            printers?.append(PrinterDisplay(image: #imageLiteral(resourceName: "3d_printer"), name: name!, diameter: diameter!))
+            printers?.append(PrinterDisplay(image: #imageLiteral(resourceName: "3d_printer"), name: name!, diameter: diameter!, uid: uid))
         }
         
         // Commit the changes

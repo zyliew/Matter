@@ -160,6 +160,7 @@ extension PrintingVC {
             let printer = object.value(forKey: "printer") as! String
             let diameter = object.value(forKey: "diameter") as! Double
             let weight = object.value(forKey: "weight") as! Double
+            let material = object.value(forKey: "material") as! String
             let completed = object.value(forKey: "completed") as! Bool
             let uid = object.value(forKey: "uid") as! String
             let createdDateString = object.value(forKey: "createdDate") as! String
@@ -169,7 +170,7 @@ extension PrintingVC {
             
             // check that object is not completed yet
             if !completed {
-                let toAdd = PrintingDisplay(image: UIImage(data: image)!, item: item, printer: printer, diameter: diameter, weight: weight, completed: completed, uid: uid)
+                let toAdd = PrintingDisplay(image: UIImage(data: image)!, item: item, printer: printer, diameter: diameter, weight: weight, completed: completed, uid: uid, material: material)
                 toAdd.createdDate = createdDate!
                 
                 printingArray.append(toAdd)
