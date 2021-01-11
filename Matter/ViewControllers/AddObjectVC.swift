@@ -51,21 +51,23 @@ extension AddObjectVC {
         
         let name = nameTextField.text
         let weight = Double(weightTextField.text!)
+        let uid = UUID().uuidString
         
         let object = NSEntityDescription.insertNewObject(forEntityName: "Item", into: context)
         
         object.setValue(name, forKey: "name")
         object.setValue(weight, forKey: "weight")
+        object.setValue(uid, forKey: "uid")
         
         // handle images
         if let imageData = objectImage.image?.pngData() {
             object.setValue(imageData, forKey: "image")
-            objects?.append(ObjectDisplay(name: name!, weight: weight!, image: objectImage.image!))
+            objects?.append(ObjectDisplay(name: name!, weight: weight!, image: objectImage.image!, uid: uid))
         } else {
             let image = #imageLiteral(resourceName: "nozzle_extruding").pngData()
             objectImage.image = #imageLiteral(resourceName: "nozzle_extruding")
             object.setValue(image, forKey: "image")
-            objects?.append(ObjectDisplay(name: name!, weight: weight!, image: #imageLiteral(resourceName: "nozzle_extruding")))
+            objects?.append(ObjectDisplay(name: name!, weight: weight!, image: #imageLiteral(resourceName: "nozzle_extruding"), uid: uid))
         }
         
         // Commit the changes

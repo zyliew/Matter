@@ -125,7 +125,7 @@ extension ObjectVC: UITableViewDelegate, UITableViewDataSource {
             
             // Delete
             alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: {action in
-                self.deleteSingleObject(name: name)
+                self.deleteSingleObject(uid: item.uid)
                 self.objectArray.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }))
@@ -225,8 +225,9 @@ extension ObjectVC {
             let name = object.value(forKey: "name") as! String
             let weight = object.value(forKey: "weight") as! Double
             let image = object.value(forKey: "image") as! Data
+            let uid = object.value(forKey: "uid") as! String
             
-            objectArray.append(ObjectDisplay(name: name, weight: weight, image: UIImage(data: image)!))
+            objectArray.append(ObjectDisplay(name: name, weight: weight, image: UIImage(data: image)!, uid: uid))
 //            itemArray.append(PrintItem(name: name, weight: weight))
         }
     }
@@ -295,7 +296,7 @@ extension ObjectVC {
         print("core data cleared")
     }
     
-    func deleteSingleObject(name: String) {
+    func deleteSingleObject(uid: String) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Item")
@@ -307,10 +308,10 @@ extension ObjectVC {
             if fetchedResults.count > 0 {
                 // find spools with the matching uid and delete it
                 for result:AnyObject in fetchedResults {
-                    let currentName = result.value(forKey: "name") as! String
-                    if name == currentName {
+                    let currentUid = result.value(forKey: "name") as! String
+                    if uid == currentUid {
                         context.delete(result as! NSManagedObject)
-                        print("Object with name: \(name) deleted from Core Data")
+                        print("Object with uid: \(uid) deleted from Core Data")
                         break
                     }
                 }
