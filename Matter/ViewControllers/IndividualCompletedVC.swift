@@ -47,6 +47,7 @@ extension IndividualCompletedVC: UITableViewDelegate, UITableViewDataSource {
         cell.printerLabel.text = item.printer
         cell.diameterLabel.text = String(item.diameter)
         cell.weightLabel.text = String(item.weight)
+        cell.materialLabel.text = item.material
         cell.cellRow = indexPath.row
         cell.cellIndexPath = indexPath
         cell.delegate = self

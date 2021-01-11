@@ -46,6 +46,7 @@ extension IndividualPrintingVC: UITableViewDelegate, UITableViewDataSource {
         cell.itemLabel.text = item.item
         cell.printerLabel.text = item.printer
         cell.diameterLabel.text = String(item.diameter)
+        cell.materialLabel.text = item.material
         cell.weightLabel.text = String(item.weight)
         cell.cellRow = indexPath.row
         cell.cellIndexPath = indexPath

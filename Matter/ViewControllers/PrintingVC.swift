@@ -19,6 +19,7 @@ class PrintingTableViewCell:UITableViewCell {
     @IBOutlet weak var itemLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var diameterLabel: UILabel!
+    @IBOutlet weak var materialLabel: UILabel!
     @IBOutlet weak var printerLabel: UILabel!
     @IBOutlet weak var completeButton: UIButton!
     var uid:String?
@@ -68,6 +69,7 @@ extension PrintingVC: UITableViewDelegate, UITableViewDataSource {
         cell.itemLabel.text = item.item
         cell.printerLabel.text = item.printer
         cell.diameterLabel.text = String(item.diameter)
+        cell.materialLabel.text = item.material
         cell.weightLabel.text = String(item.weight)
         cell.cellRow = indexPath.row
         cell.cellIndexPath = indexPath
