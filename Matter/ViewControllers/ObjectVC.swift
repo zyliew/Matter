@@ -156,11 +156,16 @@ extension ObjectVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension ObjectVC: ObjectTableViewCellDelegate {
+    
+    // pops up an alert and updates the object's name and weight
     func tappedEdit(name: String, weight: Double, row: Int) {
         print("implement alert")
         print("name is \(name), weight is \(weight)")
         var editName:UITextField?
         var editWeight:UITextField?
+        
+//        var updatedName:String
+//        var updatedWeight:Double
 
         let alert = UIAlertController(
             title: "Edit", message: nil,
@@ -175,14 +180,27 @@ extension ObjectVC: ObjectTableViewCellDelegate {
             editWeight?.text = String(weight)
         })
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:nil))
-        alert.addAction(UIAlertAction(title: "Update", style: .default, handler:nil))
+        alert.addAction(UIAlertAction(title: "Update", style: .default, handler:{ action in
+            self.updateInfo(originalName: name, updatedName: editName!.text!, weight: Double(editWeight!.text!)!)
+            DispatchQueue.main.async { self.tableView.reloadData() }
+        }))
 
         self.present(alert, animated: true)
+        
     }
     
     // updates this object's name and weight in objectArray and core data
-    func updateInfo(name: String, weight: Double) {
+    func updateInfo(originalName: String, updatedName: String, weight: Double) {
+        // retrive the object from objectArray and update
+        for target in objectArray {
+            if target.name == originalName {
+                target.name = updatedName
+                target.weight = weight
+                break
+            }
+        }
         
+        updateSingleObject(originalName: originalName, updatedName: updatedName, weight: weight)
     }
 }
 
@@ -210,6 +228,42 @@ extension ObjectVC {
             
             objectArray.append(ObjectDisplay(name: name, weight: weight, image: UIImage(data: image)!))
 //            itemArray.append(PrintItem(name: name, weight: weight))
+        }
+    }
+    
+    func updateSingleObject(originalName: String, updatedName: String, weight: Double) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Item")
+        var fetchedResults: [NSManagedObject]? = nil
+        
+        do {
+            try fetchedResults = context.fetch(request) as? [NSManagedObject]
+        } catch {
+            // if an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        for object in fetchedResults! {
+            let currentName = object.value(forKey: "name") as? String
+            if currentName == originalName {
+                print("modified object in updateSingleObject")
+                object.setValue(updatedName, forKey: "name")
+                object.setValue(weight, forKey: "weight")
+                break
+            }
+        }
+        
+        do {
+            try context.save()
+            print("modified core data")
+        } catch {
+            // if an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
         }
     }
     

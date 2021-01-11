@@ -145,7 +145,7 @@ extension IndividualCompletedVC {
             let createdDate = formatter.date(from: createdDateString)
             let finishedDate = formatter.date(from: finishedDateString)
             
-            // check that object is not completed yet
+            // check that object is completed
             if completed && printerCurrent == printer!.name {
                 let toAdd = PrintingDisplay(image: UIImage(data: image)!, item: item, printer: printerCurrent, diameter: diameter, weight: weight, completed: completed)
                 toAdd.createdDate = createdDate!

@@ -119,16 +119,16 @@ extension PrintingVC: PrintingTableViewCellDelegate {
         // confirm that the user wants to complete print
         let alert = UIAlertController(title: "Are you sure?", message: "\(item.item) will be marked as completed. It can be found in the printer's individual page", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {action in
-            self.markCompletedCoreData(name: item.item)
-            self.printingArray.remove(at: row)
-            self.tableView.deleteRows(at: [indexPath], with: .fade)
-            
             let currentDateTime = Date()
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MM-dd-yyy HH:mm"
             let finishedDate = dateFormatter.string(from: currentDateTime)
             item.finishedDate = currentDateTime
             self.updateFinishedDate(uid: item.item, date: finishedDate)
+            
+            self.markCompletedCoreData(name: item.item)
+            self.printingArray.remove(at: row)
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true)
