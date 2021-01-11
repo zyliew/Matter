@@ -18,6 +18,7 @@ class AddSpoolVC: UIViewController {
     @IBOutlet weak var brandTextBox: UITextField!
     @IBOutlet weak var spoolImage: UIImageView!
     
+    @IBOutlet weak var scrollView: UIScrollView!
     var imagePicker: UIImagePickerController!
     
     override func viewDidLoad() {
