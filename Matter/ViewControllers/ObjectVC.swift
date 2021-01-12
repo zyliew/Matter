@@ -28,7 +28,6 @@ class ObjectTableViewCell: UITableViewCell {
     @IBAction func editPressed(_ sender: Any) {
         delegate?.tappedEdit(name: nameLabel.text!, weight: Double(weightLabel.text!)!, row: objectRow!)
     }
-    
 }
     
 class ObjectVC: UIViewController {
@@ -73,8 +72,8 @@ class ObjectVC: UIViewController {
             print("going to addModelSegue")
             nextVC.delegate = self
             nextVC.objects = objectArray
-        } else if segue.identifier == "printSegue" {
-            print("printSegue")
+        } else if segue.identifier == "printButtonSegue" {
+            print("printButtonSegue")
             
             let nextVC = segue.destination as? SpoolVC
             let item = objectArray[row]
