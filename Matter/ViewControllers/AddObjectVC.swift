@@ -28,6 +28,11 @@ class AddObjectVC: UIViewController {
 
         // Do any additional setup after loading the view.
         initializeImagePicker()
+        
+        // tap to dismiss keyboard
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
     
     @IBAction func uploadImage(_ sender: Any) {
@@ -136,12 +141,5 @@ extension AddObjectVC {
             return false
         }
         return true
-    }
-    
-    
-    // This closes the keyboard when touch is detected outside of the keyboard
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-        super.touchesBegan(touches, with: event)
     }
 }

@@ -26,6 +26,12 @@ class AddSpoolVC: UIViewController {
 
         // Do any additional setup after loading the view.
         initializeImagePicker()
+        
+        // tap to dismiss keyboard
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
 //        getData()
 //        clearCoreData()
     }
@@ -33,20 +39,6 @@ class AddSpoolVC: UIViewController {
     @IBAction func uploadPicture(_ sender: Any) {
         present(imagePicker, animated: true, completion: nil)
     }
-    
-//    func saveImage(data: Data) {
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        let context = appDelegate.persistentContainer.viewContext
-//
-//        let imageInstance = Spool(context: context)
-//        imageInstance.image = data
-//        do {
-//            try context.save()
-//            print("Image is saved")
-//        } catch {
-//            print(error.localizedDescription)
-//          }
-//    }
     
     @IBAction func storeSpoolData(_ sender: Any) {
         // check that inputs are valid
@@ -239,9 +231,9 @@ extension AddSpoolVC: UIImagePickerControllerDelegate, UINavigationControllerDel
     }
     
     // This closes the keyboard when touch is detected outside of the keyboard
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-        super.touchesBegan(touches, with: event)
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        view.endEditing(true)
+//        super.touchesBegan(touches, with: event)
+//    }
 }
     
