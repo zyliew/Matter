@@ -49,6 +49,9 @@ class ObjectVC: UIViewController {
         tableView.dataSource = self
         
         self.navigationItem.title = "Objects"
+        
+        // hide the nav bar edit button, don't think we need it. Delete when ready
+        editButton.isHidden = true
 //        clearCoreData()
         getCoreData()
     }
@@ -308,7 +311,7 @@ extension ObjectVC {
             if fetchedResults.count > 0 {
                 // find spools with the matching uid and delete it
                 for result:AnyObject in fetchedResults {
-                    let currentUid = result.value(forKey: "name") as! String
+                    let currentUid = result.value(forKey: "uid") as! String
                     if uid == currentUid {
                         context.delete(result as! NSManagedObject)
                         print("Object with uid: \(uid) deleted from Core Data")
