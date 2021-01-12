@@ -514,14 +514,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ocP-zS-tDI">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VJf-mx-ykg" userLabel="Image Button">
                                                     <rect key="frame" x="20" y="10" width="80" height="80"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="80" id="aJW-RC-v6M"/>
-                                                        <constraint firstAttribute="width" constant="80" id="aOP-Zm-t9h"/>
+                                                        <constraint firstAttribute="height" constant="80" id="Avy-Ql-8RD"/>
+                                                        <constraint firstAttribute="width" constant="80" id="Ql1-LU-kFN"/>
                                                     </constraints>
-                                                </imageView>
+                                                    <state key="normal" title="Button" image="filament_spool"/>
+                                                    <connections>
+                                                        <action selector="imagePressed:" destination="8pg-nK-Yw2" eventType="touchUpInside" id="ouX-nY-1uT"/>
+                                                    </connections>
+                                                </button>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="iEL-gM-dtH" userLabel="Label Stack View">
                                                     <rect key="frame" x="125" y="14.5" width="53.5" height="71"/>
                                                     <subviews>
@@ -561,16 +564,16 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="iEL-gM-dtH" firstAttribute="centerY" secondItem="pEj-Bg-Rvg" secondAttribute="centerY" id="008-hs-AFa"/>
-                                                <constraint firstItem="ocP-zS-tDI" firstAttribute="leading" secondItem="pEj-Bg-Rvg" secondAttribute="leadingMargin" id="0rD-rs-BEA"/>
-                                                <constraint firstItem="ocP-zS-tDI" firstAttribute="centerY" secondItem="pEj-Bg-Rvg" secondAttribute="centerY" id="13v-qs-F3O"/>
+                                                <constraint firstItem="VJf-mx-ykg" firstAttribute="leading" secondItem="pEj-Bg-Rvg" secondAttribute="leadingMargin" id="0ug-AL-Fl6"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="AHA-bn-iVu" secondAttribute="trailing" constant="10" id="HZx-Ug-uou"/>
-                                                <constraint firstItem="iEL-gM-dtH" firstAttribute="leading" secondItem="ocP-zS-tDI" secondAttribute="trailing" constant="25" id="crh-6S-891"/>
+                                                <constraint firstItem="iEL-gM-dtH" firstAttribute="leading" secondItem="VJf-mx-ykg" secondAttribute="trailing" constant="25" id="mCD-Ex-snt"/>
+                                                <constraint firstItem="VJf-mx-ykg" firstAttribute="centerY" secondItem="pEj-Bg-Rvg" secondAttribute="centerY" id="n2D-X0-gn3"/>
                                                 <constraint firstItem="AHA-bn-iVu" firstAttribute="centerY" secondItem="pEj-Bg-Rvg" secondAttribute="centerY" id="you-DM-fNe"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="imageButton" destination="VJf-mx-ykg" id="9qq-pI-48B"/>
                                             <outlet property="nameLabel" destination="4pb-FT-tIP" id="Mz3-fT-V5a"/>
-                                            <outlet property="objectImage" destination="ocP-zS-tDI" id="mHz-g6-70v"/>
                                             <outlet property="weightLabel" destination="Lha-2c-UiK" id="Hpx-Ya-aC9"/>
                                         </connections>
                                     </tableViewCell>
@@ -1501,6 +1504,7 @@
     <resources>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="filament_spool" width="688" height="606"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -20,13 +20,16 @@ protocol ObjectTableViewCellDelegate {
 // Custom TableView cell
 class ObjectTableViewCell: UITableViewCell {
     var delegate:ObjectTableViewCellDelegate?
-    @IBOutlet weak var objectImage: UIImageView!
+    @IBOutlet weak var imageButton: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
     var objectRow:Int?
     
     @IBAction func editPressed(_ sender: Any) {
         delegate?.tappedEdit(name: nameLabel.text!, weight: Double(weightLabel.text!)!, row: objectRow!)
+    }
+    @IBAction func imagePressed(_ sender: Any) {
+        print("image pressed")
     }
 }
     
@@ -103,12 +106,11 @@ extension ObjectVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ObjectCell", for: indexPath as IndexPath) as! ObjectTableViewCell
         
         let item = objectArray[indexPath.row]
-        cell.objectImage.image = item.image!
         cell.nameLabel.text = item.name
         cell.weightLabel.text = String(item.weight)
-        cell.objectImage.image = item.image
         cell.delegate = self
         cell.objectRow = indexPath.row
+        cell.imageButton.setImage(item.image, for: .normal)
         
         return cell
     }
