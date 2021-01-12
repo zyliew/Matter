@@ -609,55 +609,113 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6QZ-7l-efE">
-                                <rect key="frame" x="85" y="165" width="45" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Weight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tKW-7q-mJd">
-                                <rect key="frame" x="85" y="243" width="54" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rur-0Z-a0w">
-                                <rect key="frame" x="156" y="641" width="102" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Upload Picture"/>
-                                <connections>
-                                    <action selector="uploadImage:" destination="En8-Nk-w23" eventType="touchUpInside" id="s7J-eh-11N"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghc-HL-aCP">
-                                <rect key="frame" x="182" y="715" width="49" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Submit"/>
-                                <connections>
-                                    <action selector="submit:" destination="En8-Nk-w23" eventType="touchUpInside" id="93F-Ia-f2S"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fav-8S-dhv" userLabel="Name Text Field">
-                                <rect key="frame" x="183" y="158" width="193" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FJJ-4s-p6Q" userLabel="Weight Text Field">
-                                <rect key="frame" x="183" y="243" width="193" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5XR-YU-AKY">
-                                <rect key="frame" x="87" y="344" width="240" height="180"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sdc-iY-Ul4">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n1t-8u-pya" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="OeF-GF-dhC" userLabel="Inputs Stack View">
+                                                <rect key="frame" x="73" y="28" width="268.5" height="78"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ILR-fV-oNz" userLabel="Name Stack View">
+                                                        <rect key="frame" x="0.0" y="0.0" width="268.5" height="34"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6QZ-7l-efE">
+                                                                <rect key="frame" x="0.0" y="0.0" width="68.5" height="34"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fav-8S-dhv" userLabel="Name Text Field">
+                                                                <rect key="frame" x="68.5" y="0.0" width="200" height="34"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="200" id="EMX-1i-Vv5"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="kG8-bd-gkq" userLabel="Weight Stack View">
+                                                        <rect key="frame" x="0.0" y="44" width="268.5" height="34"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tKW-7q-mJd">
+                                                                <rect key="frame" x="0.0" y="0.0" width="53.5" height="34"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FJJ-4s-p6Q" userLabel="Weight Text Field">
+                                                                <rect key="frame" x="68.5" y="0.0" width="200" height="34"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="200" id="JE8-Bh-CwZ"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="U2d-ai-T3g" userLabel="Image Stack View">
+                                                <rect key="frame" x="132" y="136" width="150" height="180"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5XR-YU-AKY">
+                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="150" id="9uX-Xg-7FZ"/>
+                                                            <constraint firstAttribute="height" constant="150" id="lGt-l1-0su"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rur-0Z-a0w">
+                                                        <rect key="frame" x="0.0" y="150" width="150" height="30"/>
+                                                        <state key="normal" title="Upload Picture"/>
+                                                        <connections>
+                                                            <action selector="uploadImage:" destination="En8-Nk-w23" eventType="touchUpInside" id="s7J-eh-11N"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghc-HL-aCP">
+                                                <rect key="frame" x="182.5" y="366" width="49" height="30"/>
+                                                <state key="normal" title="Submit"/>
+                                                <connections>
+                                                    <action selector="submit:" destination="En8-Nk-w23" eventType="touchUpInside" id="93F-Ia-f2S"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="OeF-GF-dhC" firstAttribute="centerX" secondItem="n1t-8u-pya" secondAttribute="centerX" id="336-df-FqT"/>
+                                            <constraint firstItem="OeF-GF-dhC" firstAttribute="top" secondItem="n1t-8u-pya" secondAttribute="topMargin" constant="20" id="C2f-CD-CKw"/>
+                                            <constraint firstItem="U2d-ai-T3g" firstAttribute="centerX" secondItem="n1t-8u-pya" secondAttribute="centerX" id="G4v-4x-arl"/>
+                                            <constraint firstAttribute="height" constant="700" id="Mq4-3U-gUO"/>
+                                            <constraint firstItem="ghc-HL-aCP" firstAttribute="top" secondItem="U2d-ai-T3g" secondAttribute="bottom" constant="50" id="OuG-Ut-JjV"/>
+                                            <constraint firstItem="ghc-HL-aCP" firstAttribute="centerX" secondItem="n1t-8u-pya" secondAttribute="centerX" id="Z2h-kC-zIf"/>
+                                            <constraint firstItem="U2d-ai-T3g" firstAttribute="top" secondItem="OeF-GF-dhC" secondAttribute="bottom" constant="30" id="gZ9-sm-LOa"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="n1t-8u-pya" firstAttribute="width" secondItem="BAr-Dp-WJZ" secondAttribute="width" id="3VF-g4-pUM"/>
+                                    <constraint firstItem="n1t-8u-pya" firstAttribute="leading" secondItem="GdC-5Q-Xmo" secondAttribute="leading" id="UpM-QU-SIc"/>
+                                    <constraint firstItem="n1t-8u-pya" firstAttribute="top" secondItem="GdC-5Q-Xmo" secondAttribute="top" id="bw6-pn-7h3"/>
+                                    <constraint firstItem="n1t-8u-pya" firstAttribute="trailing" secondItem="GdC-5Q-Xmo" secondAttribute="trailing" id="rPI-JZ-f1M"/>
+                                    <constraint firstItem="n1t-8u-pya" firstAttribute="bottom" secondItem="GdC-5Q-Xmo" secondAttribute="bottom" id="wNX-ER-lfi"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="GdC-5Q-Xmo"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="BAr-Dp-WJZ"/>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Wjo-WT-Pu5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Sdc-iY-Ul4" firstAttribute="top" secondItem="Wjo-WT-Pu5" secondAttribute="top" id="2hV-VK-Njr"/>
+                            <constraint firstItem="Sdc-iY-Ul4" firstAttribute="trailing" secondItem="Wjo-WT-Pu5" secondAttribute="trailing" id="C7Q-1w-x3Q"/>
+                            <constraint firstItem="Sdc-iY-Ul4" firstAttribute="leading" secondItem="Wjo-WT-Pu5" secondAttribute="leading" id="wqF-ZS-Mt2"/>
+                            <constraint firstItem="Sdc-iY-Ul4" firstAttribute="bottom" secondItem="Wjo-WT-Pu5" secondAttribute="bottom" id="yBw-30-0c8"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add Model" id="0E5-Rn-CLh"/>
                     <connections>
