@@ -15,6 +15,7 @@ import CoreData
 //}
 protocol ObjectTableViewCellDelegate {
     func tappedEdit(name: String, weight: Double, row: Int)
+    func tappedImage(row: Int, buttonImage: UIButton)
 }
 
 // Custom TableView cell
@@ -29,14 +30,16 @@ class ObjectTableViewCell: UITableViewCell {
         delegate?.tappedEdit(name: nameLabel.text!, weight: Double(weightLabel.text!)!, row: objectRow!)
     }
     @IBAction func imagePressed(_ sender: Any) {
-        print("image pressed")
+        delegate?.tappedImage(row: objectRow!, buttonImage: imageButton)
     }
 }
     
 class ObjectVC: UIViewController {
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    var objectImage:UIButton!
     var objectArray:[ObjectDisplay] = []
+    var imagePicker: UIImagePickerController!
 //    var itemArray:[PrintItem] = []
     var row = Int()
     
@@ -52,6 +55,8 @@ class ObjectVC: UIViewController {
         
         self.navigationItem.title = "Objects"
         
+        initializeImagePicker()
+        
         // hide the nav bar edit button, don't think we need it. Delete when ready
         editButton.isHidden = true
 //        clearCoreData()
@@ -59,6 +64,7 @@ class ObjectVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear ObjectVC")
         DispatchQueue.main.async { self.tableView.reloadData() }
     }
     
@@ -164,11 +170,11 @@ extension ObjectVC: ObjectTableViewCellDelegate {
     
     // pops up an alert and updates the object's name and weight
     func tappedEdit(name: String, weight: Double, row: Int) {
-        print("implement alert")
         print("name is \(name), weight is \(weight)")
         var editName:UITextField?
         var editWeight:UITextField?
         
+        let currentObject = objectArray[row]
 //        var updatedName:String
 //        var updatedWeight:Double
 
@@ -186,7 +192,7 @@ extension ObjectVC: ObjectTableViewCellDelegate {
         })
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:nil))
         alert.addAction(UIAlertAction(title: "Update", style: .default, handler:{ action in
-            self.updateInfo(originalName: name, updatedName: editName!.text!, weight: Double(editWeight!.text!)!)
+            self.updateInfo(originalName: name, updatedName: editName!.text!, weight: Double(editWeight!.text!)!, uid: currentObject.uid)
             DispatchQueue.main.async { self.tableView.reloadData() }
         }))
 
@@ -195,17 +201,39 @@ extension ObjectVC: ObjectTableViewCellDelegate {
     }
     
     // updates this object's name and weight in objectArray and core data
-    func updateInfo(originalName: String, updatedName: String, weight: Double) {
+    func updateInfo(originalName: String, updatedName: String, weight: Double, uid: String) {
         // retrive the object from objectArray and update
         for target in objectArray {
-            if target.name == originalName {
+            if target.uid == uid {
                 target.name = updatedName
                 target.weight = weight
                 break
             }
         }
         
-        updateSingleObject(originalName: originalName, updatedName: updatedName, weight: weight)
+        updateSingleObject(uid: uid, updatedName: updatedName, weight: weight, image: nil)
+    }
+    
+    func tappedImage(row: Int, buttonImage: UIButton) {
+        let currentObject = objectArray[row]
+        print("tappedImage, object is \(currentObject.name)")
+        objectImage = buttonImage
+        let alert = UIAlertController(title: "Change Image?", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Take Picture", style: .default, handler: {action in
+            self.imagePicker.sourceType = .camera
+            self.present(self.imagePicker, animated: true, completion: nil)
+//            buttonImage.setImage(self.objectImage.imageView!.image, for: .normal)
+//            self.updateSingleObject(uid: currentObject.uid, updatedName: nil, weight: nil, image: self.objectImage.imageView!.image)
+            DispatchQueue.main.async { self.tableView.reloadData() }
+        }))
+        alert.addAction(UIAlertAction(title: "Library", style: .default, handler: {action in
+            self.imagePicker.sourceType = .photoLibrary
+            self.present(self.imagePicker, animated: true, completion: nil)
+//            self.updateSingleObject(uid: currentObject.uid, updatedName: nil, weight: nil, image: self.objectImage.imageView!.image)
+            DispatchQueue.main.async { self.tableView.reloadData() }
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
     }
 }
 
@@ -237,7 +265,7 @@ extension ObjectVC {
         }
     }
     
-    func updateSingleObject(originalName: String, updatedName: String, weight: Double) {
+    func updateSingleObject(uid: String, updatedName: String?, weight: Double?, image: UIImage?) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Item")
@@ -253,11 +281,15 @@ extension ObjectVC {
         }
         
         for object in fetchedResults! {
-            let currentName = object.value(forKey: "name") as? String
-            if currentName == originalName {
+            let currentUid = object.value(forKey: "uid") as? String
+            if uid == currentUid {
                 print("modified object in updateSingleObject")
-                object.setValue(updatedName, forKey: "name")
-                object.setValue(weight, forKey: "weight")
+                if image == nil {
+                    object.setValue(updatedName, forKey: "name")
+                    object.setValue(weight, forKey: "weight")
+                } else {
+                    object.setValue(image!.pngData(), forKey: "image")
+                }
                 break
             }
         }
@@ -331,5 +363,35 @@ extension ObjectVC {
         }
         
         print("deleted single object")
+    }
+}
+
+// ImagePicker Methods
+extension ObjectVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    // dismiss imagePicker when cancel is pressed
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        // get the image from photolibrary
+        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
+            return
+        }
+        let currentObject = objectArray[row]
+        // set the spool image to the new image
+        objectImage.setImage(image, for: .normal)
+        currentObject.image = image
+        updateSingleObject(uid: currentObject.uid, updatedName: nil, weight: nil, image: image)
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func initializeImagePicker() {
+        // initialize imagePicker
+        imagePicker = UIImagePickerController()
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
     }
 }
