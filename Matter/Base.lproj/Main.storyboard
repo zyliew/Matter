@@ -601,7 +601,7 @@
             </objects>
             <point key="canvasLocation" x="598.55072463768124" y="931.47321428571422"/>
         </scene>
-        <!--Add Model-->
+        <!--Add Object-->
         <scene sceneID="XjT-2v-352">
             <objects>
                 <viewController id="En8-Nk-w23" customClass="AddObjectVC" customModule="Matter" customModuleProvider="target" sceneMemberID="viewController">
@@ -717,7 +717,7 @@
                             <constraint firstItem="Sdc-iY-Ul4" firstAttribute="bottom" secondItem="Wjo-WT-Pu5" secondAttribute="bottom" id="yBw-30-0c8"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Model" id="0E5-Rn-CLh"/>
+                    <navigationItem key="navigationItem" title="Add Object" id="0E5-Rn-CLh"/>
                     <connections>
                         <outlet property="nameTextField" destination="fav-8S-dhv" id="HQz-zf-Hg0"/>
                         <outlet property="objectImage" destination="5XR-YU-AKY" id="GwB-52-ngS"/>
@@ -868,10 +868,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="o6b-5M-mCV" kind="relationship" relationship="viewControllers" id="kJV-L8-aZa"/>
                         <segue destination="uRG-cU-wzB" kind="relationship" relationship="viewControllers" id="u0g-bh-AEZ"/>
-                        <segue destination="Gud-iN-gVB" kind="relationship" relationship="viewControllers" id="faV-UN-YX3"/>
+                        <segue destination="o6b-5M-mCV" kind="relationship" relationship="viewControllers" id="kJV-L8-aZa"/>
                         <segue destination="gbt-rn-4xC" kind="relationship" relationship="viewControllers" id="1hO-oO-I0M"/>
+                        <segue destination="Gud-iN-gVB" kind="relationship" relationship="viewControllers" id="faV-UN-YX3"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="viN-Me-l3F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -965,7 +965,7 @@
             </objects>
             <point key="canvasLocation" x="2462.3188405797105" y="-686.38392857142856"/>
         </scene>
-        <!--Add PrinterVC-->
+        <!--Add Printer-->
         <scene sceneID="FKl-v8-jHz">
             <objects>
                 <viewController id="L0R-93-ZKu" customClass="AddPrinterVC" customModule="Matter" customModuleProvider="target" sceneMemberID="viewController">
@@ -1081,7 +1081,7 @@
                             <constraint firstItem="Rdq-sg-bFB" firstAttribute="leading" secondItem="61w-dE-TBj" secondAttribute="leading" id="qyD-HS-kl6"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="rf2-DO-P80"/>
+                    <navigationItem key="navigationItem" title="Add Printer" id="rf2-DO-P80"/>
                     <connections>
                         <outlet property="diameterTextBox" destination="S52-JP-9BX" id="ffO-C9-1Wy"/>
                         <outlet property="nameTextBox" destination="SHX-zT-ln3" id="Dco-zU-Riw"/>

@@ -48,7 +48,7 @@ class ObjectVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        self.navigationItem.title = "Items"
+        self.navigationItem.title = "Objects"
 //        clearCoreData()
         getCoreData()
     }
