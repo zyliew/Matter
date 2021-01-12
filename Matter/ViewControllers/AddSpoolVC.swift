@@ -57,15 +57,14 @@ class AddSpoolVC: UIViewController {
             // add spool to core data
             addToCoreData()
             getData()
+            // visual confirmation to user that spool is added
+            let alert = UIAlertController(title: "Added", message: nil, preferredStyle: .alert)
+            self.present(alert, animated: true)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()){
+              alert.dismiss(animated: true, completion: nil)
+            }
         } else {
             print("Bad input data")
-        }
-        
-        // visual confirmation to user that spool is added
-        let alert = UIAlertController(title: "Added", message: nil, preferredStyle: .alert)
-        self.present(alert, animated: true)
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()){
-          alert.dismiss(animated: true, completion: nil)
         }
     }
     
