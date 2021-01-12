@@ -151,6 +151,7 @@ extension ObjectVC: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    // sets the current row so that we can get the particular object, pass along to SpoolsVC with segue
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         row = indexPath.row
         return indexPath

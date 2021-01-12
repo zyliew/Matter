@@ -36,8 +36,19 @@ class AddSpoolVC: UIViewController {
 //        clearCoreData()
     }
     
+    // user upload image, choose between taking a picture or from photo library
     @IBAction func uploadPicture(_ sender: Any) {
-        present(imagePicker, animated: true, completion: nil)
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Take Picture", style: .default, handler: {action in
+            self.imagePicker.sourceType = .camera
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Library", style: .default, handler: {action in
+            self.imagePicker.sourceType = .photoLibrary
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
     }
     
     @IBAction func storeSpoolData(_ sender: Any) {
@@ -48,6 +59,13 @@ class AddSpoolVC: UIViewController {
             getData()
         } else {
             print("Bad input data")
+        }
+        
+        // visual confirmation to user that spool is added
+        let alert = UIAlertController(title: "Added", message: nil, preferredStyle: .alert)
+        self.present(alert, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()){
+          alert.dismiss(animated: true, completion: nil)
         }
     }
     
