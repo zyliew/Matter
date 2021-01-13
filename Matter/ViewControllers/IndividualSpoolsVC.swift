@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import SafariServices
 
 class IndividualSpoolsTableViewCell: UITableViewCell {
     @IBOutlet weak var rollNumberLabel: UILabel!
@@ -24,6 +25,7 @@ class IndividualSpoolsVC: UIViewController {
     var spools:[IndividualSpool] = []
     
     var toPrint:ObjectDisplay?
+    var spoolURL:String?
     
     var brand = String()
     var material = String()
@@ -54,6 +56,23 @@ class IndividualSpoolsVC: UIViewController {
     
     // Pops up alert and presents the link to reorder
     @IBAction func Reorder(_ sender: Any) {
+        guard let spoolURL = spoolURL else { return }
+        guard let url = URL(string: spoolURL) else {
+            let alert = UIAlertController(title: "No URL", message: "No link was provided during spool creation", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        if !UIApplication.shared.canOpenURL(url) {
+            print("can't open url")
+            return
+        }
+        
+        let config = SFSafariViewController.Configuration()
+        config.entersReaderIfAvailable = false
+        let vc = SFSafariViewController(url: url, configuration: config)
+        present(vc, animated: true, completion: nil)
     }
     
 }
@@ -191,6 +210,10 @@ extension IndividualSpoolsVC {
                         
                         spools.append(newSpool)
                         print("added spool")
+                    }
+                    
+                    if let url = spool.value(forKey: "link") as? String {
+                        spoolURL = url
                     }
                 }
                 

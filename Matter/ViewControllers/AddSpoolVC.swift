@@ -90,6 +90,20 @@ class AddSpoolVC: UIViewController {
             return false
         }
         
+        // check if URL link is valid if user inputs a url
+        if !(purchaseLinkTextBox.text?.isEmpty ?? true) {
+            if let url = URL(string: purchaseLinkTextBox.text!) {
+                let valid = UIApplication.shared.canOpenURL(url)
+                if !valid {
+                    let alert = UIAlertController(title: "Invalid URL", message: "Please input a valid url starting with http or https", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    return false
+                }
+            }
+            
+        }
+        
         return true
     }
     
