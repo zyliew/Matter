@@ -13,6 +13,7 @@ import UIKit
 class PrintJobsVC: UIViewController {
     @IBOutlet weak var printingView: UIView!
     @IBOutlet weak var completedView: UIView!
+    @IBOutlet weak var viewSegmentControl: UISegmentedControl!
     
     var printer:PrinterDisplay?
     
@@ -20,8 +21,13 @@ class PrintJobsVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        setView(view: printingView, hidden: false)
-        setView(view: completedView, hidden: true)
+        // Note, hiding the entire segmented view, printingView for now
+        // until active tableView refresh can be implemented
+//        setView(view: printingView, hidden: false)
+//        setView(view: completedView, hidden: true)
+        setView(view: completedView, hidden: false)
+        setView(view: printingView, hidden: true)
+        viewSegmentControl.isHidden = true
         
         print("printer is \(printer!.name)")
     }

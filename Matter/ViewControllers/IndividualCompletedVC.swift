@@ -8,10 +8,23 @@
 import UIKit
 import CoreData
 
+protocol updatePrintingList {
+    func addItemToArray(item: PrintingDisplay)
+}
+
+extension IndividualCompletedVC: updateCompletedList {
+    func addItemToArray(item: PrintingDisplay) {
+        print("hit addItemToArray")
+        printingArray.append(item)
+        DispatchQueue.main.async { self.tableView.reloadData() }
+    }
+}
+
 class IndividualCompletedVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var printer:PrinterDisplay?
     var printingArray:[PrintingDisplay] = []
+    var delegate:updatePrintingList?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,6 +122,8 @@ extension IndividualCompletedVC: PrintingTableViewCellDelegate {
             let finishedDate = dateFormatter.string(from: currentDateTime)
             item.finishedDate = currentDateTime
             self.updateFinishedDate(uid: item.item, date: finishedDate)
+            
+            self.delegate?.addItemToArray(item: item)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true)

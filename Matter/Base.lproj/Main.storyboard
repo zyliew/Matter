@@ -1106,7 +1106,7 @@
             </objects>
             <point key="canvasLocation" x="3440.579710144928" y="-1142.4107142857142"/>
         </scene>
-        <!--Print JobsVC-->
+        <!--Completed Prints-->
         <scene sceneID="IzI-pE-XdD">
             <objects>
                 <viewController id="c7d-TF-PI0" customClass="PrintJobsVC" customModule="Matter" customModuleProvider="target" sceneMemberID="viewController">
@@ -1131,7 +1131,7 @@
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RPl-9v-jGe" userLabel="Completed Container View">
-                                <rect key="frame" x="0.0" y="159" width="414" height="654"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <connections>
                                     <segue destination="R33-yT-r3X" kind="embed" identifier="toIndividualCompletedSegue" id="CL1-3m-WqI"/>
                                 </connections>
@@ -1145,17 +1145,18 @@
                             <constraint firstItem="RPl-9v-jGe" firstAttribute="leading" secondItem="Jia-gu-be3" secondAttribute="leading" id="Gb8-WM-gYn"/>
                             <constraint firstItem="Jia-gu-be3" firstAttribute="trailing" secondItem="RPl-9v-jGe" secondAttribute="trailing" id="K33-oq-JTl"/>
                             <constraint firstItem="jbP-Ia-y86" firstAttribute="centerX" secondItem="eVS-dU-Tqw" secondAttribute="centerX" id="Tgb-3I-U4c"/>
-                            <constraint firstItem="RPl-9v-jGe" firstAttribute="top" secondItem="jbP-Ia-y86" secondAttribute="bottom" constant="20" id="clr-ne-aiE"/>
+                            <constraint firstItem="RPl-9v-jGe" firstAttribute="top" secondItem="Jia-gu-be3" secondAttribute="top" id="h8O-je-i1d"/>
                             <constraint firstItem="4E7-jC-9Tb" firstAttribute="leading" secondItem="Jia-gu-be3" secondAttribute="leading" id="m7W-tm-D6c"/>
                             <constraint firstItem="Jia-gu-be3" firstAttribute="trailing" secondItem="4E7-jC-9Tb" secondAttribute="trailing" id="sIm-8H-3gs"/>
                             <constraint firstItem="jbP-Ia-y86" firstAttribute="top" secondItem="Jia-gu-be3" secondAttribute="top" constant="20" id="wqW-sJ-eJn"/>
                             <constraint firstItem="Jia-gu-be3" firstAttribute="bottom" secondItem="RPl-9v-jGe" secondAttribute="bottom" id="yBi-oR-oWp"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="1eI-qd-WaY"/>
+                    <navigationItem key="navigationItem" title="Completed Prints" id="1eI-qd-WaY"/>
                     <connections>
                         <outlet property="completedView" destination="RPl-9v-jGe" id="gGV-Tb-YnT"/>
                         <outlet property="printingView" destination="4E7-jC-9Tb" id="tWq-kH-6GO"/>
+                        <outlet property="viewSegmentControl" destination="jbP-Ia-y86" id="Nxq-cv-SE5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QZj-13-jpH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1373,11 +1374,11 @@
             <objects>
                 <viewController id="R33-yT-r3X" customClass="IndividualCompletedVC" customModule="Matter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yW4-Up-tDq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="654"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CtQ-OF-cZt">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="654"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PrintingCell" id="z7h-Qd-lOX" customClass="PrintingTableViewCell" customModule="Matter" customModuleProvider="target">
