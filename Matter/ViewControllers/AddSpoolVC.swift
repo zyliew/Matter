@@ -27,6 +27,10 @@ class AddSpoolVC: UIViewController {
         // Do any additional setup after loading the view.
         initializeImagePicker()
         
+        // round image corners
+        spoolImage.layer.cornerRadius = 20
+        spoolImage.layer.masksToBounds = true
+        
         // tap to dismiss keyboard
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         tap.cancelsTouchesInView = false

@@ -29,6 +29,7 @@
 		7CAA9769258A91F300F92A04 /* SpoolVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAA9768258A91F300F92A04 /* SpoolVC.swift */; };
 		7CAA976E258A944300F92A04 /* SpoolDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAA976D258A944300F92A04 /* SpoolDisplay.swift */; };
 		7CB29A72258D31DF00B224E7 /* ObjectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB29A71258D31DF00B224E7 /* ObjectVC.swift */; };
+		7CD599CA25DD7F030093B2AA /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD599C925DD7F030093B2AA /* RoundButton.swift */; };
 		7CD723B1258BBA1300F43475 /* IndividualSpool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD723B0258BBA1300F43475 /* IndividualSpool.swift */; };
 		7CE822B4258B81C300D0AC32 /* IndividualSpoolsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE822B3258B81C300D0AC32 /* IndividualSpoolsVC.swift */; };
 		7CF7E75B258D28B1005EFE98 /* ObjectDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF7E75A258D28B1005EFE98 /* ObjectDisplay.swift */; };
@@ -80,6 +81,7 @@
 		7CAA9768258A91F300F92A04 /* SpoolVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoolVC.swift; sourceTree = "<group>"; };
 		7CAA976D258A944300F92A04 /* SpoolDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoolDisplay.swift; sourceTree = "<group>"; };
 		7CB29A71258D31DF00B224E7 /* ObjectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectVC.swift; sourceTree = "<group>"; };
+		7CD599C925DD7F030093B2AA /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		7CD723B0258BBA1300F43475 /* IndividualSpool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualSpool.swift; sourceTree = "<group>"; };
 		7CE822B3258B81C300D0AC32 /* IndividualSpoolsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualSpoolsVC.swift; sourceTree = "<group>"; };
 		7CF7E75A258D28B1005EFE98 /* ObjectDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDisplay.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				7C847492258914030031BFC9 /* Info.plist */,
 				7C84748A258914030031BFC9 /* Matter.xcdatamodeld */,
 				7C1F17D7259390E40086BBF2 /* CustomString.swift */,
+				7CD599C925DD7F030093B2AA /* RoundButton.swift */,
 			);
 			path = Matter;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				7C1F17D8259390E40086BBF2 /* CustomString.swift in Sources */,
 				7CE822B4258B81C300D0AC32 /* IndividualSpoolsVC.swift in Sources */,
 				7C53580525927683002ED4C2 /* PrinterDisplay.swift in Sources */,
+				7CD599CA25DD7F030093B2AA /* RoundButton.swift in Sources */,
 				7CF7E75B258D28B1005EFE98 /* ObjectDisplay.swift in Sources */,
 				7CAA976E258A944300F92A04 /* SpoolDisplay.swift in Sources */,
 				7C84748C258914030031BFC9 /* Matter.xcdatamodeld in Sources */,

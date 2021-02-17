@@ -354,7 +354,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qka-LV-Nf2" userLabel="Weight Stack View">
                                                         <rect key="frame" x="0.0" y="132" width="322" height="34"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLa-Jx-h2f">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weight (g)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLa-Jx-h2f">
                                                                 <rect key="frame" x="0.0" y="0.0" width="122" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
@@ -431,8 +431,8 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="EK5-oC-9OZ" userLabel="Image Stack View">
-                                                <rect key="frame" x="132" y="353" width="150" height="160"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="EK5-oC-9OZ" userLabel="Image Stack View">
+                                                <rect key="frame" x="132" y="353" width="150" height="190"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z4i-hG-14u">
                                                         <rect key="frame" x="0.0" y="0.0" width="150" height="120"/>
@@ -440,25 +440,52 @@
                                                             <constraint firstAttribute="width" constant="150" id="0bQ-cz-gqi"/>
                                                             <constraint firstAttribute="height" constant="120" id="3Fp-oz-Ob3"/>
                                                         </constraints>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="20"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                        </userDefinedRuntimeAttributes>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="410-Zd-VFg">
-                                                        <rect key="frame" x="0.0" y="130" width="150" height="30"/>
-                                                        <state key="normal" title="Upload Picture"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="410-Zd-VFg" customClass="RoundButton" customModule="Matter" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="140" width="150" height="50"/>
+                                                        <color key="backgroundColor" red="0.29267057330000001" green="0.66184137939999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="aQk-Ji-8ed"/>
+                                                            <constraint firstAttribute="width" constant="150" id="ySR-Aj-JQ7"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Upload Picture">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="22"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="0.0"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <action selector="uploadPicture:" destination="2TH-vI-A0g" eventType="touchUpInside" id="IEY-mY-8dE"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XNC-di-Ihu">
-                                                <rect key="frame" x="182.5" y="563" width="49" height="30"/>
-                                                <state key="normal" title="Submit"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XNC-di-Ihu" customClass="RoundButton" customModule="Matter" customModuleProvider="target">
+                                                <rect key="frame" x="50" y="593" width="314" height="60"/>
+                                                <color key="backgroundColor" red="0.29267057330000001" green="0.66184137939999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="OiV-Du-CUe"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <state key="normal" title="Submit">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="0.29267057330000001" green="0.66184137939999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="storeSpoolData:" destination="2TH-vI-A0g" eventType="touchUpInside" id="HPv-fb-J5D"/>
                                                 </connections>
@@ -469,10 +496,12 @@
                                             <constraint firstItem="EK5-oC-9OZ" firstAttribute="centerX" secondItem="vKE-UP-PiS" secondAttribute="centerX" id="7B9-j8-3wa"/>
                                             <constraint firstItem="42z-Eb-cfc" firstAttribute="top" secondItem="vKE-UP-PiS" secondAttribute="topMargin" constant="20" id="HRv-Yz-3SF"/>
                                             <constraint firstItem="42z-Eb-cfc" firstAttribute="centerX" secondItem="vKE-UP-PiS" secondAttribute="centerX" id="U2C-6L-nE2"/>
+                                            <constraint firstAttribute="trailing" secondItem="XNC-di-Ihu" secondAttribute="trailing" constant="50" id="d3Q-Kp-BF9"/>
                                             <constraint firstItem="XNC-di-Ihu" firstAttribute="top" secondItem="EK5-oC-9OZ" secondAttribute="bottom" constant="50" id="hg0-Qw-dGp"/>
                                             <constraint firstItem="XNC-di-Ihu" firstAttribute="centerX" secondItem="vKE-UP-PiS" secondAttribute="centerX" id="j3D-wX-sRZ"/>
                                             <constraint firstAttribute="height" constant="800" id="mOj-qK-ch7"/>
                                             <constraint firstItem="EK5-oC-9OZ" firstAttribute="top" secondItem="42z-Eb-cfc" secondAttribute="bottom" constant="30" id="ppi-k8-kk4"/>
+                                            <constraint firstItem="XNC-di-Ihu" firstAttribute="leading" secondItem="vKE-UP-PiS" secondAttribute="leading" constant="50" id="x8O-DS-OsK"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -566,19 +595,24 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="AHA-bn-iVu" userLabel="Button Stack View">
-                                                    <rect key="frame" x="352" y="12.5" width="32" height="75"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="AHA-bn-iVu" userLabel="Button Stack View">
+                                                    <rect key="frame" x="293" y="37.5" width="91" height="25"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j5I-pf-Qw7">
-                                                            <rect key="frame" x="0.0" y="0.0" width="32" height="30"/>
-                                                            <state key="normal" title="Edit"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j5I-pf-Qw7" userLabel="Edit">
+                                                            <rect key="frame" x="0.0" y="0.0" width="23" height="25"/>
+                                                            <state key="normal">
+                                                                <imageReference key="image" image="ellipsis" catalog="system" symbolScale="large"/>
+                                                            </state>
                                                             <connections>
                                                                 <action selector="editPressed:" destination="8pg-nK-Yw2" eventType="touchUpInside" id="2lW-4e-yf1"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qqo-No-tDs">
-                                                            <rect key="frame" x="0.0" y="45" width="32" height="30"/>
-                                                            <state key="normal" title="Print"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qqo-No-tDs" userLabel="Print">
+                                                            <rect key="frame" x="63" y="0.0" width="28" height="25"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <state key="normal">
+                                                                <imageReference key="image" image="printer" catalog="system" symbolScale="large"/>
+                                                            </state>
                                                             <connections>
                                                                 <segue destination="JvP-5K-sbI" kind="show" identifier="printButtonSegue" id="OCS-Fv-vNC"/>
                                                             </connections>
@@ -696,8 +730,8 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="U2d-ai-T3g" userLabel="Image Stack View">
-                                                <rect key="frame" x="132" y="136" width="150" height="180"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="U2d-ai-T3g" userLabel="Image Stack View">
+                                                <rect key="frame" x="132" y="136" width="150" height="220"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5XR-YU-AKY">
                                                         <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
@@ -705,25 +739,43 @@
                                                             <constraint firstAttribute="width" constant="150" id="9uX-Xg-7FZ"/>
                                                             <constraint firstAttribute="height" constant="150" id="lGt-l1-0su"/>
                                                         </constraints>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="20"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                        </userDefinedRuntimeAttributes>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rur-0Z-a0w">
-                                                        <rect key="frame" x="0.0" y="150" width="150" height="30"/>
-                                                        <state key="normal" title="Upload Picture"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rur-0Z-a0w" customClass="RoundButton" customModule="Matter" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="170" width="150" height="50"/>
+                                                        <color key="backgroundColor" red="0.29267057330000001" green="0.66184137939999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="150" id="Uj9-un-7gj"/>
+                                                            <constraint firstAttribute="height" constant="50" id="nkX-jk-k56"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Upload Picture">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="22"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <action selector="uploadImage:" destination="En8-Nk-w23" eventType="touchUpInside" id="s7J-eh-11N"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghc-HL-aCP">
-                                                <rect key="frame" x="182.5" y="366" width="49" height="30"/>
-                                                <state key="normal" title="Submit"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghc-HL-aCP" customClass="RoundButton" customModule="Matter" customModuleProvider="target">
+                                                <rect key="frame" x="50" y="406" width="314" height="60"/>
+                                                <color key="backgroundColor" red="0.29267057330000001" green="0.66184137939999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="Tlw-qj-ADq"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <state key="normal" title="Submit">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="submit:" destination="En8-Nk-w23" eventType="touchUpInside" id="93F-Ia-f2S"/>
                                                 </connections>
@@ -738,6 +790,8 @@
                                             <constraint firstItem="ghc-HL-aCP" firstAttribute="top" secondItem="U2d-ai-T3g" secondAttribute="bottom" constant="50" id="OuG-Ut-JjV"/>
                                             <constraint firstItem="ghc-HL-aCP" firstAttribute="centerX" secondItem="n1t-8u-pya" secondAttribute="centerX" id="Z2h-kC-zIf"/>
                                             <constraint firstItem="U2d-ai-T3g" firstAttribute="top" secondItem="OeF-GF-dhC" secondAttribute="bottom" constant="30" id="gZ9-sm-LOa"/>
+                                            <constraint firstItem="ghc-HL-aCP" firstAttribute="leading" secondItem="n1t-8u-pya" secondAttribute="leading" constant="50" id="xFI-Fp-Hp7"/>
+                                            <constraint firstAttribute="trailing" secondItem="ghc-HL-aCP" secondAttribute="trailing" constant="50" id="xyv-E3-5Fq"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1036,7 +1090,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7BI-16-LPW" userLabel="Inputs Stack View">
-                                                <rect key="frame" x="30.5" y="28" width="353.5" height="78"/>
+                                                <rect key="frame" x="30.5" y="28" width="353.5" height="75"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhC-hV-MjT" userLabel="Name Stack View">
                                                         <rect key="frame" x="0.0" y="0.0" width="353.5" height="34"/>
@@ -1058,28 +1112,33 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="gEU-CY-89a" userLabel="Diameter Stack View">
-                                                        <rect key="frame" x="0.0" y="44" width="353.5" height="34"/>
+                                                        <rect key="frame" x="0.0" y="44" width="353.5" height="31"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filament Diameter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cAd-4q-ewr">
-                                                                <rect key="frame" x="0.0" y="0.0" width="138.5" height="34"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="138.5" height="31"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S52-JP-9BX" userLabel="Diameter Text Field">
-                                                                <rect key="frame" x="153.5" y="0.0" width="200" height="34"/>
+                                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="HKq-cq-s1a">
+                                                                <rect key="frame" x="153.5" y="0.0" width="200" height="32"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="200" id="Rmt-RF-eCl"/>
+                                                                    <constraint firstAttribute="width" constant="200" id="Qsv-lV-Q9Q"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
-                                                            </textField>
+                                                                <segments>
+                                                                    <segment title="1.75"/>
+                                                                    <segment title="2.85"/>
+                                                                </segments>
+                                                                <connections>
+                                                                    <action selector="chooseDiameter:" destination="L0R-93-ZKu" eventType="valueChanged" id="kf1-Fp-jPk"/>
+                                                                </connections>
+                                                            </segmentedControl>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="y3p-6b-3Ap" userLabel="Image Stack View">
-                                                <rect key="frame" x="132" y="136" width="150" height="180"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="y3p-6b-3Ap" userLabel="Image Stack View">
+                                                <rect key="frame" x="132" y="133" width="150" height="220"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jkM-ky-WCD">
                                                         <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
@@ -1087,25 +1146,43 @@
                                                             <constraint firstAttribute="width" constant="150" id="pq4-jV-bZ1"/>
                                                             <constraint firstAttribute="height" constant="150" id="vJA-9N-1XE"/>
                                                         </constraints>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="20"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                        </userDefinedRuntimeAttributes>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7E-BR-Brd">
-                                                        <rect key="frame" x="0.0" y="150" width="150" height="30"/>
-                                                        <state key="normal" title="Upload Picture"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7E-BR-Brd" customClass="RoundButton" customModule="Matter" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="170" width="150" height="50"/>
+                                                        <color key="backgroundColor" red="0.29267057330000001" green="0.66184137939999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="150" id="LPt-h3-9eq"/>
+                                                            <constraint firstAttribute="height" constant="50" id="QIh-Ur-YUg"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Upload Picture">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="22"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <action selector="uploadPicture:" destination="L0R-93-ZKu" eventType="touchUpInside" id="1dB-Ju-shq"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1q8-UX-fjv">
-                                                <rect key="frame" x="182.5" y="366" width="49" height="30"/>
-                                                <state key="normal" title="Submit"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1q8-UX-fjv" customClass="RoundButton" customModule="Matter" customModuleProvider="target">
+                                                <rect key="frame" x="50" y="403" width="314" height="60"/>
+                                                <color key="backgroundColor" red="0.29267057330000001" green="0.66184137939999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="YBo-9l-9Hb"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <state key="normal" title="Submit">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="submitToCoreData:" destination="L0R-93-ZKu" eventType="touchUpInside" id="inr-jc-o0n"/>
                                                 </connections>
@@ -1119,6 +1196,8 @@
                                             <constraint firstItem="1q8-UX-fjv" firstAttribute="top" secondItem="y3p-6b-3Ap" secondAttribute="bottom" constant="50" id="ejK-YT-8Nj"/>
                                             <constraint firstItem="7BI-16-LPW" firstAttribute="centerX" secondItem="keu-yp-rDL" secondAttribute="centerX" id="fkU-t9-eFq"/>
                                             <constraint firstItem="y3p-6b-3Ap" firstAttribute="centerX" secondItem="keu-yp-rDL" secondAttribute="centerX" id="lBT-sm-pWh"/>
+                                            <constraint firstAttribute="trailing" secondItem="1q8-UX-fjv" secondAttribute="trailing" constant="50" id="uxD-D3-mQj"/>
+                                            <constraint firstItem="1q8-UX-fjv" firstAttribute="leading" secondItem="keu-yp-rDL" secondAttribute="leading" constant="50" id="yMI-Pb-Rjm"/>
                                             <constraint firstAttribute="height" constant="700" id="z1b-y0-mEn"/>
                                         </constraints>
                                     </view>
@@ -1145,7 +1224,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Add Printer" id="rf2-DO-P80"/>
                     <connections>
-                        <outlet property="diameterTextBox" destination="S52-JP-9BX" id="ffO-C9-1Wy"/>
+                        <outlet property="diameterSegmentedControl" destination="HKq-cq-s1a" id="hYe-QA-WNF"/>
                         <outlet property="nameTextBox" destination="SHX-zT-ln3" id="Dco-zU-Riw"/>
                         <outlet property="printerImage" destination="jkM-ky-WCD" id="5UV-Pw-jSd"/>
                     </connections>
@@ -1547,14 +1626,36 @@
             <point key="canvasLocation" x="5224.6376811594209" y="-190.17857142857142"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="1q8-UX-fjv">
+            <size key="intrinsicContentSize" width="63" height="36"/>
+        </designable>
+        <designable name="410-Zd-VFg">
+            <size key="intrinsicContentSize" width="102" height="30"/>
+        </designable>
+        <designable name="XNC-di-Ihu">
+            <size key="intrinsicContentSize" width="63" height="36"/>
+        </designable>
+        <designable name="b7E-BR-Brd">
+            <size key="intrinsicContentSize" width="102" height="30"/>
+        </designable>
+        <designable name="ghc-HL-aCP">
+            <size key="intrinsicContentSize" width="63" height="36"/>
+        </designable>
+        <designable name="rur-0Z-a0w">
+            <size key="intrinsicContentSize" width="102" height="30"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="OCS-Fv-vNC"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="filament_spool" width="688" height="606"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="printer" catalog="system" width="128" height="111"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

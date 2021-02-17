@@ -29,6 +29,10 @@ class AddObjectVC: UIViewController {
         // Do any additional setup after loading the view.
         initializeImagePicker()
         
+        // round image corners
+        objectImage.layer.cornerRadius = 20
+        objectImage.layer.masksToBounds = true
+        
         // tap to dismiss keyboard
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         tap.cancelsTouchesInView = false

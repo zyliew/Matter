@@ -15,8 +15,8 @@ protocol passPrinters {
 
 class AddPrinterVC: UIViewController {
     @IBOutlet weak var nameTextBox: UITextField!
-    @IBOutlet weak var diameterTextBox: UITextField!
     @IBOutlet weak var printerImage: UIImageView!
+    @IBOutlet weak var diameterSegmentedControl: UISegmentedControl!
     
     var imagePicker: UIImagePickerController!
     var delegate: passPrinters?
@@ -28,12 +28,18 @@ class AddPrinterVC: UIViewController {
         // Do any additional setup after loading the view.
         initializeImagePicker()
         
+        // round image corners
+        printerImage.layer.cornerRadius = 20
+        printerImage.layer.masksToBounds = true
+        
         // tap to dismiss keyboard
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
     
+    @IBAction func chooseDiameter(_ sender: Any) {
+    }
     // user upload image, choose between taking a picture or from photo library
     @IBAction func uploadPicture(_ sender: Any) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -67,21 +73,12 @@ class AddPrinterVC: UIViewController {
     
     func validInputs() -> Bool {
         // check for empty inputs
-        if nameTextBox.text!.isEmpty || diameterTextBox.text!.isEmpty {
+        if nameTextBox.text!.isEmpty {
             // throw alert
             let alert = UIAlertController(title: "Invalid Input", message: "Name and Diameter have to be filled in", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             
             self.present(alert, animated: true)
-            return false
-        }
-        
-        // check if inputs are the appropriate type
-        if !diameterTextBox.text!.isDouble {
-            let alert = UIAlertController(title: "Invalid Input", message: "Diameter has to be a number", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            self.present(alert, animated: true)
-            
             return false
         }
         
@@ -97,8 +94,17 @@ extension AddPrinterVC {
         let context = appDelegate.persistentContainer.viewContext
         
         let name = nameTextBox.text
-        let diameter = Double(diameterTextBox.text!)
+        var diameter = Double()
         let uid = UUID().uuidString
+        
+        switch diameterSegmentedControl.selectedSegmentIndex {
+        case 0:
+            diameter = 1.75
+        case 1:
+            diameter = 2.85
+        default:
+            break
+        }
         
         let printer = NSEntityDescription.insertNewObject(forEntityName: "Printer", into: context)
         
@@ -109,12 +115,12 @@ extension AddPrinterVC {
         // handle images
         if let imageData = printerImage.image?.pngData() {
             printer.setValue(imageData, forKey: "image")
-            printers?.append(PrinterDisplay(image: printerImage.image!, name: name!, diameter: diameter!, uid: uid))
+            printers?.append(PrinterDisplay(image: printerImage.image!, name: name!, diameter: diameter, uid: uid))
         } else {
             let image = #imageLiteral(resourceName: "nozzle_extruding").pngData()
             printerImage.image = #imageLiteral(resourceName: "3d_printer")
             printer.setValue(image, forKey: "image")
-            printers?.append(PrinterDisplay(image: #imageLiteral(resourceName: "3d_printer"), name: name!, diameter: diameter!, uid: uid))
+            printers?.append(PrinterDisplay(image: #imageLiteral(resourceName: "3d_printer"), name: name!, diameter: diameter, uid: uid))
         }
         
         // Commit the changes
