@@ -91,7 +91,7 @@ extension IndividualSpoolsVC: UITableViewDelegate, UITableViewDataSource {
         
         let material = spools[indexPath.row]
         cell.rollNumberLabel.text = String(indexPath.row + 1)
-        cell.weightLabel.text = "\(material.weight)g left"
+        cell.weightLabel.text = "\(material.weight) g"
         
         return cell
     }
@@ -123,7 +123,7 @@ extension IndividualSpoolsVC: UITableViewDelegate, UITableViewDataSource {
                 self.present(alert, animated: true)
             } else {
                 // enough filament, ask to confirm
-                let alert = UIAlertController(title: "Print with this Spool?", message: "\(newWeight)g of filament will be left after printing \(toPrint!.name)", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Use this Spool?", message: "\(newWeight)g of filament will be left after printing \(toPrint!.name)", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Yes", style:.default, handler: {action in self.printItem(spool: spool)}))
                 
                 alert.addAction(UIAlertAction(title: "Cancel", style:.cancel, handler: nil))
